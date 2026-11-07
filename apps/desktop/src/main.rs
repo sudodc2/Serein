@@ -4348,6 +4348,11 @@ impl Desktop {
 					request,
 					result: Err(Failure::Protocol),
 				},
+				// Offline breach indexes report nothing; settle any pending lookup.
+				Command::BreachCheck { user, .. } => Event::BreachReports {
+					user,
+					results: Vec::new(),
+				},
 				Command::StreamPreview {
 					guild,
 					channel,
