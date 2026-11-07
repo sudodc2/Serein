@@ -545,7 +545,7 @@ mod tests {
 	#[test]
 	fn favorites_decode_entries_and_survive_folder_patches() {
 		let mut entry = Vec::new();
-		write_varint(1 << 3 | 0, &mut entry); // map key (varint)
+		write_varint(1 << 3, &mut entry); // map key (varint)
 		write_varint(50, &mut entry);
 		let mut value = Vec::new();
 		{
@@ -553,11 +553,11 @@ mod tests {
 			message(1, b"bestie", &mut nick);
 			value.extend_from_slice(&nick);
 		}
-		write_varint(2 << 3 | 0, &mut value); // position
+		write_varint(2 << 3, &mut value); // position
 		write_varint(3, &mut value);
-		write_varint(3 << 3 | 0, &mut value); // parent_id
+		write_varint(3 << 3, &mut value); // parent_id
 		write_varint(9, &mut value);
-		write_varint(4 << 3 | 0, &mut value); // type = 1 channel ref
+		write_varint(4 << 3, &mut value); // type = 1 channel ref
 		write_varint(1, &mut value);
 		message(2, &value, &mut entry);
 
