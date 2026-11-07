@@ -1,8 +1,8 @@
-use serde::{Deserialize, Serialize};
 use aethon_extension_sdk::{
 	CustomRichPresence, Element, Invocation, Output, RichPresenceButton, RichPresenceImage,
 	RichPresenceKind, RichPresenceOutput, RichPresenceParty, RichPresenceTimer, RichPresenceUpdate,
 };
+use serde::{Deserialize, Serialize};
 use std::collections::BTreeMap;
 
 const FIELDS: &[(&str, &str)] = &[
