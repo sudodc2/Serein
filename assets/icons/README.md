@@ -26,8 +26,8 @@ legal disclaimer applies. The license file is staged in both packages as
 One repository-drawn glyph, `thread.svg` (four slanted round-capped bars on the same 256-unit
 grid), marks threads; it is rasterized with the Phosphor set and carries no upstream license.
 
-- `atlas.png`: 512×896 RGBA, 27,140 bytes after lossless `oxipng -o max --strip all`.
-  SHA-256 `0a9be12493c9cbf4dd6b61ce8451af90311f856801b529787d5af3ea0f598adc`.
+- `atlas.png`: 512×896 RGBA, 56,716 bytes.
+  SHA-256 `3279d5ab5f0c958e1f4d5d5d91ebba2c659e008801175d2971f4f0e5eac749f5`.
 - `index.tsv`: icon name, tab, zero-based cell; SHA-256
   `1c0a57f296eaadaa2bd70bf395f4ac5f610eadbcf2cb1c576476f51d16f6f53e`.
 
@@ -55,9 +55,10 @@ same pinned 2.1.1 package on September 27, 2026.
 The text context-menu glyphs are unmodified Phosphor `scissors-bold.svg`, `clipboard-text-bold.svg`
 and `selection-all-bold.svg`, fetched from the same pinned 2.1.1 package on November 6, 2026.
 
-The `serein-mark` cell is our own artwork, not an upstream icon: it is the solid silhouette of
-the Serein chat-wave from `assets/brand/serein-mark.svg`, trimmed to its bounding box so it
-matches Phosphor's glyph weight in the cell. It replaced the Discord brand mark that previously
+The `serein-mark` cell is our own artwork, not an upstream icon: it is the Lucide
+`user-round-group` glyph (ISC licence, https://lucide.dev) drawn as white strokes from
+`assets/brand/serein-mark.svg`, trimmed to its bounding box so it matches Phosphor's glyph
+weight in the cell. It replaced the Discord brand mark that previously
 occupied cell 58; no third-party application logo is bundled any more. `tools/generate-icons.py`
 pins its SHA-256 like every upstream source and rasterizes it from the repository rather than a
 package mirror.

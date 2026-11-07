@@ -159,7 +159,8 @@ fn write_symbolic_icon() -> Option<String> {
 		.ok()?;
 	// Symbolic icons are recolored from this placeholder foreground.
 	let svg = include_str!("../../../../assets/brand/serein-mark.svg")
-		.replace("fill=\"#fff\"", "fill=\"#bebebe\"");
+		.replace("fill=\"#fff\"", "fill=\"#bebebe\"")
+		.replace("stroke=\"#fff\"", "stroke=\"#bebebe\"");
 	std::fs::write(directory.join(format!("{ICON_NAME}.svg")), svg).ok()?;
 	directory.to_str().map(str::to_owned)
 }

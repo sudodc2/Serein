@@ -13,17 +13,10 @@
       "layers": [
         {
           "fill": {
-            "solid": "srgb:0.69412,0.78039,0.95686,1.00000"
+            "solid": "srgb:0.96078,0.98039,1.00000,1.00000"
           },
           "image-name": "02-upper-wave.svg",
-          "name": "02-upper-wave"
-        },
-        {
-          "fill": {
-            "solid": "srgb:0.81961,0.87843,1.00000,1.00000"
-          },
-          "image-name": "03-lower-wave.svg",
-          "name": "03-lower-wave"
+          "name": "02-glyph"
         }
       ],
       "lighting": "individual",
@@ -40,10 +33,10 @@
       "layers": [
         {
           "fill": {
-            "solid": "srgb:0.35294,0.47451,0.85098,1.00000"
+            "solid": "srgb:0.26667,0.28627,0.71765,1.00000"
           },
           "image-name": "01-bubble-body.svg",
-          "name": "01-bubble-body"
+          "name": "01-plate"
         }
       ],
       "lighting": "individual",
