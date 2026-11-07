@@ -13,7 +13,7 @@ use std::{
 const MAX_FILES: usize = 8192;
 const MAX_UNPACKED: u64 = 1024 * 1024 * 1024;
 const WINDOWS_FILES: &[&str] = &[
-	"serein.exe",
+	"aethon.exe",
 	"README.md",
 	"LICENSE-MIT",
 	"LICENSE-APACHE",
@@ -73,7 +73,7 @@ pub(super) fn linux_package_manager_update_command() -> Option<&'static str> {
 			|| id_like.contains("fedora")
 			|| id_like.contains("rhel")
 		{
-			return Some("sudo dnf upgrade serein");
+			return Some("sudo dnf upgrade aethon");
 		}
 		if id == "ubuntu"
 			|| id == "debian"
@@ -82,23 +82,23 @@ pub(super) fn linux_package_manager_update_command() -> Option<&'static str> {
 			|| id_like.contains("debian")
 			|| id_like.contains("ubuntu")
 		{
-			return Some("sudo apt update && sudo apt install --only-upgrade serein");
+			return Some("sudo apt update && sudo apt install --only-upgrade aethon");
 		}
 		if id == "arch" || id == "manjaro" || id == "endeavouros" || id_like.contains("arch") {
-			return Some("sudo pacman -Syu serein");
+			return Some("sudo pacman -Syu aethon");
 		}
 		if id.contains("suse") || id_like.contains("suse") {
-			return Some("sudo zypper update serein");
+			return Some("sudo zypper update aethon");
 		}
 	}
 	if Path::new("/usr/bin/dnf").is_file() {
-		Some("sudo dnf upgrade serein")
+		Some("sudo dnf upgrade aethon")
 	} else if Path::new("/usr/bin/apt").is_file() {
-		Some("sudo apt update && sudo apt install --only-upgrade serein")
+		Some("sudo apt update && sudo apt install --only-upgrade aethon")
 	} else if Path::new("/usr/bin/pacman").is_file() {
-		Some("sudo pacman -Syu serein")
+		Some("sudo pacman -Syu aethon")
 	} else if Path::new("/usr/bin/zypper").is_file() {
-		Some("sudo zypper update serein")
+		Some("sudo zypper update aethon")
 	} else {
 		None
 	}
@@ -144,15 +144,15 @@ fn installation() -> Result<PathBuf, String> {
 				);
 			}
 			return Err(
-				"Use your package manager to update Serein, or run a release AppImage.".into(),
+				"Use your package manager to update Aethon, or run a release AppImage.".into(),
 			);
 		}
 		let appdir = PathBuf::from(std::env::var_os("APPDIR").ok_or("Missing AppImage mount.")?);
-		if fs::canonicalize(appdir.join("usr/bin/serein"))
+		if fs::canonicalize(appdir.join("usr/bin/aethon"))
 			.ok()
 			.as_ref() != Some(&exe)
 		{
-			return Err("Run Serein from its AppImage to install updates.".into());
+			return Err("Run Aethon from its AppImage to install updates.".into());
 		}
 		let image = PathBuf::from(std::env::var_os("APPIMAGE").ok_or("Missing AppImage path.")?);
 		let image = fs::canonicalize(image).map_err(|_| "Cannot locate the installed AppImage.")?;
@@ -178,19 +178,19 @@ fn installation() -> Result<PathBuf, String> {
 			.parent()
 			.and_then(Path::parent)
 			.and_then(Path::parent)
-			.ok_or("Run the installed Serein.app to install updates.")?;
-		if exe.file_name().is_none_or(|name| name != "serein")
+			.ok_or("Run the installed Aethon.app to install updates.")?;
+		if exe.file_name().is_none_or(|name| name != "aethon")
 			|| exe
 				.parent()
 				.and_then(Path::file_name)
 				.is_none_or(|name| name != "MacOS")
 			|| app.extension().is_none_or(|extension| extension != "app")
 		{
-			return Err("Run the installed Serein.app to install updates; source builds cannot replace themselves.".into());
+			return Err("Run the installed Aethon.app to install updates; source builds cannot replace themselves.".into());
 		}
 		if app.starts_with("/Volumes") || app.to_string_lossy().contains("/AppTranslocation/") {
 			return Err(
-				"Move Serein to Applications or another writable folder before updating.".into(),
+				"Move Aethon to Applications or another writable folder before updating.".into(),
 			);
 		}
 		Ok(app.to_owned())
@@ -198,15 +198,15 @@ fn installation() -> Result<PathBuf, String> {
 		let root = exe
 			.parent()
 			.ok_or("Cannot locate the installed application folder.")?;
-		if exe.file_name().is_none_or(|name| name != "serein.exe")
+		if exe.file_name().is_none_or(|name| name != "aethon.exe")
 			|| !root.join("THIRD_PARTY_NOTICES.md").is_file()
 			|| !root.join("licenses").is_dir()
 		{
-			return Err("Run Serein from an extracted release package to install updates; source builds cannot replace themselves.".into());
+			return Err("Run Aethon from an extracted release package to install updates; source builds cannot replace themselves.".into());
 		}
 		Ok(root.to_owned())
 	} else {
-		Err("Use your package manager to update Serein on Linux.".into())
+		Err("Use your package manager to update Aethon on Linux.".into())
 	}
 }
 
@@ -219,7 +219,7 @@ pub(super) fn create_stage() -> Result<Staged, String> {
 	} else {
 		installation.as_path()
 	};
-	let lock_path = parent.join(".serein-update.lock");
+	let lock_path = parent.join(".aethon-update.lock");
 	if fs::symlink_metadata(&lock_path).is_ok_and(|metadata| !metadata.is_file()) {
 		return Err("Unexpected update lock file.".into());
 	}
@@ -231,7 +231,7 @@ pub(super) fn create_stage() -> Result<Staged, String> {
 		.open(&lock_path)
 		.map_err(|_| "The installation folder is not writable.".to_owned())?;
 	lock.try_lock()
-		.map_err(|_| "Another Serein instance is preparing update storage.".to_owned())?;
+		.map_err(|_| "Another Aethon instance is preparing update storage.".to_owned())?;
 	// One bounded staging directory per installation; discard leftovers only after their owner exits.
 	let mut count = 0;
 	for entry in
@@ -239,13 +239,13 @@ pub(super) fn create_stage() -> Result<Staged, String> {
 	{
 		count += 1;
 		if count > 16_384 {
-			return Err("The installation folder contains too many entries. Move Serein into its own folder.".into());
+			return Err("The installation folder contains too many entries. Move Aethon into its own folder.".into());
 		}
 		let entry = entry.map_err(|_| "Cannot inspect update storage.".to_owned())?;
 		let name = entry.file_name();
 		let name = name.to_string_lossy();
 		let Some(pid) = name
-			.strip_prefix(".serein-update-")
+			.strip_prefix(".aethon-update-")
 			.and_then(|pid| pid.parse::<u32>().ok())
 			.filter(|pid| *pid > 0)
 		else {
@@ -265,10 +265,10 @@ pub(super) fn create_stage() -> Result<Staged, String> {
 			.is_some_and(process_alive);
 		if helper_alive || (pid != std::process::id() && process_alive(pid)) {
 			return Err(
-				"Another Serein instance is preparing an update. Close it and try again.".into(),
+				"Another Aethon instance is preparing an update. Close it and try again.".into(),
 			);
 		}
-		if fs::read(entry.path().join("owner")).ok().as_deref() != Some(b"serein-updater-v1") {
+		if fs::read(entry.path().join("owner")).ok().as_deref() != Some(b"aethon-updater-v1") {
 			return Err(
 				"An unrecognized directory occupies update storage; move it before trying again."
 					.into(),
@@ -293,7 +293,7 @@ pub(super) fn create_stage() -> Result<Staged, String> {
 			);
 		}
 	}
-	let directory = parent.join(format!(".serein-update-{}", std::process::id()));
+	let directory = parent.join(format!(".aethon-update-{}", std::process::id()));
 	let builder = fs::DirBuilder::new();
 	#[cfg(unix)]
 	let mut builder = builder;
@@ -302,8 +302,8 @@ pub(super) fn create_stage() -> Result<Staged, String> {
 		use std::os::unix::fs::DirBuilderExt;
 		builder.mode(0o700);
 	}
-	builder.create(&directory).map_err(|_| "The installation folder is not writable. Move Serein to a writable folder and try again.".to_owned())?;
-	fs::write(directory.join("owner"), b"serein-updater-v1")
+	builder.create(&directory).map_err(|_| "The installation folder is not writable. Move Aethon to a writable folder and try again.".to_owned())?;
+	fs::write(directory.join("owner"), b"aethon-updater-v1")
 		.map_err(|_| "Cannot mark update storage ownership.".to_owned())?;
 	Ok(Staged {
 		directory,
@@ -386,7 +386,7 @@ pub(super) fn cleanup(directory: &Path) {
 		Err(_) => return,
 	}
 	if fs::remove_dir(directory).is_err() {
-		let _ = fs::write(owner, b"serein-updater-v1");
+		let _ = fs::write(owner, b"aethon-updater-v1");
 	}
 }
 
@@ -636,7 +636,7 @@ pub(super) fn unpack(
 			.and_then(|p| p.as_os_str().to_str())
 			.ok_or("Invalid package path.")?;
 		if cfg!(target_os = "macos") {
-			if top != "Serein.app" && !WINDOWS_FILES.contains(&top) {
+			if top != "Aethon.app" && !WINDOWS_FILES.contains(&top) {
 				return Err("The update contains unexpected package content.".into());
 			}
 		} else if !WINDOWS_FILES.contains(&top) {
@@ -705,13 +705,13 @@ pub(super) fn unpack(
 	}
 	if cfg!(target_os = "macos") {
 		if !destination
-			.join("Serein.app/Contents/MacOS/serein")
+			.join("Aethon.app/Contents/MacOS/aethon")
 			.is_file()
 		{
-			return Err("The update does not contain Serein.app.".into());
+			return Err("The update does not contain Aethon.app.".into());
 		}
-		verify_mac(&destination.join("Serein.app"), installed)?;
-	} else if !destination.join("serein.exe").is_file()
+		verify_mac(&destination.join("Aethon.app"), installed)?;
+	} else if !destination.join("aethon.exe").is_file()
 		|| !destination.join("licenses").is_dir()
 		|| !destination.join("THIRD_PARTY_NOTICES.md").is_file()
 	{
@@ -749,7 +749,7 @@ fn verify_mac(candidate: &Path, installed: &Path) -> Result<(), String> {
 			.lines()
 			.find_map(|line| line.strip_prefix("TeamIdentifier="))
 			.filter(|team| team.len() == 10 && team.bytes().all(|b| b.is_ascii_alphanumeric()))
-			.ok_or("In-app installation requires a Developer ID signed release of Serein.")?;
+			.ok_or("In-app installation requires a Developer ID signed release of Aethon.")?;
 		let identifier = text
 			.lines()
 			.find_map(|line| line.strip_prefix("Identifier="))
@@ -758,8 +758,8 @@ fn verify_mac(candidate: &Path, installed: &Path) -> Result<(), String> {
 	}
 	let old = identity(installed)?;
 	let new = identity(candidate)?;
-	if old != new || new.1 != "cz.viceverse.serein" {
-		return Err("The update was not signed by this Serein publisher.".into());
+	if old != new || new.1 != "cz.viceverse.aethon" {
+		return Err("The update was not signed by this Aethon publisher.".into());
 	}
 	let status = Command::new("/usr/sbin/spctl")
 		.args(["--assess", "--type", "execute"])
@@ -803,7 +803,7 @@ pub(super) fn prepare_restart(
 	let _ = version;
 	#[cfg(target_os = "macos")]
 	let mut child = {
-		verify_mac(&directory.join("package/Serein.app"), installation)?;
+		verify_mac(&directory.join("package/Aethon.app"), installation)?;
 		let script = directory.join("install.sh");
 		fs::write(&script, MAC_HELPER)
 			.map_err(|_| "Cannot prepare the update helper.".to_owned())?;
@@ -892,7 +892,7 @@ pub(super) fn prepare_restart(
 		}
 		let _ = child.kill();
 		let _ = child.wait();
-		Err("The update helper did not start. Serein will remain open.".into())
+		Err("The update helper did not start. Aethon will remain open.".into())
 	}
 }
 
@@ -933,7 +933,7 @@ if ! /bin/mv "$installed" "$backup"; then
   /usr/bin/open "$installed" || true
   exit 1
 fi
-if ! /bin/mv "$stage/package/Serein.app" "$installed"; then
+if ! /bin/mv "$stage/package/Aethon.app" "$installed"; then
   /bin/mv "$backup" "$installed"
   /usr/bin/open "$installed" || true
   exit 1
@@ -981,11 +981,11 @@ try {
     Move-Item -LiteralPath $source -Destination $target
     $replaced.Add($name)
   }
-  $uninstallKey = 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Uninstall\Serein'
+  $uninstallKey = 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Uninstall\Aethon'
   if ($plan.version -and (Test-Path -LiteralPath $uninstallKey)) {
     Set-ItemProperty -LiteralPath $uninstallKey -Name 'DisplayVersion' -Value ([string]$plan.version) -ErrorAction SilentlyContinue
   }
-  Start-Process -FilePath (Join-Path $installation 'serein.exe') -WorkingDirectory $installation
+  Start-Process -FilePath (Join-Path $installation 'aethon.exe') -WorkingDirectory $installation
 } catch {
   foreach ($name in $replaced) {
     $target = Join-Path $installation $name
@@ -994,7 +994,7 @@ try {
   foreach ($name in $moved) {
     Move-Item -LiteralPath (Join-Path $backup $name) -Destination (Join-Path $installation $name) -ErrorAction SilentlyContinue
   }
-  Start-Process -FilePath (Join-Path $installation 'serein.exe') -WorkingDirectory $installation -ErrorAction SilentlyContinue
+  Start-Process -FilePath (Join-Path $installation 'aethon.exe') -WorkingDirectory $installation -ErrorAction SilentlyContinue
   exit 1
 }
 try {
@@ -1013,7 +1013,7 @@ if ($remaining.Count -eq 0) {
   if (Test-Path -LiteralPath (Join-Path $stage 'owner')) { exit 0 }
   Remove-Item -LiteralPath $stage -Force -ErrorAction SilentlyContinue
   if (Test-Path -LiteralPath $stage) {
-    [IO.File]::WriteAllText((Join-Path $stage 'owner'), 'serein-updater-v1')
+    [IO.File]::WriteAllText((Join-Path $stage 'owner'), 'aethon-updater-v1')
   }
 }
 "#;
@@ -1047,13 +1047,13 @@ pub(super) fn debug_check() -> Result<(), String> {
 			return Err(format!("Archive path validation accepted {path}"));
 		}
 	}
-	if safe_path("Serein.app/Contents/MacOS/serein").is_err() {
+	if safe_path("Aethon.app/Contents/MacOS/aethon").is_err() {
 		return Err("Valid archive path rejected.".into());
 	}
 	let mut writer = zip::ZipWriter::new(std::io::Cursor::new(Vec::new()));
 	writer
 		.start_file(
-			"Serein.app/Contents/MacOS/serein",
+			"Aethon.app/Contents/MacOS/aethon",
 			zip::write::SimpleFileOptions::default(),
 		)
 		.map_err(|_| "Cannot create synthetic ZIP.")?;
@@ -1102,11 +1102,11 @@ pub(super) fn debug_check() -> Result<(), String> {
 		let mut nonce = [0_u8; 8];
 		getrandom::fill(&mut nonce).map_err(|_| "Cannot create cleanup check storage.")?;
 		let directory = std::env::temp_dir().join(format!(
-			"serein-update-cleanup-check-{:016x}",
+			"aethon-update-cleanup-check-{:016x}",
 			u64::from_ne_bytes(nonce)
 		));
 		fs::create_dir(&directory).map_err(|_| "Cannot create cleanup check storage.")?;
-		fs::write(directory.join("owner"), b"serein-updater-v1")
+		fs::write(directory.join("owner"), b"aethon-updater-v1")
 			.map_err(|_| "Cannot create cleanup ownership marker.")?;
 		let locked = fs::OpenOptions::new()
 			.write(true)

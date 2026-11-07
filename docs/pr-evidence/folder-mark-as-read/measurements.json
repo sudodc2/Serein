@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "task": "Serein PR #672: mark server folders as read",
+  "task": "Aethon PR #672: mark server folders as read",
   "capturedDate": "2026-10-15",
   "source": {
     "baseline": {
@@ -26,8 +26,8 @@
     "rust": "1.98.1"
   },
   "demoScenario": {
-    "build": "cargo build --release --locked -p serein --no-default-features --features demo",
-    "launch": "target/release/serein.exe --demo",
+    "build": "cargo build --release --locked -p aethon --no-default-features --features demo",
+    "launch": "target/release/aethon.exe --demo",
     "accountOrNetwork": "Offline synthetic workspace; no Discord account or transport",
     "state": "Synthetic folder context menu open at the same getting-started channel; no unread guild in the folder, so the new action is disabled in the after capture"
   },
@@ -57,7 +57,7 @@
     "nsisAvailable": false,
     "measurements": [
       {
-        "metric": "serein.exe bytes",
+        "metric": "aethon.exe bytes",
         "baseline": 87399936,
         "after": 87405568,
         "delta": 5632,

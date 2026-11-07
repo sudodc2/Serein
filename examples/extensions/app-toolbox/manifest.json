@@ -3,7 +3,7 @@
   "id": "app-toolbox",
   "name": "App Toolbox",
   "version": "1.0.0",
-  "author": "Serein contributors",
+  "author": "Aethon contributors",
   "license": "MIT OR Apache-2.0",
   "source": "https://github.com/ViceVerse-cz/Serein/tree/main/examples/extensions/app-toolbox",
   "kind": "plugin",

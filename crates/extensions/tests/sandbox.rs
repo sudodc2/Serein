@@ -7,7 +7,7 @@ fn plugin(wasm: &str) -> Package {
 			id: "test-plugin".into(),
 			name: "Test plugin".into(),
 			version: "1.0.0".into(),
-			author: "Serein".into(),
+			author: "Aethon".into(),
 			license: "MIT".into(),
 			source: "https://github.com/example/plugin".into(),
 			kind: ExtensionKind::Plugin,
@@ -30,8 +30,8 @@ fn returning(json: &str) -> Package {
 	plugin(&format!(
 		r#"(module (memory (export "memory") 1 256)
 		(data (i32.const 32768) "{data}")
-		(func (export "serein_alloc") (param i32) (result i32) (i32.const 0))
-		(func (export "serein_invoke") (param i32 i32) (result i64) (i64.const {})))"#,
+		(func (export "aethon_alloc") (param i32) (result i32) (i32.const 0))
+		(func (export "aethon_invoke") (param i32 i32) (result i64) (i64.const {})))"#,
 		(32768_u64 << 32) | json.len() as u64
 	))
 }
@@ -57,7 +57,7 @@ fn rejects_imports_start_and_excessive_memory() {
 			.is_err()
 	);
 	let package = plugin(
-		r#"(module (memory (export "memory") 257) (func (export "serein_alloc") (param i32) (result i32) i32.const 0) (func (export "serein_invoke") (param i32 i32) (result i64) i64.const 0))"#,
+		r#"(module (memory (export "memory") 257) (func (export "aethon_alloc") (param i32) (result i32) i32.const 0) (func (export "aethon_invoke") (param i32 i32) (result i64) i64.const 0))"#,
 	);
 	assert!(invoke(&package, &input()).is_err());
 }
@@ -72,7 +72,7 @@ fn fuel_interrupts_infinite_loop_and_memory_growth_traps() {
 		),
 	] {
 		let package = plugin(&format!(
-			r#"(module (memory (export "memory") 1) (func (export "serein_alloc") (param i32) (result i32) i32.const 0) (func (export "serein_invoke") (param i32 i32) (result i64) {body}))"#
+			r#"(module (memory (export "memory") 1) (func (export "aethon_alloc") (param i32) (result i32) i32.const 0) (func (export "aethon_invoke") (param i32 i32) (result i64) {body}))"#
 		));
 		let error = invoke(&package, &input()).unwrap_err();
 		assert_eq!(
@@ -86,15 +86,15 @@ fn fuel_interrupts_infinite_loop_and_memory_growth_traps() {
 fn diagnostics_distinguish_safe_runtime_input_and_output_failures() {
 	let trap = plugin(
 		r#"(module (memory (export "memory") 1)
-        (func (export "serein_alloc") (param i32) (result i32) i32.const 0)
-        (func (export "serein_invoke") (param i32 i32) (result i64) unreachable))"#,
+        (func (export "aethon_alloc") (param i32) (result i32) i32.const 0)
+        (func (export "aethon_invoke") (param i32 i32) (result i64) unreachable))"#,
 	);
 	assert!(matches!(invoke(&trap, &input()), Err(Error::Trap)));
 	let recursive = plugin(
 		r#"(module (memory (export "memory") 1)
-        (func (export "serein_alloc") (param i32) (result i32) i32.const 0)
+        (func (export "aethon_alloc") (param i32) (result i32) i32.const 0)
         (func $recurse (result i64) call $recurse i64.const 1 i64.add)
-        (func (export "serein_invoke") (param i32 i32) (result i64) call $recurse))"#,
+        (func (export "aethon_invoke") (param i32 i32) (result i64) call $recurse))"#,
 	);
 	assert!(matches!(invoke(&recursive, &input()), Err(Error::Stack)));
 	assert!(matches!(
@@ -120,8 +120,8 @@ fn diagnostics_distinguish_safe_runtime_input_and_output_failures() {
 	));
 	let oversized = plugin(&format!(
 		r#"(module (memory (export "memory") 1)
-        (func (export "serein_alloc") (param i32) (result i32) i32.const 0)
-        (func (export "serein_invoke") (param i32 i32) (result i64) i64.const {}))"#,
+        (func (export "aethon_alloc") (param i32) (result i32) i32.const 0)
+        (func (export "aethon_invoke") (param i32 i32) (result i64) i64.const {}))"#,
 		MAX_IO_BYTES + 1
 	));
 	assert!(matches!(
@@ -139,7 +139,7 @@ fn diagnostics_distinguish_safe_runtime_input_and_output_failures() {
 fn rejects_oversized_or_invalid_pointers_and_json_responses() {
 	for packed in [MAX_IO_BYTES as u64 + 1, (u32::MAX as u64) << 32 | 4] {
 		let package = plugin(&format!(
-			r#"(module (memory (export "memory") 1) (func (export "serein_alloc") (param i32) (result i32) i32.const 0) (func (export "serein_invoke") (param i32 i32) (result i64) i64.const {packed}))"#
+			r#"(module (memory (export "memory") 1) (func (export "aethon_alloc") (param i32) (result i32) i32.const 0) (func (export "aethon_invoke") (param i32 i32) (result i64) i64.const {packed}))"#
 		));
 		assert!(invoke(&package, &input()).is_err());
 	}
@@ -386,7 +386,7 @@ fn image_sharing_plugin_requires_activation_and_capability() {
 
 	{
 		let protector = parse_package(include_bytes!(
-			"../../../extensions/plugins/packages/message-delete-protector.serein-extension"
+			"../../../extensions/plugins/packages/message-delete-protector.aethon-extension"
 		))
 		.unwrap();
 		let input = Invocation {
@@ -403,7 +403,7 @@ fn image_sharing_plugin_requires_activation_and_capability() {
 #[test]
 fn rgb_cycle_package_executes_through_the_real_abi() {
 	let package = parse_package(include_bytes!(
-		"../../../examples/extensions/packages/rgb-cycle.serein-extension"
+		"../../../examples/extensions/packages/rgb-cycle.aethon-extension"
 	))
 	.unwrap();
 	let output = invoke(
@@ -572,7 +572,7 @@ fn event_effects_allow_granted_storage_and_appearance_without_unsolicited_ui() {
 /// The published Custom RPC package through the real offline sandbox.
 #[test]
 fn custom_rpc_package_preserves_drafts_and_controls_presence() {
-	let bytes = include_bytes!("../../../extensions/plugins/packages/custom-rpc.serein-extension");
+	let bytes = include_bytes!("../../../extensions/plugins/packages/custom-rpc.aethon-extension");
 	let package = parse_package(bytes).expect("package validates");
 	let mut input = Invocation {
 		action: "open".into(),

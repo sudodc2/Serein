@@ -3,7 +3,7 @@
 Baseline: `7cd14efe2cd22b59ea8569fb858c6324b5c09a38` (`main`, before PR #705).
 After: the conflict-resolution source revision committed with these images.
 
-Native Serein windows, Linux x86_64, pinned Rust 1.98.1, wgpu/Vulkan llvmpipe,
+Native Aethon windows, Linux x86_64, pinned Rust 1.98.1, wgpu/Vulkan llvmpipe,
 Xvfb at 1440 × 1080, application window 1120 × 760 at scale 1. Each capture follows
 a ten-second warmup with the pointer outside the application. Executable and test
 builds used `CARGO_PROFILE_DEV_DEBUG=0`, `CARGO_PROFILE_TEST_DEBUG=0` and
@@ -29,9 +29,9 @@ Verification on the resolved source:
 
 ```sh
 cargo fmt --all -- --check
-cargo check --locked -p serein -p ui --all-targets --features serein/demo
-cargo test --locked -p serein -p ui -p client-core -p discord-api --features serein/demo --lib --bins typing
-cargo build --locked -p serein --features demo --bin serein
+cargo check --locked -p aethon -p ui --all-targets --features aethon/demo
+cargo test --locked -p aethon -p ui -p client-core -p discord-api --features aethon/demo --lib --bins typing
+cargo build --locked -p aethon --features demo --bin aethon
 ```
 
 All passed. The filtered suite contains 21 tests: seven client-core, one HTTP

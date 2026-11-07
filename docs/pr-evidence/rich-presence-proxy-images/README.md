@@ -24,7 +24,7 @@ callback after at least five frames and a one-second warmup. The light pair adds
 `--light`.
 
 ```sh
-cargo run --locked -p serein --features demo --example profile_preview -- --demo --page=profile-card --proxy-artwork --output=preview.png --width=1120 --height=760
+cargo run --locked -p aethon --features demo --example profile_preview -- --demo --page=profile-card --proxy-artwork --output=preview.png --width=1120 --height=760
 ```
 
 Executable/test builds used `CARGO_PROFILE_DEV_DEBUG=0`,

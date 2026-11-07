@@ -1,5 +1,5 @@
+use aethon_extension_sdk as sdk;
 use extensions::{Action, Capability, ExtensionKind, Invocation, Manifest, Output, Surface};
-use serein_extension_sdk as sdk;
 
 fn manifest(action: &str, surface: Surface) -> Manifest {
 	let mut capabilities = vec![Capability::Storage];
@@ -19,7 +19,7 @@ fn manifest(action: &str, surface: Surface) -> Manifest {
 		id: "sdk-check".into(),
 		name: "SDK compatibility check".into(),
 		version: "1.0.0".into(),
-		author: "Serein contributors".into(),
+		author: "Aethon contributors".into(),
 		license: "MIT".into(),
 		source: "https://example.org/source".into(),
 		kind: ExtensionKind::Plugin,
@@ -213,7 +213,7 @@ fn every_sdk_panel_and_appearance_field_is_accepted_by_the_host() {
 					TextInput {
 						id: "name".into(),
 						label: "Name".into(),
-						value: "Serein".into(),
+						value: "Aethon".into(),
 					},
 					Checkbox {
 						id: "enabled".into(),

@@ -48,7 +48,7 @@ impl Sounds {
 			let status = self.status.clone();
 			let context = ctx.clone();
 			if std::thread::Builder::new()
-				.name("serein-notification-audio".into())
+				.name("aethon-notification-audio".into())
 				.spawn(move || {
 					while let Ok((request, sound, volume)) = receive.recv() {
 						if generation.load(Ordering::Acquire) != request {

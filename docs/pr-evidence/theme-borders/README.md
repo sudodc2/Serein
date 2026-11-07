@@ -1,7 +1,7 @@
 # Theme border evidence
 
 Baseline: `c2842aa7` (clean `main`, matching `origin/main`). Both demo binaries were built
-with Rust 1.98.1, `--locked -p serein --features demo`, including voice.
+with Rust 1.98.1, `--locked -p aethon --features demo`, including voice.
 
 These are native X11 window captures of synthetic `--demo` content on Linux,
 using Vulkan, with `WINIT_X11_SCALE_FACTOR=0.93`, 100% egui zoom

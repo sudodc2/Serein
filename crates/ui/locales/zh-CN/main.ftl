@@ -3,7 +3,7 @@
 language-system = 系统
 language-group = 语言
 language-label = 显示语言
-language-description = 选择 Serein 的语言。Discord 内容不会翻译。
+language-description = 选择 Aethon 的语言。Discord 内容不会翻译。
 section-user = 用户设置
 section-app = 应用程式设置
 section-customization = 个人化
@@ -28,11 +28,11 @@ description-appearance = 主题、色彩、窗口效果与布局。
 description-chat = 消息、媒体、链接与滚动的行为。
 description-messaging-permissions = 控制谁能联系你、消息如何过滤。
 description-notifications = 选择要接收哪些通知，以及如何显示。
-description-registered-games = 分享你在玩的游戏，修正或新增 Serein 侦测到的游戏。
+description-registered-games = 分享你在玩的游戏，修正或新增 Aethon 侦测到的游戏。
 description-voice = 麦克风、扬声器、摄影机与语音处理。
-description-keybinds = Serein 的键盘快捷键。
-description-storage = Serein 在这台设备上保留的数据。
-description-updates = 让这台设备的 Serein 保持最新。
+description-keybinds = Aethon 的键盘快捷键。
+description-storage = Aethon 在这台设备上保留的数据。
+description-updates = 让这台设备的 Aethon 保持最新。
 description-extensions = 管理社区扩展。
 description-themes = 选择社区主题。
 theme-maker = 主题制作
@@ -45,34 +45,34 @@ log-out = 登出
 unofficial = 非官方 · 未获 Discord 认可
 offline-preview = 离线预览 · 变更只留在这次会话，不会发送。
 general-startup = 开机启动
-general-open-at-startup = 电脑启动时打开 Serein
-general-open-at-startup-description = Serein 会在背景登入并连接。
+general-open-at-startup = 电脑启动时打开 Aethon
+general-open-at-startup-description = Aethon 会在背景登入并连接。
 general-start-minimized = 最小化启动
 general-start-minimized-description = 在背景启动，不占用你的屏幕。
 general-startup-unavailable = 自动启动仅支持 Windows 和 macOS。
 general-window = 窗口
 general-hide-decorations = 无标题栏
-general-hide-decorations-description = 适用于平铺式窗口管理器：移除所有标题栏与边框，包括 Serein 自己的标题栏。请用窗口管理器移动、调整大小或关闭 Serein。
+general-hide-decorations-description = 适用于平铺式窗口管理器：移除所有标题栏与边框，包括 Aethon 自己的标题栏。请用窗口管理器移动、调整大小或关闭 Aethon。
 general-custom-title-bar = 自定义标题列
-general-custom-title-bar-description = 以 Serein 自己的 GTK 4 风格标题列取代系统标题列。
-general-hide-title-bar = 隐藏 Serein 标题列
+general-custom-title-bar-description = 以 Aethon 自己的 GTK 4 风格标题列取代系统标题列。
+general-hide-title-bar = 隐藏 Aethon 标题列
 general-hide-title-bar-description = 改用系统标题列与窗口按钮。
-general-keep-menu-bar = 让 Serein 留在菜单栏
-general-keep-system-tray = 让 Serein 留在系统托盘
-general-menu-bar-description = 关闭窗口后 Serein 留在菜单栏。要结束请从菜单中选离开。
-general-linux-tray-description = 关闭后 Serein 继续执行。可用系统托盘显示、最小化或结束。
-general-windows-tray-description = 关闭窗口后 Serein 留在通知区域。要结束请从菜单中选离开。
+general-keep-menu-bar = 让 Aethon 留在菜单栏
+general-keep-system-tray = 让 Aethon 留在系统托盘
+general-menu-bar-description = 关闭窗口后 Aethon 留在菜单栏。要结束请从菜单中选离开。
+general-linux-tray-description = 关闭后 Aethon 继续执行。可用系统托盘显示、最小化或结束。
+general-windows-tray-description = 关闭窗口后 Aethon 留在通知区域。要结束请从菜单中选离开。
 general-tray-unavailable = 此平台没有系统托盘可用。
 general-graphics = 图形
 general-render-with = 渲染方式
-general-gpu-restart = 下次启动 Serein 时生效。
+general-gpu-restart = 下次启动 Aethon 时生效。
 general-gpu-current-prefix = 目前绘制使用
 general-steady-refresh-rate = 固定刷新率
-general-steady-refresh-rate-description = 当 Serein 是活动窗口时，会以显示器的刷新率绘制，让可变刷新率（VRR、G-SYNC、FreeSync）显示器可以保持同一刷新率而不会闪烁。会更耗电。
+general-steady-refresh-rate-description = 当 Aethon 是活动窗口时，会以显示器的刷新率绘制，让可变刷新率（VRR、G-SYNC、FreeSync）显示器可以保持同一刷新率而不会闪烁。会更耗电。
 gpu-automatic = 自动
 gpu-high-performance = 高性能
 gpu-power-saving = 省电
-gpu-automatic-description = 让 Serein 自行选择能绘制此窗口的 GPU。
+gpu-automatic-description = 让 Aethon 自行选择能绘制此窗口的 GPU。
 gpu-high-performance-description = 有独立显示卡时就使用它。
 gpu-power-saving-description = 使用集成显卡以节省电力。
 direct-messages = 私信
@@ -216,7 +216,7 @@ account-menu-custom-status-editor-clear-after = 多久后清除
 # Context: custom_status_editor
 account-menu-custom-status-editor-no-custom-status = 无自订状态
 # Context: custom_status_editor
-account-menu-custom-status-editor-serein-clears-it = Serein 会自动清除
+account-menu-custom-status-editor-aethon-clears-it = Aethon 会自动清除
 # Context: custom_status_editor
 account-menu-custom-status-editor-status-text = 状态文字
 # Context: custom_status_editor
@@ -1054,7 +1054,7 @@ fonts-show-none-installed = 这台系统上找不到已安装的字体。
 # Context: show
 fonts-show-the-quick-brown-fox-jumps-over-the-lazy-dog-0123456789 = 灵巧的棕色狐狸跃过懒惰的狗。0123456789
 # Context: show
-fonts-show-ttf-or-otf-up-to-32-mib-saved-on-this = 这台设备已安装的字体，单一上限 32 MiB。会另存一份给 Serein 使用。代码仍用等宽字体。
+fonts-show-ttf-or-otf-up-to-32-mib-saved-on-this = 这台设备已安装的字体，单一上限 32 MiB。会另存一份给 Aethon 使用。代码仍用等宽字体。
 # Context: show
 fonts-show-typography = 文字排版
 
@@ -1572,7 +1572,7 @@ keybinds-show-voice-enable-global-keybinds = 启用全局快捷键
 # Context: show_voice
 keybinds-show-voice-global-availability = 全局可用性
 # Context: show_voice
-keybinds-show-voice-use-voice-shortcuts-while-another-app-is-focused-when-off = 焦点在其他应用程序时也能使用语音快捷键。关闭时，快捷键仅在 Serein 有焦点时生效。
+keybinds-show-voice-use-voice-shortcuts-while-another-app-is-focused-when-off = 焦点在其他应用程序时也能使用语音快捷键。关闭时，快捷键仅在 Aethon 有焦点时生效。
 
 ## crates/ui/src/lib.rs
 # Context: account_card
@@ -1650,7 +1650,7 @@ main-restoring-checking-your-saved-login = 正在检查已保存的登录信息
 # Context: restoring
 main-restoring-connecting-to-discord = 正在连接 Discord
 # Context: restoring_screen
-main-restoring-screen-serein = Serein
+main-restoring-screen-aethon = Aethon
 # Context: restoring_screen
 main-restoring-screen-use-a-different-account = 使用其他账户
 # Context: restoring_screen
@@ -1660,11 +1660,11 @@ main-sign-in-accounts-saved-accounts = 已保存的账户
 # Context: sign_in_consent
 main-sign-in-consent-passwords-and-2fa-stay-on-discord-s-own-login-page = 密码与 2FA 只留在 Discord 自己的登录页；只有会话令牌会存入你的操作系统凭据存储区。
 # Context: sign_in_disclosures
-main-sign-in-disclosures-about-serein = 关于 Serein
+main-sign-in-disclosures-about-aethon = 关于 Aethon
 # Context: sign_in_disclosures
 main-sign-in-disclosures-connect-with-this-token = 使用该令牌连接
 # Context: sign_in_disclosures
-main-sign-in-disclosures-for-owners-who-already-hold-a-valid-discord-session-token = 供已持有有效 Discord 会话令牌的用户使用，例如来自另一套已登录的 Serein。此处绝不会用到密码与 2FA，且完全跳过 Discord 的托管登录页。
+main-sign-in-disclosures-for-owners-who-already-hold-a-valid-discord-session-token = 供已持有有效 Discord 会话令牌的用户使用，例如来自另一套已登录的 Aethon。此处绝不会用到密码与 2FA，且完全跳过 Discord 的托管登录页。
 # Context: sign_in_disclosures
 main-sign-in-disclosures-forget-saved-login = 清除已保存的登录
 # Context: sign_in_disclosures
@@ -1678,7 +1678,7 @@ main-sign-in-header-sign-in-with-your-discord-account-to-get-started = 登录你
 # Context: sign_in_header
 main-sign-in-header-welcome-back = 欢迎回来
 # Context: sign_in_header
-main-sign-in-header-welcome-to-serein = 欢迎使用 Serein
+main-sign-in-header-welcome-to-aethon = 欢迎使用 Aethon
 # Context: sign_in_preview
 main-sign-in-status-copy-failure-details = 复制失败详细信息
 main-sign-in-preview-explore-the-offline-preview = 浏览离线预览
@@ -1687,7 +1687,7 @@ main-sign-in-preview-sample-conversations-no-discord-connection = 示例对话�
 # Context: sign_in_screen
 main-sign-in-screen-independent-and-open-source-not-affiliated-with-discord = 独立且开源。与 Discord 无关联。
 # Context: sign_in_screen
-main-sign-in-screen-serein = Serein
+main-sign-in-screen-aethon = Aethon
 # Context: ui
 main-ui-cancel = 取消
 # Context: ui
@@ -2299,9 +2299,9 @@ screen-body-refresh = 刷新
 # Context: body
 screen-body-screen-or-window = 屏幕或窗口
 # Context: body
-screen-body-send-what-your-mac-plays-along-with-the-screen-serein = 连同画面一起送出你的 Mac 播放的声音。不含 Serein 本身的通话音频。
+screen-body-send-what-your-mac-plays-along-with-the-screen-aethon = 连同画面一起送出你的 Mac 播放的声音。不含 Aethon 本身的通话音频。
 # Context: body
-screen-body-share-sound-from-other-apps-even-when-sharing-one-window = 即使只分享一个窗口，也能送出其他应用程序的声音。不含 Serein 本身的音频。
+screen-body-share-sound-from-other-apps-even-when-sharing-one-window = 即使只分享一个窗口，也能送出其他应用程序的声音。不含 Aethon 本身的音频。
 # Context: body
 screen-body-share-system-audio = 分享系统音频
 # Context: body
@@ -3462,7 +3462,7 @@ settings-activity-added-games = 已新增的游戏
 # Context: activity_settings
 settings-activity-no-games-added = 尚未新增游戏
 # Context: activity_settings
-settings-activity-hidden = 已隐藏。Serein 不会检测这个游戏。
+settings-activity-hidden = 已隐藏。Aethon 不会检测这个游戏。
 # Context: activity_settings
 settings-activity-detected = 自动检测到
 # Context: activity_settings
@@ -3484,7 +3484,7 @@ settings-activity-click-to-rename = 点击重命名
 # Context: activity_settings
 settings-activity-add-a-game = 新增游戏
 # Context: activity_settings
-settings-activity-choose-program = 选择一个运行中的程序。只要它在运行，Serein 就会把你的游戏显示为它。
+settings-activity-choose-program = 选择一个运行中的程序。只要它在运行，Aethon 就会把你的游戏显示为它。
 # Context: activity_settings
 settings-activity-search-programs = 搜索运行中的程序
 # Context: activity_settings
@@ -3512,7 +3512,7 @@ settings-appearance-settings-primary-color = 主色
 # Context: appearance_settings
 settings-appearance-settings-reset = 重置
 # Context: appearance_settings
-settings-appearance-settings-restart-serein-after-changing-this-themes-can-customize-effects-while = 修改后需重新启动 Serein。启用主题时可自行设置效果。
+settings-appearance-settings-restart-aethon-after-changing-this-themes-can-customize-effects-while = 修改后需重新启动 Aethon。启用主题时可自行设置效果。
 # Context: appearance_settings
 settings-appearance-settings-the-active-theme-brings-its-own-accent-it-takes-over = 当前主题自带强调色；使用该主题期间由其接管。
 # Context: appearance_settings
@@ -3552,11 +3552,11 @@ settings-storage-page-clear-cache = 清除缓存
 # Context: storage_page
 settings-storage-page-local-storage = 本地存储
 # Context: storage_page
-settings-storage-page-messages-and-drafts-are-cached-on-this-device-inside-bounded = 消息与草稿会存放在这台设备上，文件有容量上限且按账号分离。Serein 不会加密缓存内容；已保存的登录令牌存放在操作系统的凭据库。
+settings-storage-page-messages-and-drafts-are-cached-on-this-device-inside-bounded = 消息与草稿会存放在这台设备上，文件有容量上限且按账号分离。Aethon 不会加密缓存内容；已保存的登录令牌存放在操作系统的凭据库。
 # Context: storage_page
 settings-storage-page-removes-cached-messages-and-media-drafts-and-your-login-stay = 会清除缓存的消息与媒体。草稿和你的登录会保留。
 # Context: storage_page
-settings-storage-page-serein-does-not-collect-telemetry-or-upload-diagnostics-discord-retains = Serein 不收集遥测数据，也不上传诊断信息。Discord 的服务端数据按其自身政策保留。
+settings-storage-page-aethon-does-not-collect-telemetry-or-upload-diagnostics-discord-retains = Aethon 不收集遥测数据，也不上传诊断信息。Discord 的服务端数据按其自身政策保留。
 # Context: storage_page
 settings-storage-page-your-privacy = 你的隐私
 # Context: cosmetic_settings
@@ -4005,7 +4005,7 @@ updates-update-settings-could-not-load-or-save-update-preferences-changes-may-no
 # Context: update_settings
 updates-update-settings-download-update = 下载更新
 # Context: update_settings
-updates-update-settings-download-updates-in-the-background-restart-when-you-are-ready = 在后台下载更新，准备好再重启。关闭此项后 Serein 仍会在启动与定期检查更新。
+updates-update-settings-download-updates-in-the-background-restart-when-you-are-ready = 在后台下载更新，准备好再重启。关闭此项后 Aethon 仍会在启动与定期检查更新。
 # Context: update_settings
 updates-update-settings-early-builds-with-the-newest-changes-nightly-releases-can-be = 包含最新改动的早期版本。Nightly 可能较不稳定。
 # Context: update_settings
@@ -4031,7 +4031,7 @@ updates-update-settings-release-channel = 发布渠道
 # Context: update_settings
 updates-update-settings-restart-to-update = 重启以更新
 # Context: update_settings
-updates-update-settings-serein-was-installed-via-your-distribution-run-this-in-a = Serein 是以发行版方式安装的。请在终端中执行此命令更新。
+updates-update-settings-aethon-was-installed-via-your-distribution-run-this-in-a = Aethon 是以发行版方式安装的。请在终端中执行此命令更新。
 # Context: update_settings
 updates-update-settings-save-diagnostics = 保存诊断信息
 # Context: update_settings
@@ -4053,7 +4053,7 @@ updates-update-settings-log-warnings = 错误与警告
 # Context: update_settings
 updates-update-settings-open-folder = 打开文件夹
 # Context: update_settings
-updates-update-settings-the-log-folder-could-not-be-written = 无法写入日志文件夹。请检查 Serein 的数据文件夹后重试。
+updates-update-settings-the-log-folder-could-not-be-written = 无法写入日志文件夹。请检查 Aethon 的数据文件夹后重试。
 # Context: update_settings
 updates-update-settings-timings-stages-and-failures-in-one-local-file-no-account-channel-or = 耗时、阶段与失败记录在单个本地日志文件中。绝不写入账户、频道、消息与凭据数据，也不会上传任何内容。
 # Context: update_log
@@ -4522,7 +4522,7 @@ onboarding-rules-heading = 服务器规则
 # Context: rules
 onboarding-rules-review = 聊天前，审核人员会先检查这些回答。
 # Context: field
-onboarding-field-unsupported = 这个服务器有个问题 Serein 还无法显示。请到 Discord 应用程序完成加入。
+onboarding-field-unsupported = 这个服务器有个问题 Aethon 还无法显示。请到 Discord 应用程序完成加入。
 # Context: field
 onboarding-field-agree = 我已阅读并同意规则
 
@@ -4562,7 +4562,7 @@ public-upload-host-catbox = 上限 200 MB（GIF 20 MB） · 两年未访问可�
 public-upload-host-litterbox = 上限 1 GB · 暂存型，72 小时后删除
 public-upload-over-limit = { $size } · 超过你的 Discord 上传上限 { $limit }
 public-upload-uploading = 上传至 { $host } · { $sent }／{ $total }
-public-upload-privacy = 拿到链接的人都能打开这个文件。内容原封不动（含元数据）上传到 Discord 之外，Serein 之后无法删除。
+public-upload-privacy = 拿到链接的人都能打开这个文件。内容原封不动（含元数据）上传到 Discord 之外，Aethon 之后无法删除。
 public-upload-review = 尚未发送任何东西。把链接加入草稿或复制后，自行发送。
 public-upload-return = 请回到原对话加入这个链接。
 public-upload-preparing = 正在准备公开上传…
@@ -4706,7 +4706,7 @@ reading-double-click-reaction = 双击回应
 
 ## crates/platform/src/app_menu.rs
 # Context: macos_menu_bar
-app-menu-about = 关于 Serein
+app-menu-about = 关于 Aethon
 # Context: macos_menu_bar
 app-menu-updates = 检查更新…
 # Context: macos_menu_bar
@@ -4714,13 +4714,13 @@ app-menu-settings = 设置…
 # Context: macos_menu_bar
 app-menu-services = 服务
 # Context: macos_menu_bar
-app-menu-hide = 隐藏 Serein
+app-menu-hide = 隐藏 Aethon
 # Context: macos_menu_bar
 app-menu-hide-others = 隐藏其他
 # Context: macos_menu_bar
 app-menu-show-all = 全部显示
 # Context: macos_menu_bar
-app-menu-quit = 退出 Serein
+app-menu-quit = 退出 Aethon
 # Context: macos_menu_bar
 app-menu-file = 文件
 # Context: macos_menu_bar
@@ -4762,7 +4762,7 @@ app-menu-bring-all-to-front = 前置全部窗口
 # Context: macos_menu_bar
 app-menu-help = 帮助
 # Context: macos_menu_bar
-app-menu-github = GitHub 上的 Serein
+app-menu-github = GitHub 上的 Aethon
 # Context: macos_menu_bar
 app-menu-report-issue = 报告问题…
 

@@ -92,7 +92,7 @@
     ];
 in
     rustPlatform.buildRustPackage (finalAttrs: {
-        pname = "serein";
+        pname = "aethon";
         # Match `cargo build`: release automation versions Cargo.toml, not this file.
         version = (lib.importTOML ../../Cargo.toml).workspace.package.version;
 
@@ -108,7 +108,7 @@ in
 
         cargoBuildFlags = [
             "--package"
-            "serein"
+            "aethon"
         ];
 
         nativeBuildInputs =
@@ -160,10 +160,10 @@ in
         # MPL-2.0 hpke-rs source ship with every binary.
         postInstall =
             ''
-                docs="$out/share/doc/serein"
+                docs="$out/share/doc/aethon"
             ''
             + lib.optionalString isDarwin ''
-                app="$out/Applications/Serein.app/Contents"
+                app="$out/Applications/Aethon.app/Contents"
                 docs="$app/Resources"
             ''
             + ''
@@ -179,10 +179,10 @@ in
                 cp -R vendor/hpke-rs "$docs/source/"
             ''
             + lib.optionalString isLinux ''
-                install -Dm444 packaging/linux/serein.desktop \
-                  $out/share/applications/cz.viceverse.serein.desktop
-                substituteInPlace $out/share/applications/cz.viceverse.serein.desktop \
-                  --replace-fail "Exec=serein" "Exec=$out/bin/serein"
+                install -Dm444 packaging/linux/aethon.desktop \
+                  $out/share/applications/cz.viceverse.aethon.desktop
+                substituteInPlace $out/share/applications/cz.viceverse.aethon.desktop \
+                  --replace-fail "Exec=aethon" "Exec=$out/bin/aethon"
                 mkdir -p $out/share/icons
                 cp -R packaging/linux/hicolor $out/share/icons/
             ''
@@ -190,11 +190,11 @@ in
             # (privacy usage descriptions, identifier and icon) from the launched binary.
             + lib.optionalString isDarwin ''
                 install -Dm444 packaging/macos/Info.plist "$app/Info.plist"
-                install -Dm444 packaging/macos/Serein.icns "$app/Resources/Serein.icns"
+                install -Dm444 packaging/macos/Aethon.icns "$app/Resources/Aethon.icns"
                 mkdir -p "$app/MacOS" "$out/share/doc"
-                mv "$out/bin/serein" "$app/MacOS/serein"
-                ln -s "$app/MacOS/serein" "$out/bin/serein"
-                ln -s "$app/Resources" "$out/share/doc/serein"
+                mv "$out/bin/aethon" "$app/MacOS/aethon"
+                ln -s "$app/MacOS/aethon" "$out/bin/aethon"
+                ln -s "$app/Resources" "$out/share/doc/aethon"
             '';
 
         meta = {
@@ -205,7 +205,7 @@ in
                 asl20
             ];
             platforms = lib.platforms.linux ++ lib.platforms.darwin;
-            mainProgram = "serein";
+            mainProgram = "aethon";
             maintainers = with lib.maintainers; [
                 myamusashi
             ];

@@ -6,7 +6,7 @@ worktree received only that page and the fixture-only `preview_profile_popout` h
 have no cosmetics because the field does not exist there.
 
 ```sh
-cargo build --release --locked -p serein --features demo --example profile_preview
+cargo build --release --locked -p aethon --features demo --example profile_preview
 gamescope --backend headless -w 1440 -h 900 -W 1440 -H 900 -- env -u WAYLAND_DISPLAY \
   target/release/examples/profile_preview --demo --width=1440 --height=900 \
   --page=collectibles --output=after-popout.png   # also: --full, --light, --page=dm-tags
@@ -24,7 +24,7 @@ come from a debug `profile_preview --features demo` build of the follow-up commi
 exported the same way at 1440 × 900 on Fedora Asahi (Apple M1, labwc):
 
 ```sh
-cargo build --locked -p serein --features demo --example profile_preview
+cargo build --locked -p aethon --features demo --example profile_preview
 target/debug/examples/profile_preview --demo --width=1440 --height=900 --page=storage --output=after-settings-storage.png
 target/debug/examples/profile_preview --demo --width=1440 --height=900 --page=appearance --scroll=900 --output=after-settings-cosmetics.png
 target/debug/examples/profile_preview --demo --width=1440 --height=900 --page=collectibles --full --output=after-full.png

@@ -52,7 +52,7 @@ def check_shortcut(shortcut, executable):
         try:
             assert ctypes.c_ushort.from_buffer(value).value == 31
             app_id = ctypes.c_void_p.from_buffer(value, 8).value
-            assert ctypes.wstring_at(app_id) == "cz.viceverse.serein"
+            assert ctypes.wstring_at(app_id) == "cz.viceverse.aethon"
         finally:
             ole.PropVariantClear(value)
     finally:
@@ -77,30 +77,30 @@ def main():
     compiler = shutil.which("makensis") or r"C:\Program Files (x86)\NSIS\makensis.exe"
     programs = ctypes.create_unicode_buffer(1024)
     ctypes.OleDLL("shell32").SHGetFolderPathW(None, 2, None, 0, programs)
-    shortcut = Path(programs.value) / "Serein.lnk"
-    uninstall_key = r"Software\Microsoft\Windows\CurrentVersion\Uninstall\Serein"
-    assert not shortcut.exists(), "Refusing to overwrite an existing Serein shortcut"
+    shortcut = Path(programs.value) / "Aethon.lnk"
+    uninstall_key = r"Software\Microsoft\Windows\CurrentVersion\Uninstall\Aethon"
+    assert not shortcut.exists(), "Refusing to overwrite an existing Aethon shortcut"
     try:
         with winreg.OpenKey(winreg.HKEY_CURRENT_USER, uninstall_key):
-            raise AssertionError("Refusing to overwrite an existing Serein installation")
+            raise AssertionError("Refusing to overwrite an existing Aethon installation")
     except FileNotFoundError:
         pass
-    with tempfile.TemporaryDirectory(prefix="serein-installer-offline-") as temporary:
+    with tempfile.TemporaryDirectory(prefix="aethon-installer-offline-") as temporary:
         root = Path(temporary)
         payload, output = root / "payload", root / "output"
         payload.mkdir()
         output.mkdir()
         fixture = root / "fixture.rs"
         fixture.write_text('fn main() { if let Some(p) = std::env::args().nth(1) { std::fs::write(p, b"ready").unwrap(); std::thread::sleep(std::time::Duration::from_secs(120)); } }')
-        subprocess.run(["rustc", "--edition=2024", "-O", str(fixture), "-o", str(payload / "serein.exe")], check=True)
+        subprocess.run(["rustc", "--edition=2024", "-O", str(fixture), "-o", str(payload / "aethon.exe")], check=True)
         (payload / "LICENSE-MIT").write_text("Synthetic installer fixture")
         for name in ("install-notifications.ps1", "setup.ps1"):
             (payload / name).write_text("throw 'Installer must not run or install this optional script'")
         subprocess.run([compiler, "-V2", "-NOCD", "-DVERSION=0.0.0-offline", f"-DDIST_DIR={payload}",
                         f"-DOUTPUT_DIR={output}", str(repository / "packaging/windows/installer.nsi")],
                        cwd=repository, check=True, timeout=120)
-        setup = output / "serein-0.0.0-offline-setup.exe"
-        installed = root / "Installed Serein žluťoučký"
+        setup = output / "aethon-0.0.0-offline-setup.exe"
+        installed = root / "Installed Aethon žluťoučký"
         uninstaller = installed / "uninstall.exe"
         copied_uninstaller = root / "uninstall-test.exe"
 
@@ -123,8 +123,8 @@ def main():
         running = None
         try:
             # Case-insensitive process recognition, with no GUI, Discord or audio.
-            running_exe = root / "SEREIN.EXE"
-            shutil.copy2(payload / "serein.exe", running_exe)
+            running_exe = root / "AETHON.EXE"
+            shutil.copy2(payload / "aethon.exe", running_exe)
             ready = root / "ready"
             running = subprocess.Popen([str(running_exe), str(ready)])
             wait_for(ready.exists)
@@ -139,11 +139,11 @@ def main():
                 start = time.perf_counter()
                 subprocess.run(f'"{setup}" /S /D={installed}', check=True, timeout=30)
                 timings.append(round((time.perf_counter() - start) * 1000, 3))
-                assert (installed / "serein.exe").read_bytes() == (payload / "serein.exe").read_bytes()
+                assert (installed / "aethon.exe").read_bytes() == (payload / "aethon.exe").read_bytes()
                 assert uninstaller.is_file()
                 assert not (installed / "install-notifications.ps1").exists()
                 assert not (installed / "setup.ps1").exists()
-                check_shortcut(shortcut, installed / "serein.exe")
+                check_shortcut(shortcut, installed / "aethon.exe")
                 with winreg.OpenKey(winreg.HKEY_CURRENT_USER, uninstall_key, 0,
                                     winreg.KEY_READ | winreg.KEY_WOW64_64KEY) as key:
                     assert winreg.QueryValueEx(key, "DisplayVersion")[0] == "0.0.0-offline"
@@ -152,11 +152,11 @@ def main():
                 for name in ("install-notifications.ps1", "setup.ps1"):
                     (installed / name).write_text("legacy fixture")
             ready.unlink()
-            running = subprocess.Popen([str(installed / "serein.exe"), str(ready)])
+            running = subprocess.Popen([str(installed / "aethon.exe"), str(ready)])
             wait_for(ready.exists)
             result = uninstall()
             assert result.returncode == 1, result.returncode
-            assert (installed / "serein.exe").exists() and shortcut.exists()
+            assert (installed / "aethon.exe").exists() and shortcut.exists()
             running.terminate()
             running.wait(timeout=10)
             running = None

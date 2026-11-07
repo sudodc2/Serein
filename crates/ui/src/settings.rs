@@ -592,7 +592,7 @@ impl MessagingUi {
 				self.settings_logout(ui, state.demo);
 				ui.add_space(12.0);
 				ui.label(
-					RichText::new(format!("Serein {}", self.build.version))
+					RichText::new(format!("Aethon {}", self.build.version))
 						.size(12.0)
 						.color(colors.muted),
 				);
@@ -878,7 +878,7 @@ impl MessagingUi {
 		let language = self.language;
 		#[cfg(target_os = "linux")]
 		{
-			// Hiding every decoration and drawing Serein's own bar contradict each other:
+			// Hiding every decoration and drawing Aethon's own bar contradict each other:
 			// whichever switch was just turned on wins. The "no title bar" switch is at the
 			// bottom of this group, since it is only for tiling window managers.
 			let label = language.text("general-custom-title-bar");
@@ -1069,7 +1069,7 @@ impl MessagingUi {
 					ui,
 					"settings-appearance-settings-transparency-blur",
 					Some(
-						"settings-appearance-settings-restart-serein-after-changing-this-themes-can-customize-effects-while",
+						"settings-appearance-settings-restart-aethon-after-changing-this-themes-can-customize-effects-while",
 					),
 					&mut self.transparency_blur,
 				);
@@ -1358,7 +1358,7 @@ impl MessagingUi {
 				design::hint(
 					ui,
 					&crate::i18n::translate(
-						"settings-storage-page-serein-does-not-collect-telemetry-or-upload-diagnostics-discord-retains",
+						"settings-storage-page-aethon-does-not-collect-telemetry-or-upload-diagnostics-discord-retains",
 					),
 				);
 			},

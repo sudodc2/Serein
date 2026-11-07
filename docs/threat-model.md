@@ -49,7 +49,7 @@ RUSTSEC-2026-0383, and RUSTSEC-2026-0386). The policy also retains the older
 RUSTSEC-2026-0414 exception for `pulldown-cmark`.
 
 The direct `pulldown-cmark` pin is now 0.13.6, addressing RUSTSEC-2026-0433's quadratic
-nested-image wikilink parsing. Serein uses the default parser or enables only strikethrough;
+nested-image wikilink parsing. Aethon uses the default parser or enables only strikethrough;
 it does not enable the affected `ENABLE_WIKILINKS` option. The patched release is used
 without adding an advisory exception. See the [upstream fix](https://github.com/pulldown-cmark/pulldown-cmark/pull/1186).
 

@@ -5,7 +5,7 @@ Baseline `ee93c1d0` (main). The changed build is this PR's branch. Both are debu
 worktree received only an evidence-only `--own` flag, which opens the account's own card.
 
 ```sh
-cargo build --locked -p serein --features demo --example profile_preview
+cargo build --locked -p aethon --features demo --example profile_preview
 gamescope --backend headless -w 1440 -h 900 -W 1440 -H 900 -- env -u WAYLAND_DISPLAY \
   target/debug/examples/profile_preview --demo --width=1440 --height=900 \
   --page=collectibles --own --output=after-own.png

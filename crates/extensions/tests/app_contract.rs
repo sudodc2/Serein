@@ -1,5 +1,5 @@
+use aethon_extension_sdk as sdk;
 use extensions::*;
-use serein_extension_sdk as sdk;
 
 #[test]
 fn sdk_manifests_round_trip_all_capabilities_and_surfaces_through_host_validation() {
@@ -109,7 +109,7 @@ fn test_manifest(capabilities: Vec<Capability>) -> Manifest {
 		id: "app-check".into(),
 		name: "App contract".into(),
 		version: "1.0.0".into(),
-		author: "Serein".into(),
+		author: "Aethon".into(),
 		license: "MIT".into(),
 		source: "https://example.org/source".into(),
 		kind: ExtensionKind::Plugin,

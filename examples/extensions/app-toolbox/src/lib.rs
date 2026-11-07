@@ -1,4 +1,4 @@
-use serein_extension_sdk::{
+use aethon_extension_sdk::{
 	AppInvocation, AppOutput, AppSnapshot, AppView, ChannelSnapshot, Element, HostEffect,
 	Invocation, LocalSettingsPatch, NotificationSettingsPatch, Output,
 };
@@ -500,12 +500,12 @@ fn handle(input: AppInvocation) -> AppOutput {
 		},
 	}
 }
-serein_extension_sdk::export!(handle);
+aethon_extension_sdk::export!(handle);
 
 #[cfg(test)]
 mod tests {
 	use super::*;
-	use serein_extension_sdk::{AppEventKind, dispatch_typed, serde_json};
+	use aethon_extension_sdk::{AppEventKind, dispatch_typed, serde_json};
 
 	fn element_count(panel: &[Element]) -> usize {
 		panel

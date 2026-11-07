@@ -51,7 +51,7 @@ pub(super) fn open(
 		.iter()
 		.map(|byte| format!("{byte:02x}"))
 		.collect::<String>();
-	let directory = std::env::temp_dir().join(format!("serein-video-{name}"));
+	let directory = std::env::temp_dir().join(format!("aethon-video-{name}"));
 	fs::DirBuilder::new()
 		.mode(0o700)
 		.create(&directory)
@@ -59,7 +59,7 @@ pub(super) fn open(
 	let temporary = Temporary(directory);
 	let result = convert(source, cancelled, executable, &temporary);
 	fs::remove_dir_all(&temporary.0).map_err(
-		|_| "Temporary video cleanup failed; remove serein-video files from the system temporary folder",
+		|_| "Temporary video cleanup failed; remove aethon-video files from the system temporary folder",
 	)?;
 	result
 }
@@ -102,7 +102,7 @@ fn convert(
 		.args([
 			"-c",
 			"ulimit -f 131072 || exit 1; exec \"$@\"",
-			"serein-video",
+			"aethon-video",
 			executable,
 		])
 		.args([

@@ -16,10 +16,10 @@ const planPath = 'target/release-plan.json';
 const plan = mode === 'publish' ? JSON.parse(readFileSync(planPath, 'utf8')) : null;
 if (plan) assert.equal(channel, plan.channel, 'Release channel changed');
 const tapRepo = 'ViceVerse-cz/homebrew-serein';
-const caskPath = 'Casks/serein.rb';
+const caskPath = 'Casks/aethon.rb';
 const tapToken = process.env.HOMEBREW_TAP_TOKEN;
 // Fork releases have no Homebrew tap; upstream never sets this, so its flow is unchanged.
-const skipCask = process.env.SEREIN_SKIP_CASK === '1';
+const skipCask = process.env.AETHON_SKIP_CASK === '1';
 if (plan && !skipCask) assert(tapToken, 'HOMEBREW_TAP_TOKEN is required to publish the Homebrew cask');
 
 function checkTapAccess() {
@@ -44,7 +44,7 @@ if (plan && !resumed && !skipCask) checkTapAccess();
 // The cask lives in its own tap repository so users do not clone this one. The tap file is the
 // single source of truth; releases only rewrite its version and checksum.
 function publishCask() {
-  const asset = `release-assets/serein-${plan.gitTag}-macOS-ARM64.zip`;
+  const asset = `release-assets/aethon-${plan.gitTag}-macOS-ARM64.zip`;
   const checksum = createHash('sha256').update(readFileSync(asset)).digest('hex');
   const gh = args => execFileSync('gh', args, {
     encoding: 'utf8', env: { ...process.env, GH_TOKEN: tapToken },
@@ -81,7 +81,7 @@ if (plan && channel === 'production') {
       successComment: false,
       failComment: false,
       releasedLabels: false,
-      releaseNameTemplate: 'Serein <%= nextRelease.version %>',
+      releaseNameTemplate: 'Aethon <%= nextRelease.version %>',
     }],
   );
 }
@@ -128,7 +128,7 @@ if (mode === 'plan') {
       const assets = readdirSync('release-assets')
         .map(name => `release-assets/${name}`);
       execFileSync('gh', ['release', 'create', plan.gitTag, ...assets,
-        '--target', plan.gitHead, '--title', `Serein ${plan.version}`,
+        '--target', plan.gitHead, '--title', `Aethon ${plan.version}`,
         '--notes-file', 'target/release-notes.md', '--prerelease', '--latest=false', '--draft'],
       { stdio: 'inherit' });
     }

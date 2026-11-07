@@ -120,7 +120,7 @@ pub(crate) fn capture(output: PathBuf) -> eframe::Result {
 		..Default::default()
 	};
 	eframe::run_native(
-		"Serein synthetic camera Gateway replay",
+		"Aethon synthetic camera Gateway replay",
 		options,
 		Box::new(move |cc| {
 			ui::fonts::install(&cc.egui_ctx);

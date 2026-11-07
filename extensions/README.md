@@ -1,6 +1,6 @@
-# Serein extensions
+# Aethon extensions
 
-The extension SDK and the official theme and plugin catalog for Serein. Plugins build
+The extension SDK and the official theme and plugin catalog for Aethon. Plugins build
 against the one [SDK](sdk); the [authoring guide](../examples/extensions/README.md)
 covers writing your own.
 
@@ -39,7 +39,7 @@ covers the validator itself.
 
 Catalog tooling uses only Python's standard library. It checks identities,
 capabilities/actions, byte bounds, plugin Wasm headers, source manifests, previews and
-hashes. It intentionally does not duplicate Serein's theme schema or Wasm sandbox
+hashes. It intentionally does not duplicate Aethon's theme schema or Wasm sandbox
 validation: the client runs `extensions::parse_package` and sandbox checks before
 installation, and CI runs the committed packages through the same code.
 
@@ -71,9 +71,9 @@ compatibility evidence.
 Package bytes and stable IDs are preserved from the existing client/theme repository:
 
 - Nine original themes, two plugin packages, their Rust source/SDK/build files, and Ocean preview originate from `ViceVerse-cz/Serein` at `9e6bbcdef06b997ee3de3e228b2f2a54c940b7d0`.
-- Forest Piano and Soft White originate from the owner's desktop packages normalized for Serein import at `a217f86c56b13ee51c4eb956f235b13eafb7609f`.
+- Forest Piano and Soft White originate from the owner's desktop packages normalized for Aethon import at `a217f86c56b13ee51c4eb956f235b13eafb7609f`.
 - All eleven theme packages are also recorded in `ViceVerse-cz/Serein-themes` at `6d2a97be4f8b0040aa9eada5648bceff55acb612`.
-- Existing authors, license labels, and source URLs remain in every manifest. Serein's MIT and Apache-2.0 notices are retained at the repository root and do not replace individual artwork terms.
+- Existing authors, license labels, and source URLs remain in every manifest. Aethon's MIT and Apache-2.0 notices are retained at the repository root and do not replace individual artwork terms.
 - Forest Piano and Soft White retain supplied `CC0-1.0` metadata; this is not independent verification of image rights. Consult their original sources for artwork provenance.
 
 This repository does not relicense third-party artwork or assert additional redistribution rights.

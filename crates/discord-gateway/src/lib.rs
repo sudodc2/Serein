@@ -311,7 +311,7 @@ impl Diagnostics {
 		// Charge attempted output even if stderr is closed or accepts only part of a line.
 		self.remaining -= 1;
 		self.bytes -= bytes;
-		let _ = writeln!(writer, "[Serein {}] {label}", self.scope);
+		let _ = writeln!(writer, "[Aethon {}] {label}", self.scope);
 	}
 }
 fn ignored_dispatch_label(name: Option<&str>) -> &'static str {
@@ -1252,11 +1252,11 @@ async fn run_recoverable(
 	outgoing_activity.update_afk(*afk.borrow_and_update());
 	let mut member_diagnostics = Diagnostics::new(
 		"members",
-		std::env::var_os("SEREIN_MEMBER_DIAGNOSTICS").as_deref() == Some(std::ffi::OsStr::new("1")),
+		std::env::var_os("AETHON_MEMBER_DIAGNOSTICS").as_deref() == Some(std::ffi::OsStr::new("1")),
 	);
 	let mut gateway_diagnostics = Diagnostics::new(
 		"gateway",
-		std::env::var_os("SEREIN_GATEWAY_DIAGNOSTICS").as_deref()
+		std::env::var_os("AETHON_GATEWAY_DIAGNOSTICS").as_deref()
 			== Some(std::ffi::OsStr::new("1")),
 	);
 	let mut state = ResumeState::default();
@@ -3440,7 +3440,7 @@ mod member_tests {
 		for _ in 0..1000 {
 			enabled.record_to(label, &mut output);
 		}
-		let line = "[Serein gateway] unsupported dispatch ignored\n";
+		let line = "[Aethon gateway] unsupported dispatch ignored\n";
 		assert_eq!(output, line.repeat(64).as_bytes());
 		assert_eq!(enabled.remaining, 0);
 		assert_eq!(enabled.bytes, 8 * 1024 - output.len());
@@ -3452,7 +3452,7 @@ mod member_tests {
 		short.bytes = 20;
 		short.record_to("\u{e9}", &mut output);
 		short.record_to("another line", &mut output);
-		assert_eq!(output, "[Serein members] \u{e9}\n".as_bytes());
+		assert_eq!(output, "[Aethon members] \u{e9}\n".as_bytes());
 		assert_eq!((short.remaining, short.bytes), (63, 0));
 		static OVERSIZED: [u8; 8192] = [b'x'; 8192];
 		let mut oversized = Diagnostics::new("gateway", true);

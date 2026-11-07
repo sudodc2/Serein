@@ -28,7 +28,7 @@ description-appearance = Тема, цвета, оконные эффекты и 
 description-chat = Как ведут себя сообщения, медиа, ссылки и прокрутка.
 description-messaging-permissions = Контролируйте, кто может связаться с вами и как фильтруются сообщения.
 description-notifications = Выберите, какие уведомления вы будете получать и как они будут отображаться.
-description-registered-games = Делитесь тем, во что играете, и исправляйте или добавляйте игры, найденные Serein.
+description-registered-games = Делитесь тем, во что играете, и исправляйте или добавляйте игры, найденные Aethon.
 description-voice = Микрофон, динамики, камера и обработка голоса.
 description-keybinds = Сочетания клавиш для Серейн.
 description-storage = Что Серейн хранит на этом устройстве.
@@ -52,9 +52,9 @@ general-start-minimized-description = Начните в фоновом режи�
 general-startup-unavailable = Автоматический запуск доступен в Windows и macOS.
 general-window = Окно
 general-hide-decorations = Без заголовка окна
-general-hide-decorations-description = Для тайловых оконных менеджеров: убирает все заголовки и рамки, включая собственный заголовок Serein. Перемещайте, изменяйте размер и закрывайте Serein средствами оконного менеджера.
+general-hide-decorations-description = Для тайловых оконных менеджеров: убирает все заголовки и рамки, включая собственный заголовок Aethon. Перемещайте, изменяйте размер и закрывайте Aethon средствами оконного менеджера.
 general-custom-title-bar = Собственный заголовок окна
-general-custom-title-bar-description = Заменяет системную строку заголовка собственной панелью заголовка Serein в стиле GTK 4.
+general-custom-title-bar-description = Заменяет системную строку заголовка собственной панелью заголовка Aethon в стиле GTK 4.
 general-hide-title-bar = Скрыть строку заголовка Серейн
 general-hide-title-bar-description = Вместо этого используйте системную строку заголовка и кнопки окна.
 general-keep-menu-bar = Держите Серейн в строке меню
@@ -68,7 +68,7 @@ general-render-with = Рендеринг с помощью
 general-gpu-restart = Изменение этого параметра вступает в силу после перезапуска.
 general-gpu-current-prefix = Сейчас активна
 general-steady-refresh-rate = Постоянная частота обновления
-general-steady-refresh-rate-description = Пока окно Serein активно, отрисовка идёт с частотой обновления экрана, поэтому мониторы с переменной частотой обновления (VRR, G-SYNC, FreeSync) могут держать одну частоту и не мерцать. Расходует больше энергии.
+general-steady-refresh-rate-description = Пока окно Aethon активно, отрисовка идёт с частотой обновления экрана, поэтому мониторы с переменной частотой обновления (VRR, G-SYNC, FreeSync) могут держать одну частоту и не мерцать. Расходует больше энергии.
 gpu-automatic = Автоматический
 gpu-high-performance = Высокая производительность
 gpu-power-saving = Экономия энергии
@@ -217,7 +217,7 @@ account-menu-custom-status-editor-clear-after = Очистить после
 # Context: custom_status_editor
 account-menu-custom-status-editor-no-custom-status = Нет индивидуального статуса
 # Context: custom_status_editor
-account-menu-custom-status-editor-serein-clears-it = Серейн очищает это
+account-menu-custom-status-editor-aethon-clears-it = Серейн очищает это
 # Context: custom_status_editor
 account-menu-custom-status-editor-status-text = Текст статуса
 # Context: custom_status_editor
@@ -1635,7 +1635,7 @@ main-restoring-checking-your-saved-login = Проверка сохраненно
 # Context: restoring
 main-restoring-connecting-to-discord = Подключение к Дискорду
 # Context: restoring_screen
-main-restoring-screen-serein = Серейн
+main-restoring-screen-aethon = Серейн
 # Context: restoring_screen
 main-restoring-screen-use-a-different-account = Использовать другую учетную запись
 # Context: restoring_screen
@@ -1645,11 +1645,11 @@ main-sign-in-accounts-saved-accounts = Сохраненные аккаунты
 # Context: sign_in_consent
 main-sign-in-consent-passwords-and-2fa-stay-on-discord-s-own-login-page = Пароли и 2FA остаются на собственной странице входа в Discord; в хранилище учетных данных вашей ОС сохраняется только токен сеанса.
 # Context: sign_in_disclosures
-main-sign-in-disclosures-about-serein = О Серейн
+main-sign-in-disclosures-about-aethon = О Серейн
 # Context: sign_in_disclosures
 main-sign-in-disclosures-connect-with-this-token = Подключиться с помощью этого токена
 # Context: sign_in_disclosures
-main-sign-in-disclosures-for-owners-who-already-hold-a-valid-discord-session-token = Для владельцев, у которых уже есть действующий токен сеанса Discord, например, из другой установки Serein, вошедшей в систему. Пароли и 2FA здесь никогда не используются; это полностью обходит размещенную страницу входа в Discord.
+main-sign-in-disclosures-for-owners-who-already-hold-a-valid-discord-session-token = Для владельцев, у которых уже есть действующий токен сеанса Discord, например, из другой установки Aethon, вошедшей в систему. Пароли и 2FA здесь никогда не используются; это полностью обходит размещенную страницу входа в Discord.
 # Context: sign_in_disclosures
 main-sign-in-disclosures-forget-saved-login = Забыть сохраненный логин
 # Context: sign_in_disclosures
@@ -1663,7 +1663,7 @@ main-sign-in-header-sign-in-with-your-discord-account-to-get-started = Войд�
 # Context: sign_in_header
 main-sign-in-header-welcome-back = Добро пожаловать
 # Context: sign_in_header
-main-sign-in-header-welcome-to-serein = Добро пожаловать в Серейн
+main-sign-in-header-welcome-to-aethon = Добро пожаловать в Серейн
 # Context: sign_in_preview
 main-sign-in-status-copy-failure-details = Копировать сведения об ошибке
 main-sign-in-preview-explore-the-offline-preview = Ознакомьтесь с предварительной версией в автономном режиме
@@ -1672,7 +1672,7 @@ main-sign-in-preview-sample-conversations-no-discord-connection = Примеры
 # Context: sign_in_screen
 main-sign-in-screen-independent-and-open-source-not-affiliated-with-discord = Независимый и открытый исходный код. Не связан с Discord.
 # Context: sign_in_screen
-main-sign-in-screen-serein = Серейн
+main-sign-in-screen-aethon = Серейн
 # Context: ui
 main-ui-cancel = Отмена
 # Context: ui
@@ -2269,7 +2269,7 @@ screen-body-refresh = Обновить
 # Context: body
 screen-body-screen-or-window = Экран или окно
 # Context: body
-screen-body-send-what-your-mac-plays-along-with-the-screen-serein = Отправьте то, что ваш Mac воспроизводит вместе с экраном. Звук звонка Серейн не учитывается.
+screen-body-send-what-your-mac-plays-along-with-the-screen-aethon = Отправьте то, что ваш Mac воспроизводит вместе с экраном. Звук звонка Серейн не учитывается.
 # Context: body
 screen-body-share-sound-from-other-apps-even-when-sharing-one-window = Делитесь звуком из других приложений, даже если вы делитесь одним окном. Собственный звук Серейн не учитывается.
 # Context: body
@@ -3432,7 +3432,7 @@ settings-activity-added-games = Добавленные игры
 # Context: activity_settings
 settings-activity-no-games-added = Нет добавленных игр
 # Context: activity_settings
-settings-activity-hidden = Скрыто. Serein не будет обнаруживать эту игру.
+settings-activity-hidden = Скрыто. Aethon не будет обнаруживать эту игру.
 # Context: activity_settings
 settings-activity-detected = Обнаружено автоматически
 # Context: activity_settings
@@ -3454,7 +3454,7 @@ settings-activity-click-to-rename = Нажмите, чтобы переимен�
 # Context: activity_settings
 settings-activity-add-a-game = Добавить игру
 # Context: activity_settings
-settings-activity-choose-program = Выберите запущенную программу. Serein будет показывать её как вашу игру, когда она запущена.
+settings-activity-choose-program = Выберите запущенную программу. Aethon будет показывать её как вашу игру, когда она запущена.
 # Context: activity_settings
 settings-activity-search-programs = Поиск запущенных программ
 # Context: activity_settings
@@ -3482,7 +3482,7 @@ settings-appearance-settings-primary-color = Основной цвет
 # Context: appearance_settings
 settings-appearance-settings-reset = Сбросить
 # Context: appearance_settings
-settings-appearance-settings-restart-serein-after-changing-this-themes-can-customize-effects-while = Перезапустите Sein после изменения. Когда темы включены, можно настраивать эффекты.
+settings-appearance-settings-restart-aethon-after-changing-this-themes-can-customize-effects-while = Перезапустите Sein после изменения. Когда темы включены, можно настраивать эффекты.
 # Context: appearance_settings
 settings-appearance-settings-the-active-theme-brings-its-own-accent-it-takes-over = Активная тема вносит свой акцент; он вступает во владение, пока используется тема.
 # Context: appearance_settings
@@ -3519,11 +3519,11 @@ settings-storage-page-clear-cache = Очистить кэш
 # Context: storage_page
 settings-storage-page-local-storage = Локальное хранилище
 # Context: storage_page
-settings-storage-page-messages-and-drafts-are-cached-on-this-device-inside-bounded = Сообщения и черновики кэшируются на этом устройстве в ограниченных файлах, изолированных от учетной записи. Данные кэша не шифруются Serein; сохраненные токены входа используют хранилище учетных данных ОС.
+settings-storage-page-messages-and-drafts-are-cached-on-this-device-inside-bounded = Сообщения и черновики кэшируются на этом устройстве в ограниченных файлах, изолированных от учетной записи. Данные кэша не шифруются Aethon; сохраненные токены входа используют хранилище учетных данных ОС.
 # Context: storage_page
 settings-storage-page-removes-cached-messages-and-media-drafts-and-your-login-stay = Удаляет кэшированные сообщения и медиа. Черновики и ваш логин остаются.
 # Context: storage_page
-settings-storage-page-serein-does-not-collect-telemetry-or-upload-diagnostics-discord-retains = Serein не собирает телеметрию и не загружает диагностические данные. Discord сохраняет данные на стороне сервиса в соответствии со своей собственной политикой.
+settings-storage-page-aethon-does-not-collect-telemetry-or-upload-diagnostics-discord-retains = Aethon не собирает телеметрию и не загружает диагностические данные. Discord сохраняет данные на стороне сервиса в соответствии со своей собственной политикой.
 # Context: storage_page
 settings-storage-page-your-privacy = Ваша конфиденциальность
 # Context: cosmetic_settings
@@ -4003,7 +4003,7 @@ updates-update-settings-release-channel = Ветка релизов
 # Context: update_settings
 updates-update-settings-restart-to-update = Перезапустите, чтобы обновить
 # Context: update_settings
-updates-update-settings-serein-was-installed-via-your-distribution-run-this-in-a = Serein был установлен через пакетный менеджер. Используйте эту команду для обновления.
+updates-update-settings-aethon-was-installed-via-your-distribution-run-this-in-a = Aethon был установлен через пакетный менеджер. Используйте эту команду для обновления.
 # Context: update_settings
 updates-update-settings-save-diagnostics = Сохранить диагностику
 # Context: update_settings
@@ -4025,7 +4025,7 @@ updates-update-settings-log-warnings = Ошибки и предупрежден�
 # Context: update_settings
 updates-update-settings-open-folder = Открыть папку
 # Context: update_settings
-updates-update-settings-the-log-folder-could-not-be-written = Не удалось записать папку журнала. Проверьте папку данных Serein и повторите попытку.
+updates-update-settings-the-log-folder-could-not-be-written = Не удалось записать папку журнала. Проверьте папку данных Aethon и повторите попытку.
 # Context: update_settings
 updates-update-settings-timings-stages-and-failures-in-one-local-file-no-account-channel-or = Тайминги, этапы и сбои в одном локальном файле журнала. Данные аккаунта, каналов, сообщений и учётные данные не записываются, и ничего не отправляется.
 # Context: update_log
@@ -4482,7 +4482,7 @@ onboarding-rules-heading = Правила сервера
 # Context: rules
 onboarding-rules-review = Модератор проверит эти ответы, прежде чем вы сможете писать.
 # Context: field
-onboarding-field-unsupported = Сервер задаёт вопрос, который Serein пока не умеет показывать. Завершите вступление в приложении Discord.
+onboarding-field-unsupported = Сервер задаёт вопрос, который Aethon пока не умеет показывать. Завершите вступление в приложении Discord.
 # Context: field
 onboarding-field-agree = Я прочитал(а) правила и согласен(на) с ними
 
@@ -4611,7 +4611,7 @@ reading-double-click-reaction = Double-click reaction
 
 ## crates/platform/src/app_menu.rs
 # Context: macos_menu_bar
-app-menu-about = О программе Serein
+app-menu-about = О программе Aethon
 # Context: macos_menu_bar
 app-menu-updates = Проверить обновления…
 # Context: macos_menu_bar
@@ -4619,13 +4619,13 @@ app-menu-settings = Настройки…
 # Context: macos_menu_bar
 app-menu-services = Службы
 # Context: macos_menu_bar
-app-menu-hide = Скрыть Serein
+app-menu-hide = Скрыть Aethon
 # Context: macos_menu_bar
 app-menu-hide-others = Скрыть остальные
 # Context: macos_menu_bar
 app-menu-show-all = Показать все
 # Context: macos_menu_bar
-app-menu-quit = Завершить Serein
+app-menu-quit = Завершить Aethon
 # Context: macos_menu_bar
 app-menu-file = Файл
 # Context: macos_menu_bar
@@ -4667,7 +4667,7 @@ app-menu-bring-all-to-front = Все окна — на передний план
 # Context: macos_menu_bar
 app-menu-help = Справка
 # Context: macos_menu_bar
-app-menu-github = Serein на GitHub
+app-menu-github = Aethon на GitHub
 # Context: macos_menu_bar
 app-menu-report-issue = Сообщить о проблеме…
 

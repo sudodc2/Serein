@@ -6,21 +6,21 @@ version = 4
 name = "app-actions"
 version = "1.0.0"
 dependencies = [
- "serein-extension-sdk",
+ "aethon-extension-sdk",
 ]
 
 [[package]]
 name = "app-toolbox"
 version = "1.0.0"
 dependencies = [
- "serein-extension-sdk",
+ "aethon-extension-sdk",
 ]
 
 [[package]]
 name = "conversation-inspector"
 version = "1.0.0"
 dependencies = [
- "serein-extension-sdk",
+ "aethon-extension-sdk",
 ]
 
 [[package]]
@@ -47,7 +47,7 @@ dependencies = [
 name = "guild-inspector"
 version = "1.0.0"
 dependencies = [
- "serein-extension-sdk",
+ "aethon-extension-sdk",
 ]
 
 [[package]]
@@ -177,7 +177,7 @@ name = "message-counter"
 version = "1.0.0"
 dependencies = [
  "serde",
- "serein-extension-sdk",
+ "aethon-extension-sdk",
 ]
 
 [[package]]
@@ -219,7 +219,7 @@ version = "1.1.0"
 dependencies = [
  "serde",
  "serde_json",
- "serein-extension-sdk",
+ "aethon-extension-sdk",
 ]
 
 [[package]]
@@ -266,7 +266,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "serein-extension-sdk"
+name = "aethon-extension-sdk"
 version = "0.1.0"
 dependencies = [
  "serde",

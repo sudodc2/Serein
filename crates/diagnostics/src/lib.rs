@@ -1,4 +1,4 @@
-//! Serein's opt-in diagnostic log.
+//! Aethon's opt-in diagnostic log.
 //!
 //! A record carries a compile-time category and label, numbers, and at most four fields whose text
 //! is a compile-time constant. Nothing in this API accepts an account, channel, message, path,
@@ -34,8 +34,8 @@ const MAX_LINE_BYTES: usize = 320;
 /// The file rotates once; a run then stops appending instead of growing without end.
 const MAX_FILE_BYTES: u64 = 2 * 1024 * 1024;
 const MAX_RUN_BYTES: u64 = 4 * 1024 * 1024;
-const LOG_FILE: &str = "serein.log";
-const PREVIOUS_LOG_FILE: &str = "serein.1.log";
+const LOG_FILE: &str = "aethon.log";
+const PREVIOUS_LOG_FILE: &str = "aethon.1.log";
 
 /// How much detail the log keeps: a record is written when its level is at or above the
 /// owner's choice, so `Error` keeps failures only and `Debug` keeps everything.
@@ -200,8 +200,8 @@ pub fn level() -> Level {
 	Level::from_code(sink().level.load(Ordering::Relaxed))
 }
 
-/// The fallback folder used when Serein's own data folder cannot be written.
-const FALLBACK_FOLDER: &str = "serein-logs";
+/// The fallback folder used when Aethon's own data folder cannot be written.
+const FALLBACK_FOLDER: &str = "aethon-logs";
 
 /// The folder a log uses when the app has no writable data folder at all.
 pub fn fallback_directory() -> PathBuf {
@@ -512,7 +512,7 @@ fn sink() -> &'static Sink {
 	SINK.get_or_init(|| {
 		let sink: &'static Sink = Box::leak(Box::new(Sink::new()));
 		let _ = std::thread::Builder::new()
-			.name("serein-log".into())
+			.name("aethon-log".into())
 			.spawn(move || writer(sink));
 		sink
 	})

@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Aethon
+Comment=Experimental unofficial native Discord client
+Exec=aethon
+Icon=aethon
+StartupWMClass=cz.viceverse.aethon
+Terminal=false
+Categories=Network;InstantMessaging;

@@ -1,13 +1,13 @@
 # Binary recipe for the existing voice-enabled Arch release. No Rust build required.
-pkgname=serein-bin
+pkgname=aethon-bin
 pkgver=1.0.0pre.nightly.20261001.53
 pkgrel=1
 pkgdesc='Unofficial native Discord client (prebuilt nightly)'
 arch=('x86_64')
 url='https://github.com/ViceVerse-cz/Serein'
 license=('MIT' 'Apache-2.0')
-provides=("serein=$pkgver")
-conflicts=('serein' 'serein-git')
+provides=("aethon=$pkgver")
+conflicts=('aethon' 'aethon-git')
 options=('!strip' '!debug' '!lto')
 # Preserve the native release's ABI floors, including dynamically loaded media plugins.
 depends=(
@@ -150,14 +150,14 @@ optdepends=(
   'gst-plugins-bad: hardware screen encoding'
   'gst-libav: inline video'
 )
-source_x86_64=('https://github.com/ViceVerse-cz/Serein/releases/download/v1.0.0-nightly.20261001.53/serein-v1.0.0-nightly.20261001.53-Linux-arch-serein-1.0.0pre.nightly.20261001.53-1-x86_64.pkg.tar.zst')
+source_x86_64=('https://github.com/ViceVerse-cz/Serein/releases/download/v1.0.0-nightly.20261001.53/aethon-v1.0.0-nightly.20261001.53-Linux-arch-aethon-1.0.0pre.nightly.20261001.53-1-x86_64.pkg.tar.zst')
 sha256sums_x86_64=('5efa3f71216cced0da707753b96007add5efc9bad256c390ecc020c5a238dfc5')
 
 package() {
   install -d "$pkgdir/usr/bin" "$pkgdir/usr/share/licenses/$pkgname"
-  install -m755 "$srcdir/usr/bin/serein" "$pkgdir/usr/bin/serein"
+  install -m755 "$srcdir/usr/bin/aethon" "$pkgdir/usr/bin/aethon"
   install -d "$pkgdir/usr/share"
   cp -a "$srcdir/usr/share/." "$pkgdir/usr/share/"
-  install -m644 "$srcdir/usr/share/doc/serein/LICENSE-MIT" "$pkgdir/usr/share/licenses/$pkgname/LICENSE-MIT"
-  install -m644 "$srcdir/usr/share/doc/serein/LICENSE-APACHE" "$pkgdir/usr/share/licenses/$pkgname/LICENSE-APACHE"
+  install -m644 "$srcdir/usr/share/doc/aethon/LICENSE-MIT" "$pkgdir/usr/share/licenses/$pkgname/LICENSE-MIT"
+  install -m644 "$srcdir/usr/share/doc/aethon/LICENSE-APACHE" "$pkgdir/usr/share/licenses/$pkgname/LICENSE-APACHE"
 }

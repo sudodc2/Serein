@@ -188,7 +188,7 @@ fn main() {
 	assert!(
 		std::str::from_utf8(&output)
 			.unwrap()
-			.starts_with("[Serein voice Audio]")
+			.starts_with("[Aethon voice Audio]")
 	);
 	assert!(
 		!std::str::from_utf8(&output)

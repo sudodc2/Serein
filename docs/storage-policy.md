@@ -407,7 +407,7 @@ marker so a save can replace an editor-created theme without overwriting an impo
 or reviewed package. The eight-installed-theme and 16 MiB package limits remain.
 Each theme embeds at most one 2 MiB background PNG/JPEG and one separate 2 MiB
 card cover PNG/JPEG; no source image path is persisted.
-Removing a theme deletes only Serein's copy, preserving originals and exports.
+Removing a theme deletes only Aethon's copy, preserving originals and exports.
 Exports use a unique temporary sibling and replace the selected destination only
 after a complete write. Failed saves/exports leave the editor draft available.
 
@@ -527,7 +527,7 @@ for the one live call, with no allocation or persisted membership history.
 
 Explicit media clipboard copies (September 13) reuse the bounded attachment
 download worker. One original video, at most 100 MiB, remains in a randomized
-`serein-clipboard-*` OS temporary directory while its file clipboard entry is
+`aethon-clipboard-*` OS temporary directory while its file clipboard entry is
 usable. The next media copy, logout, or normal exit releases it; pasting requires
 the app to remain open. Image staging files are removed after decoding. All file
 work and cleanup run outside rendering. Forced termination or filesystem failures
@@ -581,7 +581,7 @@ account-isolated; declarative themes are device preferences. Up to eight install
 themes remain available in Colour preset; switching only changes the bounded
 64-byte active theme identifier and retains the packages. Installation,
 validation, invocation storage and removal run on a bounded background worker.
-Disabling removes Serein's package and extension data, and failed cleanup is
+Disabling removes Aethon's package and extension data, and failed cleanup is
 reported and retried. Logout removes the account's plugin data. Imported
 original files and source repositories are never deleted. No credentials belong
 in plugin storage; it is not encrypted. Only bounded metadata may remain after
@@ -796,9 +796,9 @@ The owner explicitly withdrew the no-storage policy on 2026-09-09. Local files, 
 
 | Data | Location / bound | Removal |
 |---|---|---|
-| Discord token | OS credential store by default, service `cz.viceverse.serein`; packaged builds use account `discord-session` for the session restored on launch and `discord-session.<account id>` for each remembered account, while default source builds use the corresponding `discord-session.development` names; at most 2048 bytes each. A per-account entry is written once, when the roster records none, and rewritten only for a token the owner just supplied: on macOS every access to an existing entry is governed by that item's keychain ACL | Explicit logout / Forget saved login removes both entries for that build profile's account; forgetting or pruning a saved account removes its per-account entry; invalid-token expiry also requests deletion. The explicit plaintext fallback below shares these removal paths |
+| Discord token | OS credential store by default, service `cz.viceverse.aethon`; packaged builds use account `discord-session` for the session restored on launch and `discord-session.<account id>` for each remembered account, while default source builds use the corresponding `discord-session.development` names; at most 2048 bytes each. A per-account entry is written once, when the roster records none, and rewritten only for a token the owner just supplied: on macOS every access to an existing entry is governed by that item's keychain ACL | Explicit logout / Forget saved login removes both entries for that build profile's account; forgetting or pruning a saved account removes its per-account entry; invalid-token expiry also requests deletion. The explicit plaintext fallback below shares these removal paths |
 | Remembered accounts (switcher) | `accounts` table in `client.sqlite3`: at most 8 rows of account ID, username, display name (64 bytes each), avatar hash, last-use timestamp and a flag recording whether the credential store holds that account's entry; no token | Logging out of, or forgetting, that account; the least recently used row is pruned past 8, taking its token and cached data with it |
-| History and drafts | `SEREIN_DATA_DIR/client.sqlite3` when an absolute override is set; otherwise `dirs::data_local_dir()/serein-development/client.sqlite3` for default source builds and `dirs::data_local_dir()/serein/client.sqlite3` for packaged builds | Clear cached history also clears service images and keeps drafts; logout clears the authenticated account’s history and drafts |
+| History and drafts | `AETHON_DATA_DIR/client.sqlite3` when an absolute override is set; otherwise `dirs::data_local_dir()/aethon-development/client.sqlite3` for default source builds and `dirs::data_local_dir()/aethon/client.sqlite3` for packaged builds | Clear cached history also clears service images and keeps drafts; logout clears the authenticated account’s history and drafts |
 | Messages | 500 per window, at most 20 stored channel windows globally, 48 MiB estimated text/metadata; SQLite main database capped at 64 MiB. A window that reaches its channel's first message also stores that message ID, so the channel introduction can show with the cached window | Oldest touched channel evicted transactionally, with its first-message ID |
 | Avatar, server-icon, profile-banner and message-preview PNGs | Account subdirectory beneath the selected application-data root's `avatars`; media defaults to 1 GiB / 4096 files per account (owner presets 256 MiB–4 GiB), shared artwork (emoji, badges, server tags and icons, role icons, decorations, nameplates) to 128 MiB / 4096 files in `artwork/` (presets 64–512 MiB), 90 days since last use by default (presets 7–365), at most 2 MiB per preview (512 KiB for icons/avatars) | Clear cache, per-partition clear in Settings › Storage, or account logout; versioned avatar/icon/banner keys and hashed media-source keys separate changed images |
 | Selected profile metadata | One session-memory record, at most 64 KiB; profile response body at most 256 KiB | Closing/changing the profile, session reset or logout; no SQLite profile table |
@@ -817,7 +817,7 @@ The owner explicitly withdrew the no-storage policy on 2026-09-09. Local files, 
 | Steady refresh rate | Boolean in the existing device-wide `app_preferences` singleton; defaults off, including older saved preferences | Retained across restart/logout; applies immediately; demo changes remain in memory |
 | Authentication page | Wry incognito on Windows/macOS; ephemeral WebKit6 NetworkSession on Linux, destroyed on token handoff/cancel/timeout | Platform engine teardown; OS artifacts not promised erased |
 
-Typical packaged-build database directories: macOS `~/Library/Application Support/serein`, Windows `%LOCALAPPDATA%/serein`, Linux `$XDG_DATA_HOME/serein` or `~/.local/share/serein`; default source builds use the sibling `serein-development` directory. An absolute `SEREIN_DATA_DIR` selects the root for SQLite, image caches, extensions and detectable-game metadata; an empty or relative override disables those stores instead of falling back to production data. `cargo xtask package` disables the development feature, so distributed executables use the packaged-build directory and credential namespace. Newly created Unix data directories are private (0700); existing override permissions are preserved. Database contents are **not encrypted by Serein**. OS token protection does not encrypt history, backups or drafts, and the override does not relocate OS credential entries. Opted-in plaintext login files use the selected data root.
+Typical packaged-build database directories: macOS `~/Library/Application Support/aethon`, Windows `%LOCALAPPDATA%/aethon`, Linux `$XDG_DATA_HOME/aethon` or `~/.local/share/aethon`; default source builds use the sibling `aethon-development` directory. An absolute `AETHON_DATA_DIR` selects the root for SQLite, image caches, extensions and detectable-game metadata; an empty or relative override disables those stores instead of falling back to production data. `cargo xtask package` disables the development feature, so distributed executables use the packaged-build directory and credential namespace. Newly created Unix data directories are private (0700); existing override permissions are preserved. Database contents are **not encrypted by Aethon**. OS token protection does not encrypt history, backups or drafts, and the override does not relocate OS credential entries. Opted-in plaintext login files use the selected data root.
 
 The app writes no background log, analytics, crash upload, saved password or MFA ticket. Plaintext login files require the explicit opt-in described below. A separate credential-free CDN downloader loads visible avatars, server icons, profile banners and validated service-proxied message images. Build outputs, this documentation, synthetic test databases and package files are development artifacts.
 
@@ -933,7 +933,7 @@ the UI copies it for GPU colour conversion. No live media was used to establish 
 
 Service-confirmed DM ringing retains at most 64 calls × 64 recipient IDs (32 KiB ID storage plus bounded vector metadata), alongside the existing call roster. It is session-only and clears on call deletion, access loss, fresh resync and disconnect. Targeted ringing adds one fixed-size pending UI action and one cancellable HTTP task, with no retries or persisted history. The dispatcher reuses a navigation-limited private-channel map, retaining at most 63 recipient IDs and 512 allocated ID bytes per channel for membership checks; no directory fetch is added. A coalesced revision invalidates pending actions when membership changes.
 
-Voice introduces no application audio files, recordings or voice-key store. Device preferences are saved locally as described above. Voice tokens/session IDs use redacted, zeroizing buffers and never enter SQLite or diagnostics; DAVE identities are regenerated for a new call. Eight-frame PCM queues, bounded Opus packets and one bounded decoder/jitter/PCM working set per remote speaker (up to 63) are transient media allocations, not disk caches. Guild voice rosters are session-only with 4,096-entry and 1 MiB budgets; they are never persisted. Upstream cryptographic tracing is compiled out. Audio-device shutdown is fenced before another device session starts. Synthetic crypto, transport and device-free capture-gate tests passed; actual audio-driver/permission artifacts and process writes during a physical call have not been traced. OS microphone permissions and driver behavior are outside Serein's cache-clearing guarantee.
+Voice introduces no application audio files, recordings or voice-key store. Device preferences are saved locally as described above. Voice tokens/session IDs use redacted, zeroizing buffers and never enter SQLite or diagnostics; DAVE identities are regenerated for a new call. Eight-frame PCM queues, bounded Opus packets and one bounded decoder/jitter/PCM working set per remote speaker (up to 63) are transient media allocations, not disk caches. Guild voice rosters are session-only with 4,096-entry and 1 MiB budgets; they are never persisted. Upstream cryptographic tracing is compiled out. Audio-device shutdown is fenced before another device session starts. Synthetic crypto, transport and device-free capture-gate tests passed; actual audio-driver/permission artifacts and process writes during a physical call have not been traced. OS microphone permissions and driver behavior are outside Aethon's cache-clearing guarantee.
 
 The optional READY voice-user lookup and per-snapshot/passive-update member lookup each admit
 at most 4,096 unique nonzero users / 1 MiB of estimated model storage, checking before insertion.
@@ -946,7 +946,7 @@ the actual roster's 4,096-entry / 1 MiB bounds are unchanged; no new disk storag
 
 Image attachment metadata remains bounded by 10 attachments / 64 KiB retained metadata and 256 KiB JSON per message, including original/proxy signed URLs. It counts toward existing window, pending-patch and database budgets. Decoded pixels reuse the shared media worker/cache; spoiler attachments are not requested before explicit reveal. Profile metadata (bio, pronouns, badges, connections and mutual-server summaries) stays in the single bounded RAM view. Profile and server-specific banner/avatar pixels may remain in the shared account image cache after closing the profile; cache clear/logout removes them under the same policy. Equipped cosmetics (decoration, nameplate, name style, effect and frame details) are display-only RAM values that are never written to SQLite. Decoration and still-nameplate artwork use the shared-artwork partition; effect layers, frame layers and animated nameplates use the media partition. Cosmetics hidden in Settings are not requested. Profile effect and frame catalog details are kept in a session-only cache of at most 64 SKUs. A viewed profile's badge catalog (at most 40 badges and 48 KiB) stays in the same bounded RAM profile view and cache and is never persisted; badge settings are written only to Discord on an explicit Save.
 
-Explicit Download creates an original attachment file only at the user-selected location. Suggested filenames are sanitized; downloads never reinterpret message filenames as destination paths, follow redirects, or send credentials to the CDN. Existing regular files are replaced only after native Save confirmation and a complete, flushed transfer. A new destination is published without overwriting a file created meanwhile. The one worker closes/removes its sibling partial on cancellation or failure; cleanup failures are visible. Forced termination or a filesystem error can leave a `.serein-*.partial` sibling, and macOS, Linux and Windows publish new files with exclusive native moves so hard-link support is not required. Normal close waits for the active worker; a cancelled native dialog must still be dismissed. Downloads are explicit user files, not account cache entries, and survive logout/cache clearing. Limits and transfer bounds are strictly enforced.
+Explicit Download creates an original attachment file only at the user-selected location. Suggested filenames are sanitized; downloads never reinterpret message filenames as destination paths, follow redirects, or send credentials to the CDN. Existing regular files are replaced only after native Save confirmation and a complete, flushed transfer. A new destination is published without overwriting a file created meanwhile. The one worker closes/removes its sibling partial on cancellation or failure; cleanup failures are visible. Forced termination or a filesystem error can leave a `.aethon-*.partial` sibling, and macOS, Linux and Windows publish new files with exclusive native moves so hard-link support is not required. Normal close waits for the active worker; a cancelled native dialog must still be dismissed. Downloads are explicit user files, not account cache entries, and survive logout/cache clearing. Limits and transfer bounds are strictly enforced.
 
 Conversation search queries and result snippets are session-only, limited to one 25-result / 256 KiB page and a 256-character query. Neither is written to SQLite or diagnostics. Opening a result keeps the same result page and uses normal bounded history retrieval, whose revalidated messages can enter the existing account cache. Numbered navigation adds only fixed-size offset/total metadata and a three-character page input; it replaces the single result page and retains no page history. Offsets are capped at 9,975.
 
@@ -1065,7 +1065,7 @@ Schema 7 adds one checked integer `message_kind` (0..255) per cached message, wi
 
 ### Opt-in synchronization and compatibility diagnostics
 
-Voice performance diagnostics (`SEREIN_VOICE_DIAGNOSTICS=1`) are also off by default.
+Voice performance diagnostics (`AETHON_VOICE_DIAGNOSTICS=1`) are also off by default.
 They include aggregate compressed-video byte counts, decoded dimensions/transitions,
 repair/feedback counts and playback-queue outcomes. They retain at most eight fixed-size
 numeric reports in a worker queue,
@@ -1135,8 +1135,8 @@ one on-demand 2,048-entry timestamp deque (32 KiB), one-second reporting age, at
 256-status reports per 100 ms and at most 628 encrypted bytes per report. It retains no
 media, identities or advertised bandwidth estimate.
 
-`SEREIN_MEMBER_DIAGNOSTICS=1` enables fixed-label member synchronization diagnostics;
-`SEREIN_GATEWAY_DIAGNOSTICS=1` enables Gateway compatibility diagnostics. Both are off by default.
+`AETHON_MEMBER_DIAGNOSTICS=1` enables fixed-label member synchronization diagnostics;
+`AETHON_GATEWAY_DIAGNOSTICS=1` enables Gateway compatibility diagnostics. Both are off by default.
 Each enabled scope has a hard budget of 64 attempted records AND 8 KiB of formatted UTF-8
 output per Gateway run, shared across reconnect attempts. The desktop adds at most one
 fixed-label terminal session-failure line per enabled scope (less than 256 bytes). Failed or
@@ -1169,12 +1169,12 @@ the single writer thread, including at startup, and Settings shows only its comp
 Repeated changes replace one pending setup request; stale completions cannot publish a new path.
 Demo and fixture sessions never install a file or open its folder.
 
-An enabled log writes `logs/serein.log` inside Serein's data folder, with private permissions on
+An enabled log writes `logs/aethon.log` inside Aethon's data folder, with private permissions on
 Unix. Every Unix open uses an owner-checked directory descriptor and rejects symlinks, hard-linked
 files and non-regular files (including FIFOs) without blocking. Directory/file permissions
 are set on their descriptors to 0700/0600; failures refuse the destination. Windows rejects
 reparse points, including junctions. A data folder that refuses the file (a read-only profile, a machine policy, a sandboxed run)
-is replaced by `serein-logs` in the temporary folder, and then by `serein-logs` beside the
+is replaced by `aethon-logs` in the temporary folder, and then by `aethon-logs` beside the
 executable; the Settings page names the file that ended up in use, and each refused attempt is
 recorded with its error class and operating-system code. When every folder refuses, the level still
 applies: the copy button returns the lines kept in memory. Each line is the machine's local wall
@@ -1187,7 +1187,7 @@ credential value: redaction is a property of the type rather than of review. A l
 
 Bounds: at most 256 formatted lines / 64 KiB wait for the writer, and at most 512 lines / 128 KiB
 stay in memory for the copy button; an overflow drops the oldest line. One writer thread owns the
-file, so no render, audio or network path touches the disk. The file rotates once to `serein.1.log`
+file, so no render, audio or network path touches the disk. The file rotates once to `aethon.1.log`
 at 2 MiB, and a run stops appending after 4 MiB in total; the copyable tail keeps working
 afterwards. A folder that cannot be written is reported in Settings instead of promising a file,
 and a closed or removed file never stops the client. The log is local only: nothing is uploaded, and
@@ -1285,7 +1285,7 @@ Eframe `system_fonts` enumerates installed fonts on a background thread and uses
 read-only memory-mapped OS font files for missing glyphs, including native color
 emoji. System fallback does not download or copy font files. Upstream fallback can wait
 for enumeration on its first missing glyph; its font/cache memory is framework
-overhead, separate from Serein message/image budgets. OS font availability and
+overhead, separate from Aethon message/image budgets. OS font availability and
 emoji coverage vary by platform. Bundled text faces and Twemoji remain in use.
 
 Explicit Appearance → Typography import accepts one installed TTF/OTF face up to 32 MiB. A native
@@ -1365,7 +1365,7 @@ is created even for existing schema-10/12 databases, requires no message migrati
 account logout like appearance. A failed load stays off; failed writes are visible in settings.
 Preview controls never load or save this preference.
 
-While enabled in an authenticated connection, Serein owns one standard Discord IPC endpoint
+While enabled in an authenticated connection, Aethon owns one standard Discord IPC endpoint
 and at most eight connected game workers. Windows uses a current-user-only pipe DACL and
 rejects remote connections; Unix uses a 0600 socket and checks peer UID. Occupied paths are
 never replaced or unlinked. Unix removes only its own device/inode on teardown; Windows
@@ -1437,7 +1437,7 @@ raw presence payloads. Connection teardown clears these reports and workers.
 ### Account menu presence (September 12, 2026)
 
 The account status and custom status are Discord settings (`settings-proto/1`,
-status field). Serein reads them before gateway identify, so a launch does not
+status field). Aethon reads them before gateway identify, so a launch does not
 force Online, and writes that field again when the owner changes them. The
 gateway still publishes one replaceable watch value. One local row per account
 (`account_presence`: status, custom text at most 512 bytes, optional expiry) is
@@ -1480,17 +1480,17 @@ actions. No disk storage, network endpoint or friend-management write is added.
 ### Opt-in Windows startup
 
 General settings can register this executable for the current Windows user's sign-in,
-off by default. The sole source of truth is the `Serein` REG_SZ value under
+off by default. The sole source of truth is the `Aethon` REG_SZ value under
 `HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run`: a quoted absolute
 executable path with `--autostart` and optionally `--start-minimized`, at most 260
 UTF-16 code units plus its terminator. It contains no account data or credentials.
 Turning startup off removes only this value. It survives logout; moving the portable
 executable requires enabling startup again from its new location. Windows Startup Apps
-can independently block the entry; Serein does not override that OS decision.
+can independently block the entry; Aethon does not override that OS decision.
 One off-thread operation and one fixed-size completion may exist at a time. Failed
 writes restore the last known setting and display an error. Demo mode does not read
 or write the startup entry. Automatic launches use the existing saved-login behavior;
-ordinary manual launches remain visible even when Start Serein minimized is selected.
+ordinary manual launches remain visible even when Start Aethon minimized is selected.
 
 ### Account-type badges (schema 14)
 
@@ -1589,7 +1589,7 @@ defaults; the existing 16 KiB row bound still applies. These preferences survive
 account logout. Update checks wait for preferences to load; demo actions remain
 in memory and never open update transports or create installation files.
 
-The updater uses a separate credential-free HTTPS client for the Serein GitHub
+The updater uses a separate credential-free HTTPS client for the Aethon GitHub
 release repository. It keeps one worker/result slot, at most 2 MiB of release
 metadata, a 64 KiB checksum list and one streamed archive capped at 512 MiB.
 Progress is coalesced into one atomic byte counter; release bodies, URLs and
@@ -1635,7 +1635,7 @@ are persisted, and no background pagination or new queue is introduced.
 ### Opt-in macOS startup
 
 The existing startup worker writes only
-`~/Library/LaunchAgents/cz.viceverse.serein.startup.plist`, at most 16 KiB,
+`~/Library/LaunchAgents/cz.viceverse.aethon.startup.plist`, at most 16 KiB,
 with an absolute executable path and fixed autostart/minimized flags. Reads are
 bounded to 16 KiB; unknown or moved entries report an error. Enabling atomically
 replaces this file using a private sibling temporary file; disabling removes it.
@@ -1948,7 +1948,7 @@ Successful public links stay copyable in their dialog; account/session reset rel
 them and cancels work. Explicit Add to draft uses ordinary account-isolated draft
 persistence, and later sent messages use ordinary bounded history persistence.
 Failed or cancelled transfers may leave remotely hosted data without a recoverable
-URL. Serein cannot delete anonymous hosted files or erase them on logout. The consent
+URL. Aethon cannot delete anonymous hosted files or erase them on logout. The consent
 states public access, unchanged embedded metadata and the service's current two-year
 inactivity retention; these are remote-host policy, not application cleanup guarantees.
 

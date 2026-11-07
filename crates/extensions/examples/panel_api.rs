@@ -5,7 +5,7 @@ use serde_json::json;
 fn main() {
 	let manifest: Manifest = serde_json::from_value(json!({
 		"api_version": 1, "id": "panel-check", "name": "Offline panel check",
-		"version": "1.0.0", "author": "Serein contributors", "license": "MIT",
+		"version": "1.0.0", "author": "Aethon contributors", "license": "MIT",
 		"source": "https://example.com/source", "kind": "plugin",
 		"actions": [{"id": "apply", "label": "Apply", "surface": "panel"}]
 	}))
@@ -65,8 +65,8 @@ fn main() {
 	let module = wat::parse_str(format!(
 		r#"(module (memory (export "memory") 1 256)
         (data (i32.const 32768) "{data}")
-        (func (export "serein_alloc") (param i32) (result i32) (i32.const 0))
-        (func (export "serein_invoke") (param i32 i32) (result i64) (i64.const {})))"#,
+        (func (export "aethon_alloc") (param i32) (result i32) (i32.const 0))
+        (func (export "aethon_invoke") (param i32 i32) (result i64) (i64.const {})))"#,
 		(32768_u64 << 32) | response.len() as u64
 	))
 	.unwrap();

@@ -1,4 +1,4 @@
-//! Rounded window corners for the undecorated Linux window with Serein's own title bar.
+//! Rounded window corners for the undecorated Linux window with Aethon's own title bar.
 //!
 //! egui cannot clip to a rounded shape, so after the frame is drawn a full-window pass
 //! multiplies every pixel by the coverage of a rounded rectangle. Outside the shape the
@@ -56,11 +56,11 @@ impl Mask {
 
 	fn create(&self, device: &wgpu::Device) -> Resources {
 		let module = device.create_shader_module(wgpu::ShaderModuleDescriptor {
-			label: Some("serein-round-corners"),
+			label: Some("aethon-round-corners"),
 			source: wgpu::ShaderSource::Wgsl(SHADER.into()),
 		});
 		let layout = device.create_bind_group_layout(&wgpu::BindGroupLayoutDescriptor {
-			label: Some("serein-round-corners"),
+			label: Some("aethon-round-corners"),
 			entries: &[wgpu::BindGroupLayoutEntry {
 				binding: 0,
 				visibility: wgpu::ShaderStages::FRAGMENT,
@@ -73,7 +73,7 @@ impl Mask {
 			}],
 		});
 		let pipeline_layout = device.create_pipeline_layout(&wgpu::PipelineLayoutDescriptor {
-			label: Some("serein-round-corners"),
+			label: Some("aethon-round-corners"),
 			bind_group_layouts: &[Some(&layout)],
 			immediate_size: 0,
 		});
@@ -85,7 +85,7 @@ impl Mask {
 			operation: wgpu::BlendOperation::Add,
 		};
 		let pipeline = device.create_render_pipeline(&wgpu::RenderPipelineDescriptor {
-			label: Some("serein-round-corners"),
+			label: Some("aethon-round-corners"),
 			layout: Some(&pipeline_layout),
 			vertex: wgpu::VertexState {
 				module: &module,
@@ -114,13 +114,13 @@ impl Mask {
 			cache: None,
 		});
 		let params = device.create_buffer(&wgpu::BufferDescriptor {
-			label: Some("serein-round-corners"),
+			label: Some("aethon-round-corners"),
 			size: std::mem::size_of::<[f32; 4]>() as wgpu::BufferAddress,
 			usage: wgpu::BufferUsages::UNIFORM | wgpu::BufferUsages::COPY_DST,
 			mapped_at_creation: false,
 		});
 		let bind_group = device.create_bind_group(&wgpu::BindGroupDescriptor {
-			label: Some("serein-round-corners"),
+			label: Some("aethon-round-corners"),
 			layout: &layout,
 			entries: &[wgpu::BindGroupEntry {
 				binding: 0,
