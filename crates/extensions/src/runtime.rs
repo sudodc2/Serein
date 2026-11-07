@@ -7,6 +7,11 @@ use wasmi::{
 const MEMORY_BYTES: usize = 16 * 1024 * 1024;
 const FUEL: u64 = 10_000_000;
 
+// Packages built against the pre-rename SDK export `serein_alloc`/`serein_invoke`;
+// accept both names so existing extensions keep running.
+const ABI_ALLOC: [&str; 2] = ["aethon_alloc", "serein_alloc"];
+const ABI_INVOKE: [&str; 2] = ["aethon_invoke", "serein_invoke"];
+
 fn engine() -> Engine {
 	let mut config = Config::default();
 	config
@@ -30,8 +35,12 @@ fn module(engine: &Engine, bytes: &[u8]) -> Result<Module, Error> {
 		return Err(Error::Module);
 	}
 	if !matches!(module.get_export("memory"), Some(ExternType::Memory(_)))
-		|| !matches!(module.get_export("serein_alloc"), Some(ExternType::Func(ty)) if ty == FuncType::new([ValType::I32], [ValType::I32]))
-		|| !matches!(module.get_export("serein_invoke"), Some(ExternType::Func(ty)) if ty == FuncType::new([ValType::I32, ValType::I32], [ValType::I64]))
+		|| !ABI_ALLOC.iter().any(|name| {
+			matches!(module.get_export(name), Some(ExternType::Func(ty)) if ty == FuncType::new([ValType::I32], [ValType::I32]))
+		})
+		|| !ABI_INVOKE.iter().any(|name| {
+			matches!(module.get_export(name), Some(ExternType::Func(ty)) if ty == FuncType::new([ValType::I32, ValType::I32], [ValType::I64]))
+		})
 	{
 		return Err(Error::Module);
 	}
@@ -79,7 +88,8 @@ fn instantiate(engine: &Engine, module: &Module) -> Result<(Store<StoreLimits>, 
 }
 
 /// Execute once, on the host worker. All Wasm state is dropped before returning.
-/// ABI: `serein_alloc(i32) -> i32`, `serein_invoke(i32, i32) -> i64`.
+/// ABI: `aethon_alloc(i32) -> i32`, `aethon_invoke(i32, i32) -> i64`;
+/// `serein_alloc`/`serein_invoke` are accepted as legacy equivalents.
 /// The result packs the output pointer in its high 32 bits and byte length in its low 32 bits.
 pub fn invoke(package: &Package, input: &Invocation) -> Result<Output, Error> {
 	if package.manifest.kind != ExtensionKind::Plugin || package.theme.is_some() {
@@ -111,12 +121,18 @@ pub fn invoke(package: &Package, input: &Invocation) -> Result<Output, Error> {
 	let module = module(&engine, &package.wasm)?;
 	let (mut store, instance) = instantiate(&engine, &module)?;
 	let memory = instance.get_memory(&store, "memory").ok_or(Error::Module)?;
-	let alloc = instance
-		.get_typed_func::<i32, i32>(&store, "serein_alloc")
-		.map_err(|_| Error::Module)?;
-	let run = instance
-		.get_typed_func::<(i32, i32), i64>(&store, "serein_invoke")
-		.map_err(|_| Error::Module)?;
+	let alloc = ABI_ALLOC
+		.iter()
+		.find_map(|name| instance.get_typed_func::<i32, i32>(&store, name).ok())
+		.ok_or(Error::Module)?;
+	let run = ABI_INVOKE
+		.iter()
+		.find_map(|name| {
+			instance
+				.get_typed_func::<(i32, i32), i64>(&store, name)
+				.ok()
+		})
+		.ok_or(Error::Module)?;
 	let pointer = alloc
 		.call(&mut store, bytes.len() as i32)
 		.map_err(execution_error)?;
