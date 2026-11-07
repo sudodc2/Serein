@@ -148,7 +148,7 @@ pkgbase = aethon-bin
 	options = !strip
 	options = !debug
 	options = !lto
-	source_x86_64 = https://github.com/ViceVerse-cz/Serein/releases/download/v1.0.0-nightly.20261001.53/aethon-v1.0.0-nightly.20261001.53-Linux-arch-aethon-1.0.0pre.nightly.20261001.53-1-x86_64.pkg.tar.zst
+	source_x86_64 = https://github.com/ViceVerse-cz/Serein/releases/download/v1.0.0-nightly.20261001.53/serein-v1.0.0-nightly.20261001.53-Linux-arch-serein-1.0.0pre.nightly.20261001.53-1-x86_64.pkg.tar.zst
 	sha256sums_x86_64 = 5efa3f71216cced0da707753b96007add5efc9bad256c390ecc020c5a238dfc5
 
 pkgname = aethon-bin

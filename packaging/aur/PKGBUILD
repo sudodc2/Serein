@@ -150,14 +150,32 @@ optdepends=(
   'gst-plugins-bad: hardware screen encoding'
   'gst-libav: inline video'
 )
-source_x86_64=('https://github.com/ViceVerse-cz/Serein/releases/download/v1.0.0-nightly.20261001.53/aethon-v1.0.0-nightly.20261001.53-Linux-arch-aethon-1.0.0pre.nightly.20261001.53-1-x86_64.pkg.tar.zst')
+# The pinned nightly predates the rebrand: its published asset and tarball
+# layout still use the serein names. Flip source paths to aethon-* once a
+# release publishes them.
+source_x86_64=('https://github.com/ViceVerse-cz/Serein/releases/download/v1.0.0-nightly.20261001.53/serein-v1.0.0-nightly.20261001.53-Linux-arch-serein-1.0.0pre.nightly.20261001.53-1-x86_64.pkg.tar.zst')
 sha256sums_x86_64=('5efa3f71216cced0da707753b96007add5efc9bad256c390ecc020c5a238dfc5')
 
 package() {
   install -d "$pkgdir/usr/bin" "$pkgdir/usr/share/licenses/$pkgname"
-  install -m755 "$srcdir/usr/bin/aethon" "$pkgdir/usr/bin/aethon"
+  install -m755 "$srcdir/usr/bin/serein" "$pkgdir/usr/bin/aethon"
   install -d "$pkgdir/usr/share"
   cp -a "$srcdir/usr/share/." "$pkgdir/usr/share/"
-  install -m644 "$srcdir/usr/share/doc/aethon/LICENSE-MIT" "$pkgdir/usr/share/licenses/$pkgname/LICENSE-MIT"
-  install -m644 "$srcdir/usr/share/doc/aethon/LICENSE-APACHE" "$pkgdir/usr/share/licenses/$pkgname/LICENSE-APACHE"
+  if [ -f "$pkgdir/usr/share/applications/cz.viceverse.serein.desktop" ]; then
+    sed -i -e 's/^Name=.*/Name=Aethon/' -e 's/^Exec=.*/Exec=aethon/' \
+      -e 's/^Icon=.*/Icon=aethon/' \
+      -e 's/^StartupWMClass=.*/StartupWMClass=cz.viceverse.aethon/' \
+      "$pkgdir/usr/share/applications/cz.viceverse.serein.desktop"
+    mv "$pkgdir/usr/share/applications/cz.viceverse.serein.desktop" \
+      "$pkgdir/usr/share/applications/cz.viceverse.aethon.desktop"
+  fi
+  find "$pkgdir/usr/share/icons" -name 'serein*' -print0 |
+    while IFS= read -r -d '' icon; do
+      mv "$icon" "$(dirname "$icon")/$(basename "$icon" | sed 's/serein/aethon/')"
+    done
+  if [ -d "$pkgdir/usr/share/doc/serein" ]; then
+    mv "$pkgdir/usr/share/doc/serein" "$pkgdir/usr/share/doc/aethon"
+  fi
+  install -m644 "$srcdir/usr/share/doc/serein/LICENSE-MIT" "$pkgdir/usr/share/licenses/$pkgname/LICENSE-MIT"
+  install -m644 "$srcdir/usr/share/doc/serein/LICENSE-APACHE" "$pkgdir/usr/share/licenses/$pkgname/LICENSE-APACHE"
 }
