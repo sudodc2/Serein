@@ -730,7 +730,7 @@ mod tests {
 			error: None,
 			reconnecting: None,
 			camera: false,
-			watching: None,
+			watching: Vec::new(),
 		});
 		let mut screen = Screen {
 			pending: Some(Pending {

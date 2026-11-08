@@ -56,7 +56,7 @@ impl MessagingUi {
 								&& self.screen.busy && (self.screen.preview.is_some()
 								|| self.screen.preview_paused)
 						}
-						StageFocus::Stream(user) => call.watching == Some(*user),
+						StageFocus::Stream(user) => call.watching.contains(user),
 						StageFocus::Participant(_) => false,
 					}
 			})
@@ -808,7 +808,7 @@ impl MessagingUi {
 				}
 			}
 			let watching = state.voice.active.as_ref().is_some_and(|call| {
-				call.channel == entry.channel && call.watching == Some(entry.participant.user)
+				call.channel == entry.channel && call.watching.contains(&entry.participant.user)
 			});
 			let connected = state.voice.active.as_ref().is_some_and(|call| {
 				call.channel == entry.channel
@@ -896,7 +896,11 @@ impl MessagingUi {
 			}
 			Some((_, Phase::Connected | Phase::Waiting)) => {
 				self.stream_preview_watch = None;
-				if state.voice.active.as_ref().and_then(|call| call.watching) == Some(user)
+				if state
+					.voice
+					.active
+					.as_ref()
+					.is_some_and(|call| call.watching.contains(&user))
 					|| state.watch_stream(user).is_some()
 				{
 					self.voice_focus = Some(StageFocus::Stream(user));
@@ -1048,17 +1052,19 @@ impl MessagingUi {
 			tiles.push(Tile::LocalScreen);
 		}
 		// Like Discord, every remote share gets its own box beside its streamer's tile; the
-		// watched one leads, the rest stay previews until someone clicks to watch.
-		let watching = call.and_then(|call| call.watching);
-		if let Some(streamer) = watching {
-			tiles.push(Tile::Stream(streamer));
+		// watched ones lead, the rest stay previews until someone clicks to watch.
+		if let Some(call) = call {
+			for streamer in &call.watching {
+				tiles.push(Tile::Stream(*streamer));
+			}
 		}
 		let own = state.user.as_ref().map(|user| user.id);
+		let watching = |user: &Id| call.is_some_and(|call| call.watching.contains(user));
 		tiles.extend(
 			entries
 				.iter()
 				.map(|entry| entry.participant.user)
-				.filter(|user| Some(*user) != watching && Some(*user) != own)
+				.filter(|user| !watching(user) && Some(*user) != own)
 				.filter(|user| {
 					entries
 						.iter()
@@ -1203,8 +1209,22 @@ impl MessagingUi {
 		state.voice.active.as_ref().is_some_and(|call| {
 			call.channel == channel
 				&& call.phase != Phase::Failed
-				&& call.watching == Some(streamer)
+				&& call.watching.contains(&streamer)
 		})
+	}
+
+	fn stream_texture(&self, streamer: Id) -> Option<&egui::load::SizedTexture> {
+		self.voice_stream_views
+			.iter()
+			.find(|(id, _)| *id == streamer)
+			.map(|(_, texture)| texture)
+	}
+
+	fn stream_status(&self, streamer: Id) -> &'static str {
+		self.voice_stream_statuses
+			.iter()
+			.find(|(id, _)| *id == streamer)
+			.map_or("", |(_, status)| *status)
 	}
 
 	fn remote_texture(&self, user: Id) -> Option<&egui::load::SizedTexture> {
@@ -1276,7 +1296,7 @@ impl MessagingUi {
 						self.stream_audio_controls(ui);
 						ui.separator();
 						if ui.button("Stop watching").clicked() {
-							self.watch_request = Some(None);
+							self.watch_request = Some(WatchRequest::Unwatch(*streamer));
 							ui.close();
 						}
 					});
@@ -1297,7 +1317,7 @@ impl MessagingUi {
 						.as_ref()
 						.is_some_and(|call| call.channel == channel)
 					{
-						self.watch_request = Some(Some(*streamer));
+						self.watch_request = Some(WatchRequest::Watch(*streamer));
 					} else {
 						self.stream_preview_watch = Some((channel, *streamer));
 					}
@@ -1406,7 +1426,7 @@ impl MessagingUi {
 	) {
 		let name = participant_user(state, channel, streamer)
 			.map_or_else(|| "Participant".to_owned(), |user| user.name.clone());
-		let content = match &self.voice_stream_view {
+		let content = match self.stream_texture(streamer) {
 			Some(texture) => {
 				let content = fit_rect(rect, texture.size);
 				ui.put(
@@ -1418,10 +1438,11 @@ impl MessagingUi {
 			None => {
 				ui.painter().rect_filled(rect, 8, TILE_FILL);
 				if rect.height() >= 132.0 {
-					let status = if self.voice_stream_status.is_empty() {
+					let status = self.stream_status(streamer);
+					let status = if status.is_empty() {
 						"Connecting to the stream…"
 					} else {
-						self.voice_stream_status
+						status
 					};
 					let spinner = egui::Rect::from_center_size(
 						rect.center() - egui::vec2(0.0, 18.0),
@@ -1451,12 +1472,12 @@ impl MessagingUi {
 		}
 		// Fullscreen has no call bar, so it keeps its own small audio and stop actions.
 		if overlay {
-			self.stream_overlay_controls(ui, content);
+			self.stream_overlay_controls(ui, content, streamer);
 		}
 	}
 
 	/// Bottom-right actions over a fullscreen share: stream audio and Stop watching.
-	fn stream_overlay_controls(&mut self, ui: &mut egui::Ui, content: egui::Rect) {
+	fn stream_overlay_controls(&mut self, ui: &mut egui::Ui, content: egui::Rect, streamer: Id) {
 		let height = 40.0;
 		let stop_label = "Stop watching";
 		let font = egui::FontId::new(13.0, design::medium_family(ui.ctx()));
@@ -1513,7 +1534,7 @@ impl MessagingUi {
 			.on_hover_text("Stop receiving this screen share")
 			.clicked()
 		{
-			self.watch_request = Some(None);
+			self.watch_request = Some(WatchRequest::Unwatch(streamer));
 		}
 	}
 
@@ -1633,12 +1654,18 @@ impl MessagingUi {
 	pub(super) fn apply_watch_request(&mut self, state: &mut State) {
 		match self.watch_request.take() {
 			// Like Discord, a share opens enlarged as soon as you choose to watch it.
-			Some(Some(user)) => {
+			Some(WatchRequest::Watch(user)) => {
 				if state.watch_stream(user).is_some() {
 					self.voice_focus = Some(StageFocus::Stream(user));
 				}
 			}
-			Some(None) => state.stop_watching(),
+			Some(WatchRequest::Unwatch(user)) => {
+				state.stop_watching_streamer(user);
+				if matches!(self.voice_focus, Some(StageFocus::Stream(focused)) if focused == user)
+				{
+					self.voice_focus = None;
+				}
+			}
 			None => {}
 		}
 	}
@@ -3192,7 +3219,7 @@ impl MessagingUi {
 		// Discord's call bar: microphone and camera with their device menus, then share and
 		// more, then the red action; view actions sit at the right edge.
 		let watched = match self.voice_focus {
-			Some(StageFocus::Stream(user)) if call.watching == Some(user) => Some(user),
+			Some(StageFocus::Stream(user)) if call.watching.contains(&user) => Some(user),
 			_ => None,
 		};
 		let bar = ui.max_rect();
@@ -3458,7 +3485,9 @@ impl MessagingUi {
 				.show(|ui| self.stream_audio_controls(ui));
 		}
 		if stop_watching {
-			self.watch_request = Some(None);
+			if let Some(user) = watched {
+				self.watch_request = Some(WatchRequest::Unwatch(user));
+			}
 			self.voice_focus = None;
 		}
 		if camera_clicked && let Some(command) = state.set_call_camera(!camera) {
@@ -4172,6 +4201,13 @@ pub enum StageFocus {
 	LocalScreen,
 	Stream(Id),
 	Participant(Id),
+}
+
+/// A stage tile's request to start or stop watching one streamer's share.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub(crate) enum WatchRequest {
+	Watch(Id),
+	Unwatch(Id),
 }
 
 enum Tile<'a> {
@@ -5937,7 +5973,7 @@ mod tests {
 				assert!(messaging.stream_preview_watch.is_none());
 				assert_eq!(
 					state.voice.active.as_ref().unwrap().watching,
-					present.then_some(Id(3))
+					if present { vec![Id(3)] } else { Vec::new() }
 				);
 				assert!(commands.is_empty());
 				if !present {

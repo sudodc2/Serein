@@ -1634,7 +1634,10 @@ impl Desktop {
 				} else if std::env::args().any(|arg| {
 					matches!(
 						arg.as_str(),
-						"--demo-voice" | "--demo-voice-failed" | "--demo-voice-video"
+						"--demo-voice"
+							| "--demo-voice-failed"
+							| "--demo-voice-video"
+							| "--demo-guild-streams"
 					)
 				}) {
 					test_support::voice_demo_state()
@@ -1952,12 +1955,64 @@ impl Desktop {
 			let texture =
 				cc.egui_ctx
 					.load_texture("synthetic-stream", image, egui::TextureOptions::LINEAR);
-			messaging.voice_stream_view = Some(egui::load::SizedTexture::from_handle(&texture));
+			messaging
+				.voice_stream_views
+				.push((peer, egui::load::SizedTexture::from_handle(&texture)));
 			demo_textures.push(texture);
-			messaging.voice_stream_status = "Watching the stream";
+			messaging
+				.voice_stream_statuses
+				.push((peer, "Watching the stream"));
 			// `--demo-focus` additionally opens the enlarged stage layout.
 			if std::env::args().any(|arg| arg == "--demo-focus") {
 				messaging.voice_focus = Some(ui::StageFocus::Stream(peer));
+			}
+		}
+		// `--demo-guild-streams`: two roster members share synthetic screens this device
+		// watches at once, so the multi-stream stage grid renders offline.
+		#[cfg(feature = "demo")]
+		if demo && std::env::args().any(|arg| arg == "--demo-guild-streams") {
+			for entry in &mut state.voice.roster {
+				if matches!(entry.participant.user.0, 2 | 3) {
+					entry.participant.streaming = true;
+				}
+			}
+			if let Some(call) = &mut state.voice.active {
+				for participant in &mut call.participants {
+					if matches!(participant.user.0, 2 | 3) {
+						participant.streaming = true;
+					}
+				}
+			}
+			for (streamer, shift) in [(model::Id(2), 0usize), (model::Id(3), 90usize)] {
+				if state.watch_stream(streamer).is_none() {
+					continue;
+				}
+				let (width, height) = (640usize, 360usize);
+				let pixels = (0..width * height)
+					.map(|i| {
+						let (x, y) = (i % width, i / width);
+						let grid = usize::from(x % 80 < 2 || y % 80 < 2) as u8;
+						egui::Color32::from_rgb(
+							24 + grid * 40 + ((x * 90 / width + shift) % 256) as u8,
+							28 + grid * 40 + (y * 70 / height) as u8,
+							48 + grid * 50,
+						)
+					})
+					.collect();
+				let image = egui::ColorImage {
+					size: [width, height],
+					source_size: egui::vec2(width as f32, height as f32),
+					pixels,
+				};
+				let texture = cc.egui_ctx.load_texture(
+					&format!("synthetic-stream-{}", streamer.0),
+					image,
+					egui::TextureOptions::LINEAR,
+				);
+				messaging
+					.voice_stream_views
+					.push((streamer, egui::load::SizedTexture::from_handle(&texture)));
+				demo_textures.push(texture);
 			}
 		}
 		// `--demo-voice-video`: Robin's camera is a synthetic gradient and starts enlarged, so the
