@@ -1,6 +1,6 @@
 # Custom Rich Presence
 
-A native Serein editor inspired by Vencord CustomRPC. Configure Playing, Streaming,
+A native Aethon editor inspired by Vencord CustomRPC. Configure Playing, Streaming,
 Listening, Watching or Competing activities, text links, artwork and image links,
 two buttons, party size, and elapsed/countdown timers without editing JSON.
 
@@ -26,7 +26,7 @@ presence and keeps that start when you apply edits; stopping and starting again
 resets it. “Since local midnight” uses the host's local day. Timers and other
 fields are validated before publication.
 
-Requires a host with the `rich_presence` capability (Serein PR #465). It builds
+Requires a host with the `rich_presence` capability (Aethon PR #465). It builds
 against the in-repository SDK; `crates/extensions/tests/sandbox.rs` runs the
 committed package through the real host sandbox.
 
@@ -35,8 +35,8 @@ Build from `extensions/`:
 ```sh
 cargo test --locked -p custom-rpc
 cargo build --locked --release --target wasm32-unknown-unknown -p custom-rpc
-python pack.py plugins/custom-rpc/manifest.json target/wasm32-unknown-unknown/release/custom_rpc.wasm plugins/packages/custom-rpc.serein-extension
+python pack.py plugins/custom-rpc/manifest.json target/wasm32-unknown-unknown/release/custom_rpc.wasm plugins/packages/custom-rpc.aethon-extension
 ```
 
-The capability contributes one bounded activity through Serein's existing
+The capability contributes one bounded activity through Aethon's existing
 presence pipeline. The plugin has no network, filesystem or account credentials.

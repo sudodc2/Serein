@@ -1,4 +1,4 @@
-use serein_extension_sdk::{Element, Invocation, Output, Theme, ThemePalette, TickInvocation};
+use aethon_extension_sdk::{Element, Invocation, Output, Theme, ThemePalette, TickInvocation};
 use std::collections::BTreeMap;
 
 /// Full hue rotation period. The host invokes `tick` at roughly
@@ -343,4 +343,4 @@ fn hsv_to_hex(h: f64, s: f64, v: f64) -> String {
 	format!("#{:02x}{:02x}{:02x}", to_byte(r), to_byte(g), to_byte(b))
 }
 
-serein_extension_sdk::export!(handle);
+aethon_extension_sdk::export!(handle);

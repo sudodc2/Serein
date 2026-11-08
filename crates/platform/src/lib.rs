@@ -44,7 +44,7 @@ pub use login_linux::LoginView;
 
 /// Logical height of the native header the desktop app draws above the login webview.
 pub const LOGIN_HEADER_HEIGHT: f32 = 56.0;
-const SERVICE: &str = "cz.viceverse.serein";
+const SERVICE: &str = "cz.viceverse.aethon";
 #[cfg(not(feature = "development-data"))]
 const ACCOUNT: &str = "discord-session";
 #[cfg(feature = "development-data")]
@@ -212,7 +212,7 @@ pub(crate) fn ensure_webkit_locale() -> Result<(), &'static str> {
 		|| std::env::var_os("FLATPAK_ID").is_some();
 	if flatpak && !gtk4::glib::charset().0 {
 		return Err(
-			"Serein Flatpak login/verification requires a UTF-8 locale. Repair runtime languages and restart Serein; see Flatpak troubleshooting.",
+			"Aethon Flatpak login/verification requires a UTF-8 locale. Repair runtime languages and restart Aethon; see Flatpak troubleshooting.",
 		);
 	}
 	Ok(())
@@ -222,11 +222,11 @@ pub(crate) fn ensure_webkit_locale() -> Result<(), &'static str> {
 mod flatpak_locale_tests {
 	#[test]
 	fn non_utf8_webkit_preflight_is_local_to_flatpak() {
-		const CHILD: &str = "SEREIN_TEST_WEBKIT_LOCALE_CHILD";
+		const CHILD: &str = "AETHON_TEST_WEBKIT_LOCALE_CHILD";
 		if let Some(mode) = std::env::var_os(CHILD) {
 			// Fresh processes avoid GLib's cached encoding. Only the explicitly display-backed
 			// regression initializes GTK; neither test constructs WebKit or authenticates.
-			if std::env::var_os("SEREIN_TEST_WEBKIT_INITIALIZE_GTK").is_some() {
+			if std::env::var_os("AETHON_TEST_WEBKIT_INITIALIZE_GTK").is_some() {
 				gtk4::init().expect("display-backed GTK initialization");
 			}
 			assert_eq!(gtk4::glib::charset().0, mode == "utf8");
@@ -247,7 +247,7 @@ mod flatpak_locale_tests {
 	}
 
 	fn check_encoding_cases(initialize_gtk: bool) {
-		const CHILD: &str = "SEREIN_TEST_WEBKIT_LOCALE_CHILD";
+		const CHILD: &str = "AETHON_TEST_WEBKIT_LOCALE_CHILD";
 		for mode in ["native", "flatpak", "utf8"] {
 			if mode == "native" && std::path::Path::new("/.flatpak-info").is_file() {
 				continue; // A real sandbox marker cannot be removed to simulate a native app.
@@ -262,12 +262,12 @@ mod flatpak_locale_tests {
 				.env("LC_ALL", "C")
 				.env("CHARSET", if mode == "utf8" { "UTF-8" } else { "US-ASCII" })
 				.env_remove("FLATPAK_ID")
-				.env_remove("SEREIN_TEST_WEBKIT_INITIALIZE_GTK");
+				.env_remove("AETHON_TEST_WEBKIT_INITIALIZE_GTK");
 			if initialize_gtk {
-				child.env("SEREIN_TEST_WEBKIT_INITIALIZE_GTK", "1");
+				child.env("AETHON_TEST_WEBKIT_INITIALIZE_GTK", "1");
 			}
 			if mode != "native" {
-				child.env("FLATPAK_ID", "cz.viceverse.serein");
+				child.env("FLATPAK_ID", "cz.viceverse.aethon");
 			}
 			let output = child.output().unwrap();
 			assert!(
@@ -396,7 +396,7 @@ fn credential_store() -> Result<(), CredentialError> {
 		.map_err(|_| CredentialError::NoStore)
 }
 /// Unlike keyring's one-shot default, a missing Secret Service is retried, so a provider that
-/// starts after Serein (or KWallet, which may need activating) is still found.
+/// starts after Aethon (or KWallet, which may need activating) is still found.
 #[cfg(target_os = "linux")]
 fn credential_store() -> Result<(), CredentialError> {
 	const RETRY: std::time::Duration = std::time::Duration::from_secs(15);
@@ -511,7 +511,7 @@ impl LoginView {
 			.collect::<String>()
 			+ ":";
 		let script =
-			include_str!("login-handoff.js").replace("__SEREIN_LOGIN_CAPABILITY__", &capability);
+			include_str!("login-handoff.js").replace("__AETHON_LOGIN_CAPABILITY__", &capability);
 		let builder = WebViewBuilder::new()
 			.with_url("https://discord.com/login")
 			.with_incognito(true)

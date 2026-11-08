@@ -1,4 +1,4 @@
-use serein_extension_sdk::{ApiProxyConfig, ApiProxyOutput, Element, Invocation};
+use aethon_extension_sdk::{ApiProxyConfig, ApiProxyOutput, Element, Invocation};
 
 fn panel(mode: &str, url: &str, notice: &str) -> Vec<Element> {
 	let mut elements = vec![
@@ -9,7 +9,7 @@ fn panel(mode: &str, url: &str, notice: &str) -> Vec<Element> {
 			options: vec!["Direct".into(), "Automatic".into(), "URL".into()], value: mode.into(),
 		},
 		Element::TextInput { id: "url".into(), label: "HTTP/HTTPS proxy URL".into(), value: url.into() },
-		Element::Text { text: "Automatic uses environment proxy settings; PAC scripts are unsupported. A URL may contain only a host and optional port. Draft edits take effect only after Apply. For authenticated proxies, use Serein's Proxy authentication section below; never paste credentials into the URL.".into() },
+		Element::Text { text: "Automatic uses environment proxy settings; PAC scripts are unsupported. A URL may contain only a host and optional port. Draft edits take effect only after Apply. For authenticated proxies, use Aethon's Proxy authentication section below; never paste credentials into the URL.".into() },
 		Element::Button { id: "apply".into(), label: "Apply API proxy".into() },
 	];
 	if !notice.is_empty() {
@@ -101,7 +101,7 @@ fn handle(input: Invocation) -> ApiProxyOutput {
 	output
 }
 
-serein_extension_sdk::export!(handle);
+aethon_extension_sdk::export!(handle);
 
 #[cfg(test)]
 mod tests {
@@ -160,7 +160,7 @@ mod tests {
 				"{url}"
 			);
 			assert!(
-				serein_extension_sdk::serde_json::to_vec(&output)
+				aethon_extension_sdk::serde_json::to_vec(&output)
 					.unwrap()
 					.len() < 8192
 			);

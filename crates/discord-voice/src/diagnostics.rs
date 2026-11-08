@@ -154,7 +154,7 @@ const VIDEO_SLOTS: usize = Video::TwccDiscarded as usize + 1;
 /// Opt-in only; media callbacks do no additional atomic work when diagnostics are off.
 pub(crate) fn enabled() -> bool {
 	static ENABLED: OnceLock<bool> = OnceLock::new();
-	*ENABLED.get_or_init(|| std::env::var_os("SEREIN_VOICE_DIAGNOSTICS").is_some_and(|v| v == "1"))
+	*ENABLED.get_or_init(|| std::env::var_os("AETHON_VOICE_DIAGNOSTICS").is_some_and(|v| v == "1"))
 }
 
 /// Dimensions of delivered pictures only. The packed key sorts by pixel count and retains
@@ -608,7 +608,7 @@ impl Drop for Metrics {
 
 fn write_report(report: Report, bytes: &mut usize, writer: &mut impl Write) -> bool {
 	let mut line = format!(
-		"[Serein voice {:?}] debug={} at_ms={} window_ms={} wakes={} resets={} drops={} stalls={} noise_frames={} stages(calls,total_us,max_us): echo_render={:?} echo_capture={:?} noise={:?} encode={:?} mix={:?} receive={:?}",
+		"[Aethon voice {:?}] debug={} at_ms={} window_ms={} wakes={} resets={} drops={} stalls={} noise_frames={} stages(calls,total_us,max_us): echo_render={:?} echo_capture={:?} noise={:?} encode={:?} mix={:?} receive={:?}",
 		report.scope,
 		cfg!(debug_assertions),
 		report.at_ms,

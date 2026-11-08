@@ -483,42 +483,42 @@ fn extension_fixture(
 	),
 	Box<dyn std::error::Error>,
 > {
-	let external = std::env::var_os("SEREIN_PREVIEW_PACKAGE")
+	let external = std::env::var_os("AETHON_PREVIEW_PACKAGE")
 		.map(std::fs::read)
 		.transpose()?;
 	let bytes: &[u8] = match id {
 		"custom-rpc" | "api-proxy" => external
 			.as_deref()
-			.ok_or("Set SEREIN_PREVIEW_PACKAGE to the external plugin package")?,
-		"serein-ocean" => {
-			include_bytes!("../../../extensions/themes/ocean.serein-extension")
+			.ok_or("Set AETHON_PREVIEW_PACKAGE to the external plugin package")?,
+		"aethon-ocean" => {
+			include_bytes!("../../../extensions/themes/ocean.aethon-extension")
 		}
 		"message-delete-protector" => include_bytes!(
-			"../../../extensions/plugins/packages/message-delete-protector.serein-extension"
+			"../../../extensions/plugins/packages/message-delete-protector.aethon-extension"
 		),
-		"serein-midnight" => {
-			include_bytes!("../../../extensions/themes/midnight.serein-extension")
+		"aethon-midnight" => {
+			include_bytes!("../../../extensions/themes/midnight.aethon-extension")
 		}
-		"serein-rose" => {
-			include_bytes!("../../../extensions/themes/rose.serein-extension")
+		"aethon-rose" => {
+			include_bytes!("../../../extensions/themes/rose.aethon-extension")
 		}
-		"serein-forest" => {
-			include_bytes!("../../../extensions/themes/forest.serein-extension")
+		"aethon-forest" => {
+			include_bytes!("../../../extensions/themes/forest.aethon-extension")
 		}
-		"serein-latte" => {
-			include_bytes!("../../../extensions/themes/latte.serein-extension")
+		"aethon-latte" => {
+			include_bytes!("../../../extensions/themes/latte.aethon-extension")
 		}
 		"golden-theme" => {
-			include_bytes!("../../../extensions/themes/golden.serein-extension")
+			include_bytes!("../../../extensions/themes/golden.aethon-extension")
 		}
 		"black-theme" => {
-			include_bytes!("../../../extensions/themes/katana.serein-extension")
+			include_bytes!("../../../extensions/themes/katana.aethon-extension")
 		}
 		"obsidian-theme" => {
-			include_bytes!("../../../extensions/themes/obsidian.serein-extension")
+			include_bytes!("../../../extensions/themes/obsidian.aethon-extension")
 		}
 		"teal-theme" => {
-			include_bytes!("../../../extensions/themes/teal.serein-extension")
+			include_bytes!("../../../extensions/themes/teal.aethon-extension")
 		}
 		_ => return Err("Unknown fixture extension".into()),
 	};
@@ -563,27 +563,27 @@ fn seed_catalog(extensions: &mut ui::ExtensionUi, themes: bool) {
 	if themes {
 		let packages: [(&[u8], &str); 6] = [
 			(
-				include_bytes!("../../../extensions/themes/ocean.serein-extension"),
+				include_bytes!("../../../extensions/themes/ocean.aethon-extension"),
 				"",
 			),
 			(
-				include_bytes!("../../../extensions/themes/obsidian.serein-extension"),
+				include_bytes!("../../../extensions/themes/obsidian.aethon-extension"),
 				"Obsidian violet surfaces and lavender accents.",
 			),
 			(
-				include_bytes!("../../../extensions/themes/forest.serein-extension"),
+				include_bytes!("../../../extensions/themes/forest.aethon-extension"),
 				"Calm forest greens and fresh leafy accents.",
 			),
 			(
-				include_bytes!("../../../extensions/themes/latte.serein-extension"),
+				include_bytes!("../../../extensions/themes/latte.aethon-extension"),
 				"Warm coffee tones and a creamy caramel accent.",
 			),
 			(
-				include_bytes!("../../../extensions/themes/rose.serein-extension"),
+				include_bytes!("../../../extensions/themes/rose.aethon-extension"),
 				"Soft rose accents.",
 			),
 			(
-				include_bytes!("../../../extensions/themes/midnight.serein-extension"),
+				include_bytes!("../../../extensions/themes/midnight.aethon-extension"),
 				"Deep, quiet surfaces.",
 			),
 		];
@@ -648,7 +648,7 @@ fn seed_catalog(extensions: &mut ui::ExtensionUi, themes: bool) {
 	);
 	let previews = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../extensions/previews");
 	{
-		let (id, filename) = ("serein-ocean", "ocean.png");
+		let (id, filename) = ("aethon-ocean", "ocean.png");
 		let image = image::open(previews.join(filename))
 			.expect("valid fixture preview")
 			.to_rgba8();
@@ -799,7 +799,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 	let saved = Arc::new(AtomicBool::new(false));
 	let completed = saved.clone();
 	eframe::run_native(
-		"Serein · offline profile preview",
+		"Aethon · offline profile preview",
 		eframe::NativeOptions {
 			viewport: egui::ViewportBuilder::default()
 				.with_inner_size([width, height])
@@ -1282,7 +1282,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 					if theme_preview {
 						prime_extension_chat(&mut state);
 						let package = extensions::parse_package(include_bytes!(
-							"../../../extensions/themes/katana.serein-extension"
+							"../../../extensions/themes/katana.aethon-extension"
 						))?;
 						messaging.extensions.receive_theme_edit(
 							Box::new(package),
@@ -1294,7 +1294,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 					}
 					if let Some(tab) = &theme_editor {
 						let mut package = extensions::parse_package(include_bytes!(
-							"../../../extensions/themes/ocean.serein-extension"
+							"../../../extensions/themes/ocean.aethon-extension"
 						))
 						.expect("valid theme fixture");
 						package.manifest.name = "My ocean".into();

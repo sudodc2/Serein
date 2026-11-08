@@ -3,7 +3,7 @@
   "id": "custom-rpc",
   "name": "Custom Rich Presence",
   "version": "1.0.0",
-  "author": "Serein contributors",
+  "author": "Aethon contributors",
   "license": "MIT OR Apache-2.0",
   "source": "https://github.com/ViceVerse-cz/Serein-extensions/tree/main/plugins/custom-rpc",
   "kind": "plugin",

@@ -1,4 +1,4 @@
-use serein_extension_sdk::{AppAction, AppInvocation, AppOutput, Element, HostEffect, Output};
+use aethon_extension_sdk::{AppAction, AppInvocation, AppOutput, Element, HostEffect, Output};
 
 const OPERATIONS: &[&str] = &[
 	"Send message",
@@ -59,7 +59,7 @@ fn handle(input: AppInvocation) -> AppOutput {
 						},
 						Element::Text {
 							text: format!(
-								"Conversation: {} ({channel_id}). Review proposes one action; Serein's Apply button performs it. Deletion cannot be undone. Sending preserves your existing draft and attachments.",
+								"Conversation: {} ({channel_id}). Review proposes one action; Aethon's Apply button performs it. Deletion cannot be undone. Sending preserves your existing draft and attachments.",
 								channel.name
 							),
 						},
@@ -153,12 +153,12 @@ fn handle(input: AppInvocation) -> AppOutput {
 	}
 }
 
-serein_extension_sdk::export!(handle);
+aethon_extension_sdk::export!(handle);
 
 #[cfg(test)]
 mod tests {
 	use super::*;
-	use serein_extension_sdk::{dispatch_typed, serde_json};
+	use aethon_extension_sdk::{dispatch_typed, serde_json};
 
 	#[test]
 	fn proposal_is_explicit_and_rejects_navigation_and_background_events() {
@@ -174,7 +174,7 @@ mod tests {
 			.values
 			.insert("channel".into(), "21".into());
 		assert!(handle(input.clone()).effects.is_empty());
-		input.app_event = Some(serein_extension_sdk::AppEventKind::Ready);
+		input.app_event = Some(aethon_extension_sdk::AppEventKind::Ready);
 		assert!(handle(input).effects.is_empty());
 	}
 }

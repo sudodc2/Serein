@@ -54,7 +54,7 @@ impl Tray {
 		let worker_events = events.clone();
 		runtime.spawn(async move {
 			let Ok(icon) = image::load_from_memory_with_format(
-				include_bytes!("../../../../assets/brand/serein-tray.png"),
+				include_bytes!("../../../../assets/brand/aethon-tray.png"),
 				image::ImageFormat::Png,
 			) else {
 				worker_events.push(Event::Unavailable);
@@ -142,7 +142,7 @@ impl Tray {
 
 /// Symbolic icon name; GNOME's AppIndicator extension and Plasma recolor these to match the
 /// panel, so the tray mark follows the shell's own foreground colour like a native icon.
-const ICON_NAME: &str = "serein-symbolic";
+const ICON_NAME: &str = "aethon-symbolic";
 
 /// Write the mark as a symbolic SVG into a private runtime directory and return that
 /// directory, to be advertised as the item's icon theme path.
@@ -151,14 +151,14 @@ fn write_symbolic_icon() -> Option<String> {
 	let base = std::env::var_os("XDG_RUNTIME_DIR")
 		.map(std::path::PathBuf::from)
 		.filter(|path| path.is_absolute())?;
-	let directory = base.join("serein-tray-icons");
+	let directory = base.join("aethon-tray-icons");
 	std::fs::DirBuilder::new()
 		.recursive(true)
 		.mode(0o700)
 		.create(&directory)
 		.ok()?;
 	// Symbolic icons are recolored from this placeholder foreground.
-	let svg = include_str!("../../../../assets/brand/serein-mark.svg")
+	let svg = include_str!("../../../../assets/brand/aethon-mark.svg")
 		.replace("fill=\"#fff\"", "fill=\"#bebebe\"");
 	std::fs::write(directory.join(format!("{ICON_NAME}.svg")), svg).ok()?;
 	directory.to_str().map(str::to_owned)
@@ -173,10 +173,10 @@ struct Item {
 
 impl ksni::Tray for Item {
 	fn id(&self) -> String {
-		"serein".into()
+		"aethon".into()
 	}
 	fn title(&self) -> String {
-		"Serein".into()
+		"Aethon".into()
 	}
 	fn icon_name(&self) -> String {
 		// Without a theme path the name cannot resolve, so fall back to the pixmap only.
@@ -202,13 +202,13 @@ impl ksni::Tray for Item {
 	fn menu(&self) -> Vec<ksni::MenuItem<Self>> {
 		vec![
 			StandardItem {
-				label: "Show Serein".into(),
+				label: "Show Aethon".into(),
 				activate: Box::new(|item: &mut Self| item.events.push(Event::Show)),
 				..Default::default()
 			}
 			.into(),
 			StandardItem {
-				label: "Minimize Serein".into(),
+				label: "Minimize Aethon".into(),
 				activate: Box::new(|item: &mut Self| item.events.push(Event::Minimize)),
 				..Default::default()
 			}

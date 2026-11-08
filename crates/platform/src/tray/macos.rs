@@ -6,9 +6,9 @@ use objc2_app_kit::{NSImage, NSMenu, NSMenuItem, NSStatusBar, NSStatusItem};
 use objc2_foundation::{MainThreadMarker, NSData, NSObject, NSObjectProtocol, NSSize, ns_string};
 use std::sync::Arc;
 
-/// Serein's own mark, rasterized from `assets/brand/serein-mark.svg` as a menu bar template:
+/// Aethon's own mark, rasterized from `assets/brand/aethon-mark.svg` as a menu bar template:
 /// only its alpha matters, so macOS tints it for light, dark and highlighted menu bars.
-const MARK: &[u8] = include_bytes!("../../../../assets/brand/serein-tray.png");
+const MARK: &[u8] = include_bytes!("../../../../assets/brand/aethon-tray.png");
 /// Menu bar images are measured in points; the render is larger so Retina scales stay sharp.
 const MARK_POINTS: f64 = 15.0;
 
@@ -22,7 +22,7 @@ define_class!(
 	// SAFETY: NSObject has no subclassing requirements. All state and callbacks stay on
 	// the main thread, and the target lives until every menu item is disconnected.
 	#[unsafe(super = NSObject)]
-	#[name = "SereinTrayTarget"]
+	#[name = "AethonTrayTarget"]
 	#[thread_kind = MainThreadOnly]
 	#[ivars = State]
 	struct Target;
@@ -31,12 +31,12 @@ define_class!(
 	unsafe impl NSObjectProtocol for Target {}
 
 	impl Target {
-		#[unsafe(method(showSerein:))]
+		#[unsafe(method(showAethon:))]
 		fn show(&self, _sender: &NSMenuItem) {
 			self.emit(Event::Show);
 		}
 
-		#[unsafe(method(quitSerein:))]
+		#[unsafe(method(quitAethon:))]
 		fn quit(&self, _sender: &NSMenuItem) {
 			self.emit(Event::Quit);
 		}
@@ -93,12 +93,12 @@ impl Tray {
 			image.setSize(NSSize::new(MARK_POINTS, MARK_POINTS));
 			button.setImage(Some(&image));
 		} else {
-			button.setTitle(ns_string!("Serein"));
+			button.setTitle(ns_string!("Aethon"));
 		}
-		button.setToolTip(Some(ns_string!("Serein")));
+		button.setToolTip(Some(ns_string!("Aethon")));
 		for (title, action) in [
-			(ns_string!("Show Serein"), sel!(showSerein:)),
-			(ns_string!("Quit Serein"), sel!(quitSerein:)),
+			(ns_string!("Show Aethon"), sel!(showAethon:)),
+			(ns_string!("Quit Aethon"), sel!(quitAethon:)),
 		] {
 			// SAFETY: both selectors are implemented above with the menu action signature.
 			// Tray retains their main-thread target until the menu is disconnected on drop.

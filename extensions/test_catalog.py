@@ -3,13 +3,13 @@ import json
 
 import catalog
 
-theme = (catalog.ROOT / "themes/ocean.serein-extension").read_bytes()
-plugin = (catalog.ROOT / "plugins/packages/message-delete-protector.serein-extension").read_bytes()
-assert catalog.validate(theme)["id"] == "serein-ocean"
+theme = (catalog.ROOT / "themes/ocean.aethon-extension").read_bytes()
+plugin = (catalog.ROOT / "plugins/packages/message-delete-protector.aethon-extension").read_bytes()
+assert catalog.validate(theme)["id"] == "aethon-ocean"
 assert catalog.validate(plugin)["kind"] == "plugin"
-rpc = (catalog.ROOT / "plugins/packages/custom-rpc.serein-extension").read_bytes()
+rpc = (catalog.ROOT / "plugins/packages/custom-rpc.aethon-extension").read_bytes()
 assert catalog.validate(rpc)["capabilities"] == ["rich_presence", "storage"]
-proxy = (catalog.ROOT / "plugins/packages/api-proxy.serein-extension").read_bytes()
+proxy = (catalog.ROOT / "plugins/packages/api-proxy.aethon-extension").read_bytes()
 assert catalog.validate(proxy)["capabilities"] == ["api_proxy", "storage"]
 for data, mutate in (
     (proxy, lambda p: p["manifest"].update(capabilities=["api_proxy", "composer"])),

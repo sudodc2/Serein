@@ -122,10 +122,10 @@ discovery of a real existing Discord call remains unverified.
 `cargo run --locked -- --demo --demo-existing-call` shows a synthetic
 ongoing DM call with no local media session. The preview Join button is deliberately disabled.
 For the owner-controlled live gate, leave the peer connected in a private DM call, open that
-DM in Serein, wait for the banner, then explicitly Join. Verify no new ring, actual two-way
+DM in Aethon, wait for the banner, then explicitly Join. Verify no new ring, actual two-way
 audio, leaving/rejoining while the peer stays, and disappearance after the peer ends the call.
 
-Mute/deafen, saved input/output selection and focused V push-to-talk are implemented. Remappable mute and deafen bindings use global native registration when supported and when a modifier is present; they fall back to focused input on Wayland or when registration is unavailable. Settings → Keybinds offers **Enable global keybinds**, saved on this device and enabled by default. Turning it off unregisters global voice shortcuts; mute, deafen and push-to-talk still work while Serein is focused, with the existing text-entry guards. Push-to-talk releases when focus is lost and is disabled while text entry has focus. It remains focused-only by default. Push to Mute is unassigned by default; once bound, holding it mutes the microphone during a call and releasing it restores the previous state, and it registers globally like push-to-talk. Voice and other remappable actions can also use mouse 3, 4 or 5, optionally with modifiers; left and right click cancel recording instead. A bound mouse button no longer starts middle-click autoscroll or back/forward navigation. Mouse bindings work while Serein is focused on every platform and, with global keybinds enabled, are polled globally on Windows only; macOS, X11 and the Wayland portal have no global mouse-button registration. The Keybinds page also lists up to 32 **Custom bindings** that add extra chords to any action, including the four global voice actions. A chord may belong to only one binding, so recording a key or mouse button that is already taken is refused. Devices are initialized only following an explicit call with authenticated empty-room waiting or encrypted readiness, or an explicit local microphone test; no microphone test runs at startup. Acoustic echo cancellation follows the selected input profile; see below for its limits. A microphone that fails to open or start, reports a fatal callback error, or delivers no audio callbacks for five seconds is disabled with a visible warning. The call and speaker playback remain connected, and the client periodically retries microphone setup in the background while selecting another input immediately retries. Transient buffer discontinuities and non-fatal stream glitches do not disable the microphone. Ordinary silence does not trigger the warning. Selected speaker failures can fall back to the default output; an unusable output can still fail the call.
+Mute/deafen, saved input/output selection and focused V push-to-talk are implemented. Remappable mute and deafen bindings use global native registration when supported and when a modifier is present; they fall back to focused input on Wayland or when registration is unavailable. Settings → Keybinds offers **Enable global keybinds**, saved on this device and enabled by default. Turning it off unregisters global voice shortcuts; mute, deafen and push-to-talk still work while Aethon is focused, with the existing text-entry guards. Push-to-talk releases when focus is lost and is disabled while text entry has focus. It remains focused-only by default. Push to Mute is unassigned by default; once bound, holding it mutes the microphone during a call and releasing it restores the previous state, and it registers globally like push-to-talk. Voice and other remappable actions can also use mouse 3, 4 or 5, optionally with modifiers; left and right click cancel recording instead. A bound mouse button no longer starts middle-click autoscroll or back/forward navigation. Mouse bindings work while Aethon is focused on every platform and, with global keybinds enabled, are polled globally on Windows only; macOS, X11 and the Wayland portal have no global mouse-button registration. The Keybinds page also lists up to 32 **Custom bindings** that add extra chords to any action, including the four global voice actions. A chord may belong to only one binding, so recording a key or mouse button that is already taken is refused. Devices are initialized only following an explicit call with authenticated empty-room waiting or encrypted readiness, or an explicit local microphone test; no microphone test runs at startup. Acoustic echo cancellation follows the selected input profile; see below for its limits. A microphone that fails to open or start, reports a fatal callback error, or delivers no audio callbacks for five seconds is disabled with a visible warning. The call and speaker playback remain connected, and the client periodically retries microphone setup in the background while selecting another input immediately retries. Transient buffer discontinuities and non-fatal stream glitches do not disable the microphone. Ordinary silence does not trigger the warning. Selected speaker failures can fall back to the default output; an unusable output can still fail the call.
 
 One-to-one DM calls accept only their expected peer. Group DM and server calls support up to 64 total participants, with independent bounded decoder/jitter state and mixed mono playback. Only DAVE version 1 is accepted; encryption downgrades and group identities outside the authenticated participant roster fail closed. Stage channels and recording are unsupported. Outgoing screen sharing and macOS camera support is described below. Voice WebSocket resumption has a finite retry budget; an established call can then attempt bounded rejoining after media failure. A resumable main Gateway disconnect preserves the call; a fresh Gateway session invalidates it. Exhausted recovery requires an explicit new call. Voice credentials, ephemeral DAVE identities and audio stay in bounded session memory. The displayed privacy code applies to the current group epoch; identities are not remembered across calls. Comparing codes does not establish long-term identity verification or text-message encryption.
 
@@ -156,7 +156,7 @@ only this account and known group recipients, rejects duplicate participants, an
 to 64 participants per call. Recipient removal drops stale participant/watch UI state; removal
 of this account closes local media and revokes subsequent call actions.
 
-The offline debug command is `cargo run --locked -p serein --example group_call`.
+The offline debug command is `cargo run --locked -p aethon --example group_call`.
 Group signaling remains unofficial and live-unverified. For owner-controlled verification,
 repeat the one-to-one gate below in a private group whose participating clients the owner
 controls, including simultaneous speech, additions/removals, ringing/decline/join, camera,
@@ -178,7 +178,7 @@ The [compatibility matrix](discord-compatibility.md) distinguishes this from res
 
 Run only when the owner explicitly elects to test and controls both sides of a private one-to-one DM. Ordinary tests/CI never access Discord or audio devices. Do not put credentials in chat, command-line arguments, screenshots, fixtures or reports.
 
-1. Build `cargo run --locked`. Complete the [normal-user text gate](authentication.md) with the owner's Serein session and an official Discord client. Prefer Serein's own official-login webview; do not extract another application's credential.
+1. Build `cargo run --locked`. Complete the [normal-user text gate](authentication.md) with the owner's Aethon session and an official Discord client. Prefer Aethon's own official-login webview; do not extract another application's credential.
 2. With headphones on both sides, open the existing private DM and deliberately select Start. Verify that the official client rings, Answer there, and wait for encrypted audio readiness. Compare the displayed current-epoch privacy codes where available. If login, transport, DAVE or permissions fail, record the redacted failure and stop that attempt; do not bypass it.
 3. Speak short test phrases in both directions. Confirm intelligibility, latency and absence of unexpected echo. A connected label, participant list or socket handshake alone is not success. Check mute, deafen, focused V press/release, focus loss and navigation to another text conversation.
 4. Hang up and verify both clients leave, microphone access ends and another call can start after departure acknowledgment. Reverse direction: call from the official client, test Decline, then a separate Answer. Confirm there is no automatic answer or retry.
@@ -301,7 +301,7 @@ static status messages; no identifiers, tokens, audio or raw signaling are logge
 Audio-device opening has a 20-second deadline after encrypted readiness, including device changes.
 If a system device API stalls, local audio is disabled and departure is requested. The existing
 worker must retire before another call can open devices; a driver that never returns can require
-restarting Serein. The watchdog cannot forcibly cancel an operating-system driver call.
+restarting Aethon. The watchdog cannot forcibly cancel an operating-system driver call.
 
 The outgoing DAVE key-package encoding was corrected to match reference implementations; see
 [the adapter's source comparison](../crates/discord-voice/README.md#key-package-interoperability-correction).
@@ -316,10 +316,10 @@ Audio/transport worker failures use a separate fixed slot so a full progress que
 cannot discard the cause. Copying includes only the failure text, not participants,
 channel identifiers, credentials or media. The timing summaries below do not explain
 a terminal failure; copy the failed-call reason as well when troubleshooting.
-`cargo run --locked -p serein -- --demo --demo-voice-failed` previews a synthetic
+`cargo run --locked -p aethon -- --demo --demo-voice-failed` previews a synthetic
 failure and checks that subsequent cleanup/progress events retain its original reason.
 
-Set `SEREIN_VOICE_DIAGNOSTICS=1` before launching Serein to get aggregate voice
+Set `AETHON_VOICE_DIAGNOSTICS=1` before launching Aethon to get aggregate voice
 timings on stderr every five seconds and a best-effort final summary on teardown.
 `StreamSend` reports the active screen encoder; `Transport` reports camera encoding
 and call video decoding; `StreamReceive` reports its own video decoding. Values are
@@ -330,11 +330,11 @@ the software fallback after keyframe recovery.
 For example, launch an already-built macOS app from a terminal:
 
 ```sh
-SEREIN_VOICE_DIAGNOSTICS=1 SEREIN_FRAME_DIAGNOSTICS=1 /Applications/Serein.app/Contents/MacOS/serein 2> serein-voice.log
+AETHON_VOICE_DIAGNOSTICS=1 AETHON_FRAME_DIAGNOSTICS=1 /Applications/Aethon.app/Contents/MacOS/aethon 2> aethon-voice.log
 ```
 
-On Windows PowerShell, set `$env:SEREIN_VOICE_DIAGNOSTICS="1"` and
-`$env:SEREIN_FRAME_DIAGNOSTICS="1"`, then launch `serein.exe 2> serein-voice.log`.
+On Windows PowerShell, set `$env:AETHON_VOICE_DIAGNOSTICS="1"` and
+`$env:AETHON_FRAME_DIAGNOSTICS="1"`, then launch `aethon.exe 2> aethon-voice.log`.
 On Linux, use the same environment assignments as macOS with the installed executable.
 Quit an already-running instance first. Join/leave the call yourself; diagnostics never
 enable capture, join a call or send media. Quit normally to obtain the existing UI frame
@@ -392,7 +392,7 @@ owner-operated listening checks. The existing linear resampling fallback remains
 
 ## macOS microphone permission
 
-Before opening a microphone for an explicitly joined, secured call, Serein checks
+Before opening a microphone for an explicitly joined, secured call, Aethon checks
 AVFoundation authorization and requests access if undecided. Denied/restricted
 access produces a visible error directing the owner to System Settings > Privacy
 & Security > Microphone. The worker waits at most 20 seconds, checks call/device
@@ -473,7 +473,7 @@ is silently selected or retried. Legacy direct display/window filters retain the
 existing screen-recording permission requirements. When audio is enabled for a
 window, ScreenCaptureKit captures its owning application's audio, which may include
 other windows in that application; this is not isolation of one window's audio.
-Serein's own playback remains excluded. No microphone is captured by screen sharing.
+Aethon's own playback remains excluded. No microphone is captured by screen sharing.
 The native picker has not been opened during synthetic verification.
 
 Windows 11 builds that expose the "Screenshots and screen recording" privacy page can
@@ -531,7 +531,7 @@ inline parameter sets, without joining a call or capturing a screen or microphon
 The check fails if the legacy encoder cannot start; it does not silently use software.
 
 Quitting while a screen share or camera is running drops workers that are still closing
-their encoders. Serein waits up to five seconds for them before the process exits,
+their encoders. Aethon waits up to five seconds for them before the process exits,
 because NVIDIA's libnvcuvid exit handler crashes or deadlocks if `exit()` runs during an
 NVENC teardown. A deadlocked client used to keep the single-instance socket, so later
 launches exited silently. The socket is now released when shutdown begins. On an NVIDIA
@@ -541,13 +541,13 @@ teardown and reproduces the crash (driver 615.78.08 on an RTX 3070); nothing is 
 and no call is joined.
 
 System audio defaults off on Linux and Windows. It shares other applications' playback,
-even when sharing one window, and excludes Serein's own audio, including call playback
+even when sharing one window, and excludes Aethon's own audio, including call playback
 and watched streams. Exclusion happens at capture on the sender: a viewer cannot remove
 their voice once another sender has mixed it into stream audio. Other apps' notifications
 and audio remain included. macOS retains ScreenCaptureKit's current-process exclusion.
 
 Linux captures individual playback streams through PulseAudio's per-stream monitor API,
-also implemented by PipeWire's PulseAudio server. It excludes Serein and streams whose
+also implemented by PipeWire's PulseAudio server. It excludes Aethon and streams whose
 application identity cannot be established; it never falls back to a whole-output monitor
 or microphone. The ScreenCast portal grants video only; audio uses the existing desktop
 audio access, including Flatpak's PulseAudio socket permission. A separate bounded worker
@@ -555,7 +555,7 @@ handles discovery, capture and mixing outside video encoding and rendering. No a
 are moved between outputs and no virtual device is installed.
 
 Windows uses native process loopback with `PROCESS_LOOPBACK_MODE_EXCLUDE_TARGET_PROCESS_TREE`,
-excluding Serein and its child processes across outputs. This requires Windows build 20348+
+excluding Aethon and its child processes across outputs. This requires Windows build 20348+
 (Windows 11 or Windows Server 2022; ordinary Windows 10 22H2 is older). Unsupported systems
 or failed isolation report an audio error; turn audio off to share video alone. There is no
 whole-output fallback. Neither adapter records to disk.
@@ -583,7 +583,7 @@ Use two clients with headphones, enable audio on the sender, play another app an
 from the viewer: the app should be audible without the viewer's voice returning in the
 stream. Repeat while starting/stopping apps, changing outputs, rekeying and stopping sharing.
 
-The native demo (`cargo run --locked -p serein -- --demo --demo-voice`) exposes a synthetic picker without OS source discovery or capture. Live screen sharing requires the same owner-controlled login gate as voice testing. See [compatibility and limits](discord-compatibility.md#outgoing-screen-sharing--september-11-2026).
+The native demo (`cargo run --locked -p aethon -- --demo --demo-voice`) exposes a synthetic picker without OS source discovery or capture. Live screen sharing requires the same owner-controlled login gate as voice testing. See [compatibility and limits](discord-compatibility.md#outgoing-screen-sharing--september-11-2026).
 
 ## Camera in calls (macOS, Windows and Linux)
 
@@ -718,7 +718,7 @@ Both feed the existing camera transport; no Discord wire behavior changed in thi
 
 ### Screen-share audio diagnostics
 
-The existing opt-in `SEREIN_VOICE_DIAGNOSTICS=1` reporter now also emits `StreamSend`
+The existing opt-in `AETHON_VOICE_DIAGNOSTICS=1` reporter now also emits `StreamSend`
 and `StreamReceive` summaries. `StreamSend` encode calls count captured 20 ms audio
 frames encoded, encrypted and sent. `StreamReceive` receive calls count accepted
 DAVE audio packets; mix calls count decoded frames offered to the parent call's output.
@@ -826,7 +826,7 @@ only the authenticated `0xBEDE` profile with one unambiguous two-byte value enab
 feedback. Missing, malformed or unknown extension formats do not invent a sequence.
 The [transport-wide feedback format](https://datatracker.ietf.org/doc/html/draft-holmer-rmcat-transport-wide-cc-extensions-01)
 reports actual arrival times in 250 µs units, including signed deltas for reordering,
-sequence gaps and wrap. The sender/SFU retains congestion-control decisions; Serein
+sequence gaps and wrap. The sender/SFU retains congestion-control decisions; Aethon
 generates neither REMB nor a claimed available bitrate.
 
 This viewer-only feedback runs after secure readiness/announcement, across authenticated
@@ -1023,7 +1023,7 @@ sharer's status and the viewer's notice now show a message derived from it (for 
 "Discord reported the stream as ended") instead of the same text a local stop shows, and
 an unrecognised value still reads "Discord ended the stream". A `user_requested` deletion
 stays silent because it is the local stop acknowledging. With the diagnostics variable set,
-the bounded raw value is also printed as `[Serein voice Stream] discord_delete_reason=…`.
+the bounded raw value is also printed as `[Aethon voice Stream] discord_delete_reason=…`.
 
 Linux application audio reports under `ScreenAudio` as well: `capture_restart` counts
 completed application enumerations, `capture_read` monitor reads, `capture_queue` chunks
@@ -1067,13 +1067,13 @@ until it drains. Software encoding a desktop is the usual reason for the latter,
 A capture source with nothing new to send still emits a keepalive picture once a second, so
 a frozen share shows as a run of seconds carrying only that keepalive rather than a gap
 between pictures. Such a run is reported once it ends as
-`[Serein voice Screen] capture_slow_ms=… withheld=…`. A `withheld` of zero means the desktop
+`[Aethon voice Screen] capture_slow_ms=… withheld=…`. A `withheld` of zero means the desktop
 stopped producing pictures while the transport was keeping up, which is a compositor or
 portal matter; a non-zero `withheld` means the pipeline was held back waiting for the
 transport to drain, which throttles the capture source until it catches up.
 
 Three lines name why a share ended, because the status only shows the most recent message
-and a later stop overwrites it: `[Serein voice Screen] capture_stopped=…` from the capture
+and a later stop overwrites it: `[Aethon voice Screen] capture_stopped=…` from the capture
 worker, `stream_transport_stopped=…` from its RTC connection, and `share_stopped=…` for the
 message the desktop finally acted on. Read them in that order; the first is the cause and
 the others usually follow from it.
@@ -1092,8 +1092,8 @@ redirection can leave an empty file. After closing the previous test instance, r
 the intended build on each endpoint with separate output files:
 
 ```powershell
-$env:SEREIN_VOICE_DIAGNOSTICS="1"
-Start-Process .\dist\serein.exe -RedirectStandardError "$PWD\stream-debug-retest.log" -Wait
+$env:AETHON_VOICE_DIAGNOSTICS="1"
+Start-Process .\dist\aethon.exe -RedirectStandardError "$PWD\stream-debug-retest.log" -Wait
 ```
 
 Start sharing promptly after launch so the bounded diagnostic budget covers the test.
@@ -1109,7 +1109,7 @@ alone never opens streams. Leaving the voice settings page, joining a call, logo
 stop the preview. Testing is disabled during calls and in offline demo mode.
 The existing eight-frame rings bound loopback PCM; meter state is one atomic value and is not
 persisted. The meter is measured before the sensitivity gate; playback follows the gate.
-`cargo run --locked -p serein --features demo -- --demo --demo-check-mic-preview`
+`cargo run --locked -p aethon --features demo -- --demo --demo-check-mic-preview`
 checks settings rendering and capture guards without opening devices. Physical loopback and
 microphone permission prompts remain owner-verified behavior.
 

@@ -150,7 +150,7 @@ impl Clipboard {
         expect(clippy::needless_pass_by_ref_mut, clippy::unused_self)
     )]
     pub fn get_image(&mut self) -> Option<egui::ColorImage> {
-        // Serein: read through the focused surface first. arboard needs the privileged
+        // Aethon: read through the focused surface first. arboard needs the privileged
         // data-control protocol or an Xwayland bridge, which sandboxes and KWin may withhold.
         #[cfg(all(
             any(
@@ -364,7 +364,7 @@ fn init_arboard() -> Option<arboard::Clipboard> {
     }
 }
 
-/// Serein: bounds for a pasted `image/png` read through smithay-clipboard.
+/// Aethon: bounds for a pasted `image/png` read through smithay-clipboard.
 #[cfg(all(
     any(
         target_os = "linux",

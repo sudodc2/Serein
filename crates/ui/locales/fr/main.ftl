@@ -3,7 +3,7 @@
 language-system = Système
 language-group = Langue
 language-label = Langue d'affichage
-language-description = Choisissez la langue de Serein. Le contenu Discord n’est jamais traduit.
+language-description = Choisissez la langue de Aethon. Le contenu Discord n’est jamais traduit.
 section-user = Paramètres utilisateur
 section-app = Paramètres de l'application
 section-customization = Personnalisation
@@ -28,11 +28,11 @@ description-appearance = Thème, couleurs, effets de fenêtres et mise en page.
 description-chat = Comment se comportent les messages, les médias, les liens et le défilement.
 description-messaging-permissions = Contrôlez qui peut vous contacter et comment les messages sont filtrés.
 description-notifications = Choisissez les notifications que vous recevez et comment elles apparaissent.
-description-registered-games = Partagez ce à quoi vous jouez, et corrigez ou ajoutez les jeux détectés par Serein.
+description-registered-games = Partagez ce à quoi vous jouez, et corrigez ou ajoutez les jeux détectés par Aethon.
 description-voice = Microphone, haut-parleurs, caméra et traitement vocal.
-description-keybinds = Raccourcis clavier pour Serein.
-description-storage = Ce que Serein conserve sur cet appareil.
-description-updates = Gardez Serein à jour sur cet appareil.
+description-keybinds = Raccourcis clavier pour Aethon.
+description-storage = Ce que Aethon conserve sur cet appareil.
+description-updates = Gardez Aethon à jour sur cet appareil.
 description-extensions = Gérez les plugins de la communauté.
 description-themes = Choisissez un thème communautaire.
 theme-maker = Créateur de thème
@@ -45,34 +45,34 @@ log-out = Se déconnecter
 unofficial = Non officiel · non approuvé par Discord
 offline-preview = Aperçu hors ligne · les modifications restent dans cette session et ne sont jamais envoyées.
 general-startup = Démarrer
-general-open-at-startup = Ouvrez Serein au démarrage de votre ordinateur
-general-open-at-startup-description = Serein se connecte et se connecte en arrière-plan.
+general-open-at-startup = Ouvrez Aethon au démarrage de votre ordinateur
+general-open-at-startup-description = Aethon se connecte et se connecte en arrière-plan.
 general-start-minimized = Démarrer réduit
 general-start-minimized-description = Commencez en arrière-plan, hors de votre chemin.
 general-startup-unavailable = Le démarrage automatique est disponible sur Windows et macOS.
 general-window = Fenêtre
 general-hide-decorations = Pas de barre de titre
-general-hide-decorations-description = Pour les gestionnaires de fenêtres en mosaïque : supprime toutes les barres de titre et bordures, y compris celle de Serein. Déplacez, redimensionnez ou fermez Serein avec votre gestionnaire de fenêtres.
+general-hide-decorations-description = Pour les gestionnaires de fenêtres en mosaïque : supprime toutes les barres de titre et bordures, y compris celle de Aethon. Déplacez, redimensionnez ou fermez Aethon avec votre gestionnaire de fenêtres.
 general-custom-title-bar = Barre de titre personnalisée
-general-custom-title-bar-description = Remplace la barre de titre du système par la barre d'en-tête propre à Serein, dans le style de GTK 4.
-general-hide-title-bar = Masquer la barre de titre Serein
+general-custom-title-bar-description = Remplace la barre de titre du système par la barre d'en-tête propre à Aethon, dans le style de GTK 4.
+general-hide-title-bar = Masquer la barre de titre Aethon
 general-hide-title-bar-description = Utilisez plutôt la barre de titre du système et les boutons de la fenêtre.
-general-keep-menu-bar = Gardez Serein dans la barre de menu
-general-keep-system-tray = Gardez Serein dans la barre d'état système
-general-menu-bar-description = La fermeture de la fenêtre maintient Serein dans la barre de menu. Quittez son menu pour quitter.
-general-linux-tray-description = La fermeture permet à Serein de continuer à fonctionner. Utilisez le plateau pour afficher, minimiser ou quitter.
-general-windows-tray-description = La fermeture de la fenêtre maintient Serein dans la zone de notification. Quittez son menu pour quitter.
+general-keep-menu-bar = Gardez Aethon dans la barre de menu
+general-keep-system-tray = Gardez Aethon dans la barre d'état système
+general-menu-bar-description = La fermeture de la fenêtre maintient Aethon dans la barre de menu. Quittez son menu pour quitter.
+general-linux-tray-description = La fermeture permet à Aethon de continuer à fonctionner. Utilisez le plateau pour afficher, minimiser ou quitter.
+general-windows-tray-description = La fermeture de la fenêtre maintient Aethon dans la zone de notification. Quittez son menu pour quitter.
 general-tray-unavailable = Le plateau n'est pas disponible sur cette plateforme.
 general-graphics = Graphique
 general-render-with = Rendu avec
-general-gpu-restart = Prend effet au prochain démarrage de Serein.
+general-gpu-restart = Prend effet au prochain démarrage de Aethon.
 general-gpu-current-prefix = Je dessine actuellement avec
 general-steady-refresh-rate = Fréquence de rafraîchissement fixe
-general-steady-refresh-rate-description = Tant que Serein est la fenêtre active, le dessin se fait à la fréquence de rafraîchissement de l'écran, afin que les écrans à fréquence de rafraîchissement variable (VRR, G-SYNC, FreeSync) puissent garder une seule fréquence au lieu de scintiller. Consomme plus d'énergie.
+general-steady-refresh-rate-description = Tant que Aethon est la fenêtre active, le dessin se fait à la fréquence de rafraîchissement de l'écran, afin que les écrans à fréquence de rafraîchissement variable (VRR, G-SYNC, FreeSync) puissent garder une seule fréquence au lieu de scintiller. Consomme plus d'énergie.
 gpu-automatic = Automatique
 gpu-high-performance = Hautes performances
 gpu-power-saving = Économie d'énergie
-gpu-automatic-description = Laissez Serein choisir le GPU qui peut dessiner cette fenêtre.
+gpu-automatic-description = Laissez Aethon choisir le GPU qui peut dessiner cette fenêtre.
 gpu-high-performance-description = Utilisez la carte graphique discrète lorsqu'elle est disponible.
 gpu-power-saving-description = Utilisez des graphiques intégrés pour économiser la batterie.
 direct-messages = Messages directs
@@ -216,7 +216,7 @@ account-menu-custom-status-editor-clear-after = Effacer après
 # Context: custom_status_editor
 account-menu-custom-status-editor-no-custom-status = Aucun statut personnalisé
 # Context: custom_status_editor
-account-menu-custom-status-editor-serein-clears-it = Serein l'efface
+account-menu-custom-status-editor-aethon-clears-it = Aethon l'efface
 # Context: custom_status_editor
 account-menu-custom-status-editor-status-text = Texte d'état
 # Context: custom_status_editor
@@ -1556,7 +1556,7 @@ keybinds-show-voice-enable-global-keybinds = Activer les raccourcis clavier glob
 # Context: show_voice
 keybinds-show-voice-global-availability = Disponibilité mondiale
 # Context: show_voice
-keybinds-show-voice-use-voice-shortcuts-while-another-app-is-focused-when-off = Utilisez les raccourcis vocaux pendant qu'une autre application est ciblée. Lorsqu'ils sont désactivés, les raccourcis ne fonctionnent que lorsque Serein est concentré.
+keybinds-show-voice-use-voice-shortcuts-while-another-app-is-focused-when-off = Utilisez les raccourcis vocaux pendant qu'une autre application est ciblée. Lorsqu'ils sont désactivés, les raccourcis ne fonctionnent que lorsque Aethon est concentré.
 
 ## crates/ui/src/lib.rs
 # Context: account_card
@@ -1634,7 +1634,7 @@ main-restoring-checking-your-saved-login = Vérification de votre connexion enre
 # Context: restoring
 main-restoring-connecting-to-discord = Connexion à Discord
 # Context: restoring_screen
-main-restoring-screen-serein = Sereine
+main-restoring-screen-aethon = Aethone
 # Context: restoring_screen
 main-restoring-screen-use-a-different-account = Utiliser un autre compte
 # Context: restoring_screen
@@ -1644,11 +1644,11 @@ main-sign-in-accounts-saved-accounts = Comptes enregistrés
 # Context: sign_in_consent
 main-sign-in-consent-passwords-and-2fa-stay-on-discord-s-own-login-page = Les mots de passe et 2FA restent sur la propre page de connexion de Discord ; seul le jeton de session est conservé dans le magasin d'informations d'identification de votre système d'exploitation.
 # Context: sign_in_disclosures
-main-sign-in-disclosures-about-serein = À propos de Serein
+main-sign-in-disclosures-about-aethon = À propos de Aethon
 # Context: sign_in_disclosures
 main-sign-in-disclosures-connect-with-this-token = Connectez-vous avec ce jeton
 # Context: sign_in_disclosures
-main-sign-in-disclosures-for-owners-who-already-hold-a-valid-discord-session-token = Pour les propriétaires qui détiennent déjà un jeton de session Discord valide, par exemple provenant d'une autre installation Serein connectée. Les mots de passe et 2FA ne sont jamais utilisés ici ; cela contourne entièrement la page de connexion hébergée par Discord.
+main-sign-in-disclosures-for-owners-who-already-hold-a-valid-discord-session-token = Pour les propriétaires qui détiennent déjà un jeton de session Discord valide, par exemple provenant d'une autre installation Aethon connectée. Les mots de passe et 2FA ne sont jamais utilisés ici ; cela contourne entièrement la page de connexion hébergée par Discord.
 # Context: sign_in_disclosures
 main-sign-in-disclosures-forget-saved-login = Oublier la connexion enregistrée
 # Context: sign_in_disclosures
@@ -1662,7 +1662,7 @@ main-sign-in-header-sign-in-with-your-discord-account-to-get-started = Connectez
 # Context: sign_in_header
 main-sign-in-header-welcome-back = Content de te revoir
 # Context: sign_in_header
-main-sign-in-header-welcome-to-serein = Bienvenue à Serein
+main-sign-in-header-welcome-to-aethon = Bienvenue à Aethon
 # Context: sign_in_preview
 main-sign-in-status-copy-failure-details = Copier les détails de l’erreur
 main-sign-in-preview-explore-the-offline-preview = Explorez l'aperçu hors ligne
@@ -1671,7 +1671,7 @@ main-sign-in-preview-sample-conversations-no-discord-connection = Exemples de co
 # Context: sign_in_screen
 main-sign-in-screen-independent-and-open-source-not-affiliated-with-discord = Indépendant et open source. Non affilié à Discord.
 # Context: sign_in_screen
-main-sign-in-screen-serein = Sereine
+main-sign-in-screen-aethon = Aethone
 # Context: ui
 main-ui-cancel = Annuler
 # Context: ui
@@ -2268,9 +2268,9 @@ screen-body-refresh = Rafraîchir
 # Context: body
 screen-body-screen-or-window = Écran ou fenêtre
 # Context: body
-screen-body-send-what-your-mac-plays-along-with-the-screen-serein = Envoyez ce que votre Mac joue avec l'écran. L'audio de l'appel de Serein est laissé de côté.
+screen-body-send-what-your-mac-plays-along-with-the-screen-aethon = Envoyez ce que votre Mac joue avec l'écran. L'audio de l'appel de Aethon est laissé de côté.
 # Context: body
-screen-body-share-sound-from-other-apps-even-when-sharing-one-window = Partagez le son d'autres applications, même lorsque vous partagez une seule fenêtre. Le propre audio de Serein est laissé de côté.
+screen-body-share-sound-from-other-apps-even-when-sharing-one-window = Partagez le son d'autres applications, même lorsque vous partagez une seule fenêtre. Le propre audio de Aethon est laissé de côté.
 # Context: body
 screen-body-share-system-audio = Partager l'audio du système
 # Context: body
@@ -3431,7 +3431,7 @@ settings-activity-added-games = Jeux ajoutés
 # Context: activity_settings
 settings-activity-no-games-added = Aucun jeu ajouté
 # Context: activity_settings
-settings-activity-hidden = Masqué. Serein ne détectera plus ce jeu.
+settings-activity-hidden = Masqué. Aethon ne détectera plus ce jeu.
 # Context: activity_settings
 settings-activity-detected = Détecté automatiquement
 # Context: activity_settings
@@ -3453,7 +3453,7 @@ settings-activity-click-to-rename = Cliquez pour renommer
 # Context: activity_settings
 settings-activity-add-a-game = Ajouter un jeu
 # Context: activity_settings
-settings-activity-choose-program = Choisissez un programme en cours d'exécution. Serein l'affichera comme votre jeu chaque fois qu'il tourne.
+settings-activity-choose-program = Choisissez un programme en cours d'exécution. Aethon l'affichera comme votre jeu chaque fois qu'il tourne.
 # Context: activity_settings
 settings-activity-search-programs = Rechercher des programmes en cours
 # Context: activity_settings
@@ -3481,7 +3481,7 @@ settings-appearance-settings-primary-color = Couleur primaire
 # Context: appearance_settings
 settings-appearance-settings-reset = Réinitialiser
 # Context: appearance_settings
-settings-appearance-settings-restart-serein-after-changing-this-themes-can-customize-effects-while = Redémarrez Serein après avoir modifié cela. Les thèmes peuvent personnaliser les effets lorsqu'ils sont activés.
+settings-appearance-settings-restart-aethon-after-changing-this-themes-can-customize-effects-while = Redémarrez Aethon après avoir modifié cela. Les thèmes peuvent personnaliser les effets lorsqu'ils sont activés.
 # Context: appearance_settings
 settings-appearance-settings-the-active-theme-brings-its-own-accent-it-takes-over = Le thème actif apporte son propre accent ; il prend le relais pendant que le thème est utilisé.
 # Context: appearance_settings
@@ -3518,11 +3518,11 @@ settings-storage-page-clear-cache = Vider le cache
 # Context: storage_page
 settings-storage-page-local-storage = Stockage local
 # Context: storage_page
-settings-storage-page-messages-and-drafts-are-cached-on-this-device-inside-bounded = Les messages et les brouillons sont mis en cache sur cet appareil dans des fichiers délimités et isolés par compte. Les données du cache ne sont pas cryptées par Serein ; les jetons de connexion enregistrés utilisent le magasin d'informations d'identification du système d'exploitation.
+settings-storage-page-messages-and-drafts-are-cached-on-this-device-inside-bounded = Les messages et les brouillons sont mis en cache sur cet appareil dans des fichiers délimités et isolés par compte. Les données du cache ne sont pas cryptées par Aethon ; les jetons de connexion enregistrés utilisent le magasin d'informations d'identification du système d'exploitation.
 # Context: storage_page
 settings-storage-page-removes-cached-messages-and-media-drafts-and-your-login-stay = Supprime les messages et les médias mis en cache. Les brouillons et votre connexion restent.
 # Context: storage_page
-settings-storage-page-serein-does-not-collect-telemetry-or-upload-diagnostics-discord-retains = Serein ne collecte pas de télémétrie et ne télécharge pas de diagnostics. Discord conserve les données côté service conformément à ses propres politiques.
+settings-storage-page-aethon-does-not-collect-telemetry-or-upload-diagnostics-discord-retains = Aethon ne collecte pas de télémétrie et ne télécharge pas de diagnostics. Discord conserve les données côté service conformément à ses propres politiques.
 # Context: storage_page
 settings-storage-page-your-privacy = Votre vie privée
 # Context: cosmetic_settings
@@ -3973,7 +3973,7 @@ updates-update-settings-could-not-load-or-save-update-preferences-changes-may-no
 # Context: update_settings
 updates-update-settings-download-update = Télécharger la mise à jour
 # Context: update_settings
-updates-update-settings-download-updates-in-the-background-restart-when-you-are-ready = Téléchargez les mises à jour en arrière-plan. Redémarrez lorsque vous êtes prêt. Serein vérifie toujours au démarrage et périodiquement lorsque cette option est désactivée.
+updates-update-settings-download-updates-in-the-background-restart-when-you-are-ready = Téléchargez les mises à jour en arrière-plan. Redémarrez lorsque vous êtes prêt. Aethon vérifie toujours au démarrage et périodiquement lorsque cette option est désactivée.
 # Context: update_settings
 updates-update-settings-early-builds-with-the-newest-changes-nightly-releases-can-be = Premières versions avec les modifications les plus récentes. Les versions nocturnes peuvent être moins fiables.
 # Context: update_settings
@@ -3999,7 +3999,7 @@ updates-update-settings-release-channel = Canal de sortie
 # Context: update_settings
 updates-update-settings-restart-to-update = Redémarrer pour mettre à jour
 # Context: update_settings
-updates-update-settings-serein-was-installed-via-your-distribution-run-this-in-a = Serein a été installé via votre distribution. Exécutez ceci dans un terminal pour mettre à jour.
+updates-update-settings-aethon-was-installed-via-your-distribution-run-this-in-a = Aethon a été installé via votre distribution. Exécutez ceci dans un terminal pour mettre à jour.
 # Context: update_settings
 updates-update-settings-save-diagnostics = Enregistrer le diagnostic
 # Context: update_settings
@@ -4021,7 +4021,7 @@ updates-update-settings-log-warnings = Erreurs et avertissements
 # Context: update_settings
 updates-update-settings-open-folder = Ouvrir le dossier
 # Context: update_settings
-updates-update-settings-the-log-folder-could-not-be-written = Impossible d’écrire le dossier du journal. Vérifiez le dossier de données de Serein et réessayez.
+updates-update-settings-the-log-folder-could-not-be-written = Impossible d’écrire le dossier du journal. Vérifiez le dossier de données de Aethon et réessayez.
 # Context: update_settings
 updates-update-settings-timings-stages-and-failures-in-one-local-file-no-account-channel-or = Durées, étapes et échecs dans un seul fichier journal local. Les données de compte, de salon, de message et les identifiants ne sont jamais écrits, et rien n’est envoyé.
 # Context: update_log
@@ -4476,7 +4476,7 @@ onboarding-rules-heading = Règles du serveur
 # Context: rules
 onboarding-rules-review = Un modérateur examine ces réponses avant que tu puisses discuter.
 # Context: field
-onboarding-field-unsupported = Ce serveur pose une question que Serein ne peut pas encore afficher. Termine l'inscription dans l'application Discord.
+onboarding-field-unsupported = Ce serveur pose une question que Aethon ne peut pas encore afficher. Termine l'inscription dans l'application Discord.
 # Context: field
 onboarding-field-agree = J'ai lu et j'accepte les règles
 
@@ -4605,7 +4605,7 @@ reading-double-click-reaction = Double-click reaction
 
 ## crates/platform/src/app_menu.rs
 # Context: macos_menu_bar
-app-menu-about = À propos de Serein
+app-menu-about = À propos de Aethon
 # Context: macos_menu_bar
 app-menu-updates = Rechercher les mises à jour…
 # Context: macos_menu_bar
@@ -4613,13 +4613,13 @@ app-menu-settings = Réglages…
 # Context: macos_menu_bar
 app-menu-services = Services
 # Context: macos_menu_bar
-app-menu-hide = Masquer Serein
+app-menu-hide = Masquer Aethon
 # Context: macos_menu_bar
 app-menu-hide-others = Masquer les autres
 # Context: macos_menu_bar
 app-menu-show-all = Tout afficher
 # Context: macos_menu_bar
-app-menu-quit = Quitter Serein
+app-menu-quit = Quitter Aethon
 # Context: macos_menu_bar
 app-menu-file = Fichier
 # Context: macos_menu_bar
@@ -4661,7 +4661,7 @@ app-menu-bring-all-to-front = Tout ramener au premier plan
 # Context: macos_menu_bar
 app-menu-help = Aide
 # Context: macos_menu_bar
-app-menu-github = Serein sur GitHub
+app-menu-github = Aethon sur GitHub
 # Context: macos_menu_bar
 app-menu-report-issue = Signaler un problème…
 

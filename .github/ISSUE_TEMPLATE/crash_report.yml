@@ -9,7 +9,7 @@ body:
         Thank you for reporting a crash or performance issue.
 
         > [!TIP]
-        > **Quickly copy your client diagnostics:** In Serein, go to **Settings → Updates** and click **"Copy issue diagnostics"** (or click the **"Copy issue info"** link at the bottom of the Settings sidebar) to copy your Serein version, OS, display scale, and theme settings.
+        > **Quickly copy your client diagnostics:** In Aethon, go to **Settings → Updates** and click **"Copy issue diagnostics"** (or click the **"Copy issue info"** link at the bottom of the Settings sidebar) to copy your Aethon version, OS, display scale, and theme settings.
 
         > [!CAUTION]
         > **NEVER** share your Discord authentication token or credentials in logs, panic messages, or traces.
@@ -44,7 +44,7 @@ body:
       label: Steps to Reproduce
       description: Steps to consistently reproduce the crash or performance issue.
       placeholder: |
-        1. Run Serein with `RUST_BACKTRACE=1`
+        1. Run Aethon with `RUST_BACKTRACE=1`
         2. ...
         3. ...
     validations:
@@ -55,7 +55,7 @@ body:
     attributes:
       label: Rust Backtrace / Crash Log
       description: |
-        Run Serein from the terminal with `RUST_BACKTRACE=1 serein` (or via `cargo run --bin serein`) and paste the complete panic backtrace or crash report here.
+        Run Aethon from the terminal with `RUST_BACKTRACE=1 aethon` (or via `cargo run --bin aethon`) and paste the complete panic backtrace or crash report here.
       render: shell
     validations:
       required: true
@@ -87,7 +87,7 @@ body:
   - type: input
     id: version
     attributes:
-      label: Serein Version / Commit Hash
+      label: Aethon Version / Commit Hash
       description: Release tag or git commit hash. Found in **Settings → Updates** or copied via **"Copy issue diagnostics"**.
       placeholder: "e.g. 0.1.0 or commit 36b5336"
     validations:
@@ -98,9 +98,9 @@ body:
     attributes:
       label: Client & Environment Diagnostics
       description: |
-        Paste the information copied from Serein (**Settings → Updates → "Copy issue diagnostics"** or the sidebar link) here.
+        Paste the information copied from Aethon (**Settings → Updates → "Copy issue diagnostics"** or the sidebar link) here.
       placeholder: |
-        - **Serein Version:** ...
+        - **Aethon Version:** ...
         - **Operating System:** ...
         - **Display Scale:** ...
         - **Theme:** ...
@@ -112,40 +112,40 @@ body:
       value: |
         ### Collect logs for voice, video, screen sharing or performance issues
 
-        1. Quit Serein completely, then open a terminal and run the command for your platform below.
+        1. Quit Aethon completely, then open a terminal and run the command for your platform below.
            Both flags enable voice timing reports and UI frame diagnostics.
         2. Reproduce the issue briefly. For voice problems, join/leave the call yourself and note
            whether you were speaking, muted, sharing your screen or using noise suppression.
            If the call fails, also use **Copy failure reason** in the sidebar or call stage.
-        3. Quit Serein normally so the final frame summary is written. Find `serein-diagnostics.log`
+        3. Quit Aethon normally so the final frame summary is written. Find `aethon-diagnostics.log`
            in the terminal's current folder, review it for private information, then drag the file
            into the diagnostics field below (or paste the relevant output).
 
-        **Windows (PowerShell)** — replace the executable path with your installed `serein.exe`:
+        **Windows (PowerShell)** — replace the executable path with your installed `aethon.exe`:
         ```powershell
-        $env:SEREIN_VOICE_DIAGNOSTICS="1"
-        $env:SEREIN_FRAME_DIAGNOSTICS="1"
-        & "C:\path\to\serein.exe" 2> serein-diagnostics.log
-        Remove-Item Env:SEREIN_VOICE_DIAGNOSTICS, Env:SEREIN_FRAME_DIAGNOSTICS
+        $env:AETHON_VOICE_DIAGNOSTICS="1"
+        $env:AETHON_FRAME_DIAGNOSTICS="1"
+        & "C:\path\to\aethon.exe" 2> aethon-diagnostics.log
+        Remove-Item Env:AETHON_VOICE_DIAGNOSTICS, Env:AETHON_FRAME_DIAGNOSTICS
         ```
 
         **macOS (Terminal):**
         ```sh
-        SEREIN_VOICE_DIAGNOSTICS=1 SEREIN_FRAME_DIAGNOSTICS=1 /Applications/Serein.app/Contents/MacOS/serein 2> serein-diagnostics.log
+        AETHON_VOICE_DIAGNOSTICS=1 AETHON_FRAME_DIAGNOSTICS=1 /Applications/Aethon.app/Contents/MacOS/aethon 2> aethon-diagnostics.log
         ```
 
-        **Linux (terminal)** — replace `serein` with your executable/AppImage path if needed:
+        **Linux (terminal)** — replace `aethon` with your executable/AppImage path if needed:
         ```sh
-        SEREIN_VOICE_DIAGNOSTICS=1 SEREIN_FRAME_DIAGNOSTICS=1 serein 2> serein-diagnostics.log
+        AETHON_VOICE_DIAGNOSTICS=1 AETHON_FRAME_DIAGNOSTICS=1 aethon 2> aethon-diagnostics.log
         ```
 
         **Flatpak:**
         ```sh
-        flatpak run --env=SEREIN_VOICE_DIAGNOSTICS=1 --env=SEREIN_FRAME_DIAGNOSTICS=1 cz.viceverse.serein 2> serein-diagnostics.log
+        flatpak run --env=AETHON_VOICE_DIAGNOSTICS=1 --env=AETHON_FRAME_DIAGNOSTICS=1 cz.viceverse.aethon 2> aethon-diagnostics.log
         ```
 
         Voice timing reports appear about every five seconds and stop after a bounded capture;
-        restart Serein if you need another capture. If Serein freezes or crashes, send whatever
+        restart Aethon if you need another capture. If Aethon freezes or crashes, send whatever
         output was captured even if the final frame summary is missing. These commands save stderr,
         which can also contain framework logs: review the file before uploading and remove tokens,
         credentials and private content. Diagnostics are disabled on the next normal launch after
@@ -157,7 +157,7 @@ body:
     attributes:
       label: Voice / Frame Diagnostics
       description: Attach the reviewed log from the commands above or paste its output. Include any copied call failure reason and what you were doing during the capture. If you could not collect it, describe what prevented it.
-      placeholder: Drop serein-diagnostics.log here, or paste the relevant diagnostics and call failure reason...
+      placeholder: Drop aethon-diagnostics.log here, or paste the relevant diagnostics and call failure reason...
 
   - type: checkboxes
     id: checklist

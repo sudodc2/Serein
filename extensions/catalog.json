@@ -14,7 +14,7 @@
         "capabilities": [],
         "actions": []
       },
-      "release_url": "https://raw.githubusercontent.com/ViceVerse-cz/Serein/04f348092910a77cc317516b25577ad006cb708b/extensions/themes/forest-piano.serein-extension",
+      "release_url": "https://raw.githubusercontent.com/ViceVerse-cz/Serein/04f348092910a77cc317516b25577ad006cb708b/extensions/themes/forest-piano.aethon-extension",
       "sha256": "3fffa784b2f406b4ad435fa5804baa1bed9ead9682254546ccf332c2bae12505",
       "download_bytes": 6452658,
       "source_commit": "04f348092910a77cc317516b25577ad006cb708b",
@@ -27,15 +27,15 @@
     {
       "manifest": {
         "api_version": 1,
-        "id": "serein-forest",
+        "id": "aethon-forest",
         "name": "Forest",
         "version": "1.0.0",
-        "author": "Serein contributors",
+        "author": "Aethon contributors",
         "license": "MIT OR Apache-2.0",
         "source": "https://github.com/ViceVerse-cz/Serein",
         "kind": "theme"
       },
-      "release_url": "https://raw.githubusercontent.com/ViceVerse-cz/Serein/04f348092910a77cc317516b25577ad006cb708b/extensions/themes/forest.serein-extension",
+      "release_url": "https://raw.githubusercontent.com/ViceVerse-cz/Serein/04f348092910a77cc317516b25577ad006cb708b/extensions/themes/forest.aethon-extension",
       "sha256": "f576fbcb73f452da4ecddda35f92932cdd3ef7b46959a38837fe3491784d6038",
       "download_bytes": 1454,
       "source_commit": "04f348092910a77cc317516b25577ad006cb708b",
@@ -56,7 +56,7 @@
         "source": "https://github.com/ViceVerse-cz/Serein",
         "kind": "theme"
       },
-      "release_url": "https://raw.githubusercontent.com/ViceVerse-cz/Serein/04f348092910a77cc317516b25577ad006cb708b/extensions/themes/golden.serein-extension",
+      "release_url": "https://raw.githubusercontent.com/ViceVerse-cz/Serein/04f348092910a77cc317516b25577ad006cb708b/extensions/themes/golden.aethon-extension",
       "sha256": "0018a46e9c5e4d0431ba02a860b3d7deffab9c159c5d52e04928421ccb3be586",
       "download_bytes": 1794,
       "source_commit": "04f348092910a77cc317516b25577ad006cb708b",
@@ -77,7 +77,7 @@
         "source": "https://github.com/ViceVerse-cz/Serein",
         "kind": "theme"
       },
-      "release_url": "https://raw.githubusercontent.com/ViceVerse-cz/Serein/04f348092910a77cc317516b25577ad006cb708b/extensions/themes/katana.serein-extension",
+      "release_url": "https://raw.githubusercontent.com/ViceVerse-cz/Serein/04f348092910a77cc317516b25577ad006cb708b/extensions/themes/katana.aethon-extension",
       "sha256": "cf4ef3755d9208e700ee721b66edad3fceb4f26e52d09b82e645bf49070f1a15",
       "download_bytes": 994,
       "source_commit": "04f348092910a77cc317516b25577ad006cb708b",
@@ -90,15 +90,15 @@
     {
       "manifest": {
         "api_version": 1,
-        "id": "serein-latte",
+        "id": "aethon-latte",
         "name": "Latte",
         "version": "1.0.0",
-        "author": "Serein contributors",
+        "author": "Aethon contributors",
         "license": "MIT OR Apache-2.0",
         "source": "https://github.com/ViceVerse-cz/Serein",
         "kind": "theme"
       },
-      "release_url": "https://raw.githubusercontent.com/ViceVerse-cz/Serein/04f348092910a77cc317516b25577ad006cb708b/extensions/themes/latte.serein-extension",
+      "release_url": "https://raw.githubusercontent.com/ViceVerse-cz/Serein/04f348092910a77cc317516b25577ad006cb708b/extensions/themes/latte.aethon-extension",
       "sha256": "a3c3ac481e6d4039a5df26a0e58583add79e638f7a58a6fae309d1beb74a468d",
       "download_bytes": 1452,
       "source_commit": "04f348092910a77cc317516b25577ad006cb708b",
@@ -111,15 +111,15 @@
     {
       "manifest": {
         "api_version": 1,
-        "id": "serein-midnight",
+        "id": "aethon-midnight",
         "name": "Midnight",
         "version": "1.0.0",
-        "author": "Serein contributors",
+        "author": "Aethon contributors",
         "license": "MIT OR Apache-2.0",
         "source": "https://github.com/ViceVerse-cz/Serein",
         "kind": "theme"
       },
-      "release_url": "https://raw.githubusercontent.com/ViceVerse-cz/Serein/04f348092910a77cc317516b25577ad006cb708b/extensions/themes/midnight.serein-extension",
+      "release_url": "https://raw.githubusercontent.com/ViceVerse-cz/Serein/04f348092910a77cc317516b25577ad006cb708b/extensions/themes/midnight.aethon-extension",
       "sha256": "f7ffb0acdb7269f1e2fdb235536870cef344f3fac761543174ddc091bb2aebb6",
       "download_bytes": 1458,
       "source_commit": "04f348092910a77cc317516b25577ad006cb708b",
@@ -140,7 +140,7 @@
         "source": "https://github.com/ViceVerse-cz/Serein",
         "kind": "theme"
       },
-      "release_url": "https://raw.githubusercontent.com/ViceVerse-cz/Serein/04f348092910a77cc317516b25577ad006cb708b/extensions/themes/obsidian.serein-extension",
+      "release_url": "https://raw.githubusercontent.com/ViceVerse-cz/Serein/04f348092910a77cc317516b25577ad006cb708b/extensions/themes/obsidian.aethon-extension",
       "sha256": "e42cb1ad38f0c495375343bb8e64852ccb98a5a860293cd9ce3a86bbec1f0dd5",
       "download_bytes": 1838,
       "source_commit": "04f348092910a77cc317516b25577ad006cb708b",
@@ -153,15 +153,15 @@
     {
       "manifest": {
         "api_version": 1,
-        "id": "serein-ocean",
+        "id": "aethon-ocean",
         "name": "Ocean",
         "version": "1.0.0",
-        "author": "Serein contributors",
+        "author": "Aethon contributors",
         "license": "MIT OR Apache-2.0",
         "source": "https://github.com/ViceVerse-cz/Serein",
         "kind": "theme"
       },
-      "release_url": "https://raw.githubusercontent.com/ViceVerse-cz/Serein/04f348092910a77cc317516b25577ad006cb708b/extensions/themes/ocean.serein-extension",
+      "release_url": "https://raw.githubusercontent.com/ViceVerse-cz/Serein/04f348092910a77cc317516b25577ad006cb708b/extensions/themes/ocean.aethon-extension",
       "sha256": "7309d84495dc4487ccb3e3355fd704c79dd8f68b14a3441ccc7ea5bda5ef9be8",
       "download_bytes": 958,
       "source_commit": "04f348092910a77cc317516b25577ad006cb708b",
@@ -174,15 +174,15 @@
     {
       "manifest": {
         "api_version": 1,
-        "id": "serein-rose",
+        "id": "aethon-rose",
         "name": "Rose",
         "version": "1.0.0",
-        "author": "Serein contributors",
+        "author": "Aethon contributors",
         "license": "MIT OR Apache-2.0",
         "source": "https://github.com/ViceVerse-cz/Serein",
         "kind": "theme"
       },
-      "release_url": "https://raw.githubusercontent.com/ViceVerse-cz/Serein/04f348092910a77cc317516b25577ad006cb708b/extensions/themes/rose.serein-extension",
+      "release_url": "https://raw.githubusercontent.com/ViceVerse-cz/Serein/04f348092910a77cc317516b25577ad006cb708b/extensions/themes/rose.aethon-extension",
       "sha256": "bf8ad0dc259c375fbce786591530f0c2121cf336e63fc39daac11a2fc000087c",
       "download_bytes": 1450,
       "source_commit": "04f348092910a77cc317516b25577ad006cb708b",
@@ -205,7 +205,7 @@
         "capabilities": [],
         "actions": []
       },
-      "release_url": "https://raw.githubusercontent.com/ViceVerse-cz/Serein/04f348092910a77cc317516b25577ad006cb708b/extensions/themes/soft-white.serein-extension",
+      "release_url": "https://raw.githubusercontent.com/ViceVerse-cz/Serein/04f348092910a77cc317516b25577ad006cb708b/extensions/themes/soft-white.aethon-extension",
       "sha256": "e981bf8d1230bf540e531d49eecde1f06769e635b55ba2b4eb376dab668248a0",
       "download_bytes": 5860518,
       "source_commit": "04f348092910a77cc317516b25577ad006cb708b",
@@ -226,7 +226,7 @@
         "source": "https://github.com/ViceVerse-cz/Serein",
         "kind": "theme"
       },
-      "release_url": "https://raw.githubusercontent.com/ViceVerse-cz/Serein/04f348092910a77cc317516b25577ad006cb708b/extensions/themes/teal.serein-extension",
+      "release_url": "https://raw.githubusercontent.com/ViceVerse-cz/Serein/04f348092910a77cc317516b25577ad006cb708b/extensions/themes/teal.aethon-extension",
       "sha256": "1c794d14b12bb470164e2c220051de7c20b13de8175390595a559f551bb6409a",
       "download_bytes": 1827,
       "source_commit": "04f348092910a77cc317516b25577ad006cb708b",
@@ -242,7 +242,7 @@
         "id": "api-proxy",
         "name": "API Proxy",
         "version": "1.0.0",
-        "author": "Serein contributors",
+        "author": "Aethon contributors",
         "license": "MIT OR Apache-2.0",
         "source": "https://github.com/ViceVerse-cz/Serein-extensions/tree/main/plugins/api-proxy",
         "kind": "plugin",
@@ -268,7 +268,7 @@
           }
         ]
       },
-      "release_url": "https://raw.githubusercontent.com/ViceVerse-cz/Serein/04f348092910a77cc317516b25577ad006cb708b/extensions/plugins/packages/api-proxy.serein-extension",
+      "release_url": "https://raw.githubusercontent.com/ViceVerse-cz/Serein/04f348092910a77cc317516b25577ad006cb708b/extensions/plugins/packages/api-proxy.aethon-extension",
       "sha256": "e6ce691505357f3e19d5db33762e8d54da355a35b19fde309edec04fc0a7a85c",
       "download_bytes": 920979,
       "source_commit": "04f348092910a77cc317516b25577ad006cb708b",
@@ -284,7 +284,7 @@
         "id": "custom-rpc",
         "name": "Custom Rich Presence",
         "version": "1.0.0",
-        "author": "Serein contributors",
+        "author": "Aethon contributors",
         "license": "MIT OR Apache-2.0",
         "source": "https://github.com/ViceVerse-cz/Serein-extensions/tree/main/plugins/custom-rpc",
         "kind": "plugin",
@@ -325,7 +325,7 @@
           }
         ]
       },
-      "release_url": "https://raw.githubusercontent.com/ViceVerse-cz/Serein/04f348092910a77cc317516b25577ad006cb708b/extensions/plugins/packages/custom-rpc.serein-extension",
+      "release_url": "https://raw.githubusercontent.com/ViceVerse-cz/Serein/04f348092910a77cc317516b25577ad006cb708b/extensions/plugins/packages/custom-rpc.aethon-extension",
       "sha256": "f6f70f0f537052910a6e5497bf4d40a6d8d7e5ece3be4d4678a09d872e31b0ac",
       "download_bytes": 409132,
       "source_commit": "04f348092910a77cc317516b25577ad006cb708b",
@@ -341,7 +341,7 @@
         "id": "message-delete-protector",
         "name": "Message delete protector",
         "version": "1.0.0",
-        "author": "Serein contributors",
+        "author": "Aethon contributors",
         "license": "MIT OR Apache-2.0",
         "source": "https://github.com/ViceVerse-cz/Serein",
         "kind": "plugin",
@@ -356,7 +356,7 @@
           }
         ]
       },
-      "release_url": "https://raw.githubusercontent.com/ViceVerse-cz/Serein/04f348092910a77cc317516b25577ad006cb708b/extensions/plugins/packages/message-delete-protector.serein-extension",
+      "release_url": "https://raw.githubusercontent.com/ViceVerse-cz/Serein/04f348092910a77cc317516b25577ad006cb708b/extensions/plugins/packages/message-delete-protector.aethon-extension",
       "sha256": "dffd601e3b85b17ae9bacc6deedc526e225c3ee81072ee5e8e64981da03bf6f9",
       "download_bytes": 338103,
       "source_commit": "04f348092910a77cc317516b25577ad006cb708b",

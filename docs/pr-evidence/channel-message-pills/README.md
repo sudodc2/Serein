@@ -13,7 +13,7 @@ it selects incompatible windows 0.61.3 types. No other baseline UI code changed.
 Use pinned Rust 1.98.1 and separate baseline/changed worktrees. In each worktree:
 
 ```powershell
-cargo build --release --locked -p serein --features demo --example profile_preview
+cargo build --release --locked -p aethon --features demo --example profile_preview
 $preview = Join-Path $env:CARGO_TARGET_DIR 'release/examples/profile_preview.exe'
 & $preview --demo --page=channel-links --width=1120 --height=900 --output=target/pills-dark.png
 & $preview --demo --page=channel-links --width=720 --height=900 --light --output=target/pills-light-narrow.png
@@ -75,7 +75,7 @@ or developer features. Package measurements:
 
 | Metric | Baseline | After | Delta | Method |
 | --- | ---: | ---: | ---: | --- |
-| Executable | 85,449,728 B | 85,464,064 B | +14,336 B / +0.017% | serein.exe file length |
+| Executable | 85,449,728 B | 85,464,064 B | +14,336 B / +0.017% | aethon.exe file length |
 | Installed files | 89,623,341 B | 89,637,677 B | +14,336 B / +0.016% | Sum of dist file lengths |
 | ZIP distribution | 49,775,655 B | 49,781,438 B | +5,783 B / +0.012% | Compress-Archive, Optimal; ZIP file length |
 
@@ -174,7 +174,7 @@ This is not a fresh simultaneous package baseline. See
 
 | Package metric | Historical baseline | Reply fix | Delta | Method |
 | --- | ---: | ---: | ---: | --- |
-| Executable | 85,464,576 B | 85,465,088 B | +512 B / +0.0006% | serein.exe file length |
+| Executable | 85,464,576 B | 85,465,088 B | +512 B / +0.0006% | aethon.exe file length |
 | Installed files | 89,638,189 B | 89,638,701 B | +512 B / +0.0006% | Sum of dist file lengths |
 | ZIP distribution | 49,781,661 B | 49,781,875 B | +214 B / +0.0004% | Compress-Archive, Optimal; ZIP file length |
 

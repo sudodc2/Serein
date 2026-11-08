@@ -11,7 +11,7 @@ Use the repository's pinned Rust 1.98.1 toolchain on Linux x86_64. At each revis
 run `cargo xtask package`; on this Arch host its Debian stage fails because `dpkg` is
 absent. `cargo xtask package --format arch` builds the native unsigned package and
 checks its metadata, library closure, payload contents, modes, owners and lack of scripts.
-Preserve the two `dist` outputs separately. Executable size is `dist/serein`'s byte length;
+Preserve the two `dist` outputs separately. Executable size is `dist/aethon`'s byte length;
 installed size sums regular files beneath `usr/` in the inspected native archive;
 compressed size is the complete `.pkg.tar.zst` archive. Archive metadata/timestamps can vary.
 

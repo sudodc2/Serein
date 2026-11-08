@@ -27,13 +27,13 @@
                 system,
                 ...
             }: {
-                packages.serein = pkgs.callPackage ./packaging/nix/package.nix {};
-                packages.default = config.packages.serein;
+                packages.aethon = pkgs.callPackage ./packaging/nix/package.nix {};
+                packages.default = config.packages.aethon;
 
                 devShells.default = pkgs.mkShell {
-                    name = "serein-dev";
+                    name = "aethon-dev";
 
-                    inputsFrom = [config.packages.serein];
+                    inputsFrom = [config.packages.aethon];
                 };
             };
         };

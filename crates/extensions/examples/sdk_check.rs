@@ -527,7 +527,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 	check(
 		"message-delete-protector/committed",
 		include_bytes!(
-			"../../../extensions/plugins/packages/message-delete-protector.serein-extension"
+			"../../../extensions/plugins/packages/message-delete-protector.aethon-extension"
 		),
 		&expected,
 	);
@@ -574,7 +574,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 	check_message_counter(
 		"message-counter/committed",
 		&parse_package(include_bytes!(
-			"../../../examples/extensions/packages/message-counter.serein-extension"
+			"../../../examples/extensions/packages/message-counter.aethon-extension"
 		))?,
 	);
 	check_message_counter(
@@ -587,7 +587,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 	check_app_toolbox(
 		"app-toolbox/committed",
 		&parse_package(include_bytes!(
-			"../../../examples/extensions/packages/app-toolbox.serein-extension"
+			"../../../examples/extensions/packages/app-toolbox.aethon-extension"
 		))?,
 	);
 	check_app_toolbox(
@@ -600,7 +600,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 	check_guild_inspector(
 		"guild-inspector/committed",
 		&parse_package(include_bytes!(
-			"../../../examples/extensions/packages/guild-inspector.serein-extension"
+			"../../../examples/extensions/packages/guild-inspector.aethon-extension"
 		))?,
 	);
 	check_guild_inspector(
@@ -613,7 +613,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 	check_conversation_inspector(
 		"conversation-inspector/committed",
 		&parse_package(include_bytes!(
-			"../../../examples/extensions/packages/conversation-inspector.serein-extension"
+			"../../../examples/extensions/packages/conversation-inspector.aethon-extension"
 		))?,
 	);
 	check_conversation_inspector(

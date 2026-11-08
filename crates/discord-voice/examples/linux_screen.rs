@@ -55,7 +55,7 @@ mod teardown;
 mod timer;
 
 /// `--nvenc-exit`: quits while a synthetic NVENC share is still encoding, the way closing
-/// Serein drops a live screen worker. `--no-wait` exits during the teardown instead of waiting
+/// Aethon drops a live screen worker. `--no-wait` exits during the teardown instead of waiting
 /// for it: on NVIDIA drivers libnvcuvid's exit handler then crashes or deadlocks the process.
 #[cfg(target_os = "linux")]
 fn nvenc_exit() {

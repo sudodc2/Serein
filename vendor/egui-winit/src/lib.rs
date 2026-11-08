@@ -575,7 +575,7 @@ impl State {
 
             // Moving a window leaves its contents unchanged. On Windows the move runs in a modal
             // loop that waits for each synchronous paint and its vsync, so the window trailed the
-            // cursor by a frame per move (Serein patch, see SEREIN-PATCH.md).
+            // cursor by a frame per move (Aethon patch, see AETHON-PATCH.md).
             WindowEvent::Moved(_) if cfg!(target_os = "windows") => {
                 // Sample the final placement/monitor even when no client input follows the move.
                 // Scheduling through egui keeps this out of the synchronous modal paint loop.
@@ -850,10 +850,10 @@ impl State {
     ///
     /// Returns `true` if the event was sent to egui.
     pub fn on_mouse_motion(&mut self, delta: (f64, f64)) -> bool {
-        // Serein reads no raw motion. On Windows it keeps arriving while the OS moves the window,
+        // Aethon reads no raw motion. On Windows it keeps arriving while the OS moves the window,
         // and every queued event made the next frame request another one; each of those frames
         // waited for vsync inside the modal move loop and held the window a refresh behind the
-        // cursor (Serein patch, see SEREIN-PATCH.md).
+        // cursor (Aethon patch, see AETHON-PATCH.md).
         if cfg!(target_os = "windows") {
             return false;
         }

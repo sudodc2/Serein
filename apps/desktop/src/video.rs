@@ -190,7 +190,7 @@ impl Video {
 			let runtime = runtime.clone();
 			let ctx = ctx.clone();
 			std::thread::Builder::new()
-				.name("serein-attachment-video".into())
+				.name("aethon-attachment-video".into())
 				.spawn(move || {
 					while runtime.block_on(receiver.changed()).is_ok() {
 						let Some(request) = receiver.borrow_and_update().clone() else {
@@ -213,7 +213,7 @@ impl Video {
 		}
 		let requests = self.requests.as_ref().expect("worker created");
 		if requests.is_closed() {
-			return Err("Video worker stopped; restart Serein");
+			return Err("Video worker stopped; restart Aethon");
 		}
 		let session = Arc::new(Session::new(volume));
 		requests.send_replace(Some(Request {
@@ -275,7 +275,7 @@ impl Video {
 			let ctx = ctx.clone();
 			let results = self.poster_results.clone();
 			if std::thread::Builder::new()
-				.name("serein-video-poster".into())
+				.name("aethon-video-poster".into())
 				.spawn(move || {
 					// Newest first: after a scroll or channel switch the visible stages
 					// decode before posters requested for stages already scrolled past.

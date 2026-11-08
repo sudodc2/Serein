@@ -76,7 +76,7 @@ fn main() {
 	measure(
 		"message-delete-protector",
 		include_bytes!(
-			"../../../extensions/plugins/packages/message-delete-protector.serein-extension"
+			"../../../extensions/plugins/packages/message-delete-protector.aethon-extension"
 		),
 		Invocation {
 			action: "activate".into(),

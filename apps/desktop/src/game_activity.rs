@@ -59,7 +59,7 @@ trait Applications: Clone + Send + Sync + 'static {
 		&self,
 		id: Id,
 	) -> impl Future<Output = Result<Vec<discord_api::rpc::Asset>, &'static str>> + Send;
-	/// Ask Discord to proxy caller-supplied image URLs. Serein never fetches them itself.
+	/// Ask Discord to proxy caller-supplied image URLs. Aethon never fetches them itself.
 	fn external(
 		&self,
 		id: Id,
@@ -1332,7 +1332,7 @@ mod tests {
 	async fn replies_reach_pending_game_reads_as_complete_frames() {
 		use tokio::net::windows::named_pipe::{ClientOptions, ServerOptions};
 		let name = format!(
-			r"\\.\pipe\serein-test-reply-{}-{}",
+			r"\\.\pipe\aethon-test-reply-{}-{}",
 			std::process::id(),
 			getrandom::u64().unwrap()
 		);

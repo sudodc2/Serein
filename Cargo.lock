@@ -179,6 +179,62 @@ dependencies = [
 ]
 
 [[package]]
+name = "aethon"
+version = "0.1.0"
+dependencies = [
+ "arboard",
+ "client-core",
+ "cpal",
+ "diagnostics",
+ "discord-api",
+ "discord-gateway",
+ "discord-protocol",
+ "discord-voice",
+ "eframe",
+ "egui-winit",
+ "extensions",
+ "find-msvc-tools",
+ "fontique",
+ "futures-util",
+ "getrandom 0.4.3",
+ "image",
+ "local-store",
+ "log",
+ "md4",
+ "model",
+ "opus2",
+ "platform",
+ "png",
+ "rasterlottie",
+ "reqwest",
+ "resvg",
+ "rtrb",
+ "semver",
+ "serde",
+ "serde_json",
+ "sha2 0.10.9",
+ "symphonia",
+ "test-support",
+ "time",
+ "tokio",
+ "tokio-tungstenite",
+ "ui",
+ "url",
+ "winit",
+ "zeroize",
+ "zip",
+]
+
+[[package]]
+name = "aethon-extension-sdk"
+version = "0.1.0"
+dependencies = [
+ "serde",
+ "serde_json",
+ "url",
+]
+
+[[package]]
 name = "ahash"
 version = "0.8.12"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2037,9 +2093,9 @@ checksum = "af9673d8203fcb076b19dfd17e38b3d4ae9f44959416ea532ce72415a6020365"
 name = "extensions"
 version = "0.1.0"
 dependencies = [
+ "aethon-extension-sdk",
  "serde",
  "serde_json",
- "serein-extension-sdk",
  "thiserror 2.0.20",
  "url",
  "wasmi",
@@ -6361,62 +6417,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "6662b5879511e06e8999a8a235d848113e942c9124f211511b16466ee2995f26"
 dependencies = [
  "serde_core",
-]
-
-[[package]]
-name = "serein"
-version = "0.1.0"
-dependencies = [
- "arboard",
- "client-core",
- "cpal",
- "diagnostics",
- "discord-api",
- "discord-gateway",
- "discord-protocol",
- "discord-voice",
- "eframe",
- "egui-winit",
- "extensions",
- "find-msvc-tools",
- "fontique",
- "futures-util",
- "getrandom 0.4.3",
- "image",
- "local-store",
- "log",
- "md4",
- "model",
- "opus2",
- "platform",
- "png",
- "rasterlottie",
- "reqwest",
- "resvg",
- "rtrb",
- "semver",
- "serde",
- "serde_json",
- "sha2 0.10.9",
- "symphonia",
- "test-support",
- "time",
- "tokio",
- "tokio-tungstenite",
- "ui",
- "url",
- "winit",
- "zeroize",
- "zip",
-]
-
-[[package]]
-name = "serein-extension-sdk"
-version = "0.1.0"
-dependencies = [
- "serde",
- "serde_json",
- "url",
 ]
 
 [[package]]

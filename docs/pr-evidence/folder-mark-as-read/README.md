@@ -19,8 +19,8 @@ menu's rendered state; they do not claim an enabled-action click against live un
 At each source revision, build and launch only the synthetic demo:
 
 ```powershell
-cargo build --release --locked -p serein --no-default-features --features demo
-& .\target\release\serein.exe --demo
+cargo build --release --locked -p aethon --no-default-features --features demo
+& .\target\release\aethon.exe --demo
 ```
 
 Right-click the synthetic server folder in the server rail. At the baseline revision the menu has

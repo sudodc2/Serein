@@ -106,16 +106,16 @@ pub fn select(
 		});
 	};
 	let info = adapter.get_info();
-	eprintln!("[Serein] GPU adapter: {}", describe(&info));
+	eprintln!("[Aethon] GPU adapter: {}", describe(&info));
 	if software(&info) {
 		// Already on OpenGL, the override has nothing left to try.
 		if info.backend == wgpu::Backend::Gl {
 			eprintln!(
-				"[Serein] GPU adapter is a software OpenGL rasterizer; install the GPU's graphics driver"
+				"[Aethon] GPU adapter is a software OpenGL rasterizer; install the GPU's graphics driver"
 			);
 		} else {
 			eprintln!(
-				"[Serein] GPU adapter is a software rasterizer; set WGPU_BACKEND=gl to try the GPU's OpenGL driver"
+				"[Aethon] GPU adapter is a software rasterizer; set WGPU_BACKEND=gl to try the GPU's OpenGL driver"
 			);
 		}
 	}

@@ -44,9 +44,9 @@ worktree.
 | `dist/` regular-file payload (233 files) | 97,265,351 B | 97,265,351 B | 0 B |
 | ZIP of `dist/` (`7z a -tzip -mx=9`) | 52,172,759 B | 52,172,071 B | −688 B (−0.001%) |
 
-Only `serein.exe` differs, at the same size; the ZIP difference is compression noise.
+Only `aethon.exe` differs, at the same size; the ZIP difference is compression noise.
 
-Debug builds with default features and an empty `SEREIN_DATA_DIR` show the sign-in screen, which
+Debug builds with default features and an empty `AETHON_DATA_DIR` show the sign-in screen, which
 renders nothing while idle. After the window had been idle for 8 s, a script moved it with
 `SetWindowPos` (no input, activation or z-order change) while PresentMon 2.6.0 recorded the next
 4 s. The baseline presented no frame and kept the startup placement in `app_preferences`; this
@@ -75,7 +75,7 @@ dependencies on Windows 11 x64 (build 26200). Standard release packages use `car
 | `dist/` regular-file payload (233 files) | 97,263,837 B | 97,264,814 B | +977 B (+0.001%) |
 | ZIP of `dist/` (`7z a -tzip -mx=9`) | 52,175,667 B | 52,172,078 B | −3,589 B (−0.007%) |
 
-Only `serein.exe` and the copied `THIRD_PARTY_NOTICES.md` (+465 B) differ; the smaller ZIP is
+Only `aethon.exe` and the copied `THIRD_PARTY_NOTICES.md` (+465 B) differ; the smaller ZIP is
 compression noise.
 
 Drags used release `--features demo` builds of both revisions on a Ryzen 5 7600X with 32 GB of
@@ -104,7 +104,7 @@ The baseline presented about 120 frames/s for the whole drag, and the window mov
 per frame, so it trailed the cursor by up to 40 px. After the change the window moves with each
 input sample, as Character Map does; the remaining presents are the composer's 500 ms caret blink.
 At 4,000 px/s it still trails some samples by one 8 px step. The sign-in runs use the same binaries
-without `--demo` and with an empty `SEREIN_DATA_DIR`, so they also save placements: every run stored
+without `--demo` and with an empty `AETHON_DATA_DIR`, so they also save placements: every run stored
 the final position (1300, 300) before the script ended the process about 2.5 s after the drag.
 
 Process CPU during the 750 px/s drag fell from 0.42–0.50 s to 0.28–0.36 s, and it stayed at
@@ -312,7 +312,7 @@ a 12 Mbps target/max rate and 12 Mbps VBV buffer.
 
 An owner-controlled sequential comparison of `ac345cc` and official Discord on the same
 stream recorded H.265, 1280×718 and approximately 30 fps in both clients, averaging
-1.13/1.11 Mbps respectively. Neither capture recorded video drops; Serein recorded
+1.13/1.11 Mbps respectively. Neither capture recorded video drops; Aethon recorded
 zero decoding errors. The owner reported satisfaction. Content changes between captures
 and bitrate accounting differences preclude an exact perceptual-quality claim.
 Reception supports up to 4K60, but live 4K60 validation remains pending.
@@ -390,7 +390,7 @@ The same owner then opens the stream in official Discord: 13 post-startup report
 120.389 seconds, report `AV1X` at 2560×1440, 59.99 decoded fps and mean 4.594 Mbps
 (range 4.327–4.979 Mbps), with zero reported drops. Sequential motion/content and
 accounting differ; the ratio is not a codec-efficiency benchmark or proof of why the
-service selected those rates. The preceding Serein build cannot negotiate/depacketize AV1.
+service selected those rates. The preceding Aethon build cannot negotiate/depacketize AV1.
 
 Linux receive-only AV1 now takes priority over HEVC/H.264 after installed native capability
 probing. No dependency or sender-preset change is introduced. The pipeline uses existing
@@ -426,10 +426,10 @@ The subsequent successful Linux 1440p60 capture is recorded below; live 4K60 tes
 ### Watched-stream transport feedback — October 23, 2026
 
 The verified `fcf6fe62` package is the baseline. The owner-controlled different-stream
-HEVC 1280×534 comparison records 1.299 Mbps of Serein complete decrypted payload over
+HEVC 1280×534 comparison records 1.299 Mbps of Aethon complete decrypted payload over
 100.133 seconds, versus official Discord's mean reported 3.841 Mbps across eight
 post-startup reports spanning 70.234 seconds. Both decode about 59.8 fps without video
-drops. Serein records four audio rebufferings and scheduling jitter. Different scenes
+drops. Aethon records four audio rebufferings and scheduling jitter. Different scenes
 and accounting prevent treating the ~2.96× ratio as causal bandwidth evidence.
 
 The receiver adds transport-wide arrival acknowledgements, not a receiver bandwidth
@@ -648,7 +648,7 @@ encoder alongside the stream timing and receive logic. The encrypted loopback re
 verifies stereo 1,275-byte outgoing packets and mono decoding of a full 20 ms frame.
 
 The direct pulldown-cmark pin advances from 0.13.5 to 0.13.6 for RUSTSEC-2026-0433.
-Serein does not enable the affected wikilinks option; the patched MIT-licensed release
+Aethon does not enable the affected wikilinks option; the patched MIT-licensed release
 is used without adding an audit exception. With cargo-audit 0.22.2 and the same database
 `263a4d951a0867d4bddc29dddd6d59427c78f9a7`, the old lockfile reports that one finding
 and the patched lockfile reports none, with no denied warnings. Both runs use the same
@@ -865,7 +865,7 @@ unavailable, so no installer was measured.
 
 | Package metric | Baseline | After | Delta |
 | --- | ---: | ---: | ---: |
-| `serein.exe` | 87,399,936 B | 87,405,568 B | +5,632 B (+0.0064%) |
+| `aethon.exe` | 87,399,936 B | 87,405,568 B | +5,632 B (+0.0064%) |
 | Installed tree | 91,593,225 B | 91,598,857 B | +5,632 B (+0.00615%) |
 | ZIP archive | 51,350,178 B | 51,354,785 B | +4,607 B (+0.00897%) |
 
@@ -1045,8 +1045,8 @@ identical in that run, so it is a measurement artifact.
 | Package executable | 87,314,600 B | 87,555,752 B | +241,152 B (+0.28%) |
 | Installed tree (`xtask package --format dir`) | 91,848,634 B | 92,089,786 B | +241,152 B (+0.26%) |
 | Installed tree, `tar` + `zstd -19` | 46,156,864 B | 46,280,238 B | +123,374 B (+0.27%) |
-| `serein --demo` settled / peak RSS | 134 / 149 MiB | 134 / 149 MiB | 0 |
-| `serein --demo` idle CPU (one core) | 0.25% | 0.25% | noise |
+| `aethon --demo` settled / peak RSS | 134 / 149 MiB | 134 / 149 MiB | 0 |
+| `aethon --demo` idle CPU (one core) | 0.25% | 0.25% | noise |
 | `profile_preview --page=collectibles` settled / peak RSS | 94 / 110 MiB | 95 / 111 MiB | about +1 MiB |
 | `profile_preview --page=collectibles` CPU | 0.25% | 0.25% | noise |
 
@@ -1436,7 +1436,7 @@ these measurements cover the package directory and ZIP, not an installer binary.
 | Distribution ZIP | 49,970,177 B | 49,970,277 B | +100 B (+0.00020%) |
 
 For native idle samples, each source was also built with
-`cargo build --release --locked -p serein --no-default-features --features demo`
+`cargo build --release --locked -p aethon --no-default-features --features demo`
 and run with `--demo`.
 Both runs used the same 1120×760 synthetic fixture, Windows DPI 120 (125% scale),
 the default DX12 renderer and no child processes. After a 15-second warmup,
@@ -1531,7 +1531,7 @@ packages passed, without demo/developer features:
 
 | Package metric | Baseline | After | Delta | Method |
 | --- | ---: | ---: | ---: | --- |
-| Executable | 85,449,728 B | 85,464,064 B | +14,336 B / +0.017% | serein.exe file length |
+| Executable | 85,449,728 B | 85,464,064 B | +14,336 B / +0.017% | aethon.exe file length |
 | Installed files | 89,623,341 B | 89,637,677 B | +14,336 B / +0.016% | Sum of all dist file lengths |
 | ZIP distribution | 49,775,655 B | 49,781,438 B | +5,783 B / +0.012% | Compress-Archive, Optimal; ZIP file length |
 
@@ -1557,7 +1557,7 @@ with the same `38d919d7` baseline:
 
 | Package metric | Baseline | After review | Delta | Method |
 | --- | ---: | ---: | ---: | --- |
-| Executable | 85,449,728 B | 85,464,576 B | +14,848 B / +0.017% | serein.exe file length |
+| Executable | 85,449,728 B | 85,464,576 B | +14,848 B / +0.017% | aethon.exe file length |
 | Installed files | 89,623,341 B | 89,638,189 B | +14,848 B / +0.017% | Sum of all dist file lengths |
 | ZIP distribution | 49,775,655 B | 49,781,661 B | +6,006 B / +0.012% | Compress-Archive, Optimal; ZIP file length |
 
@@ -1601,7 +1601,7 @@ documentation files), but this is not a fresh simultaneous package baseline.
 
 | Package metric | Historical baseline | Reply fix | Delta | Method |
 | --- | ---: | ---: | ---: | --- |
-| Executable | 85,464,576 B | 85,465,088 B | +512 B / +0.0006% | serein.exe file length |
+| Executable | 85,464,576 B | 85,465,088 B | +512 B / +0.0006% | aethon.exe file length |
 | Installed files | 89,638,189 B | 89,638,701 B | +512 B / +0.0006% | Sum of dist file lengths |
 | ZIP distribution | 49,781,661 B | 49,781,875 B | +214 B / +0.0004% | Compress-Archive, Optimal; ZIP file length |
 
@@ -1622,7 +1622,7 @@ ZIP archives, not installer validation.
 
 | Metric / method | Baseline | Repair | Delta |
 | --- | ---: | ---: | ---: |
-| serein.exe file length | 87,251,456 B | 87,251,456 B | 0 B |
+| aethon.exe file length | 87,251,456 B | 87,251,456 B | 0 B |
 | Installed payload, 216 files | 91,444,745 B | 91,444,745 B | 0 B |
 | ZIP, sorted paths / DEFLATE level 9 | 50,287,594 B | 50,287,599 B | +5 B |
 | 100,000-event reducer replay, median of five | 68.47 ms | 66.50 ms | -1.98 ms / -2.89% |

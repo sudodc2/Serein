@@ -57,7 +57,7 @@ fn proxy_origin_and_capability_boundaries() {
 		output.validate(&manifest, &input),
 		Err(Error::Capability)
 	));
-	let encoded = serde_json::to_value(serein_extension_sdk::ApiProxyConfig::Url {
+	let encoded = serde_json::to_value(aethon_extension_sdk::ApiProxyConfig::Url {
 		url: "http://localhost:8080".into(),
 	})
 	.unwrap();
@@ -76,16 +76,16 @@ fn proxy_modes_reject_unknown_fields_in_host_and_sdk() {
 		r#"{"mode":"automatic","url":"http://localhost"}"#,
 	] {
 		assert!(serde_json::from_str::<ApiProxyConfig>(text).is_err());
-		assert!(serde_json::from_str::<serein_extension_sdk::ApiProxyConfig>(text).is_err());
+		assert!(serde_json::from_str::<aethon_extension_sdk::ApiProxyConfig>(text).is_err());
 	}
 }
 
 #[test]
 fn sdk_proxy_wrapper_flattens_into_host_output() {
-	let output = serein_extension_sdk::ApiProxyOutput {
-		api_proxy: Some(serein_extension_sdk::ApiProxyConfig::Automatic),
-		output: serein_extension_sdk::Output {
-			panel: vec![serein_extension_sdk::Element::Text {
+	let output = aethon_extension_sdk::ApiProxyOutput {
+		api_proxy: Some(aethon_extension_sdk::ApiProxyConfig::Automatic),
+		output: aethon_extension_sdk::Output {
+			panel: vec![aethon_extension_sdk::Element::Text {
 				text: "Settings".into(),
 			}],
 			..Default::default()

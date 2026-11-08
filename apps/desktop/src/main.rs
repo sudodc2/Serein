@@ -555,9 +555,9 @@ fn main() -> eframe::Result {
 	let transparency_available =
 		transparency_available || demo && std::env::args().any(|arg| arg == "--demo-transparency");
 	#[cfg(target_os = "windows")]
-	let icon = include_bytes!("../../../packaging/windows/serein.png").as_slice();
+	let icon = include_bytes!("../../../packaging/windows/aethon.png").as_slice();
 	#[cfg(target_os = "linux")]
-	let icon = include_bytes!("../../../packaging/linux/hicolor/256x256/apps/serein.png").as_slice();
+	let icon = include_bytes!("../../../packaging/linux/hicolor/256x256/apps/aethon.png").as_slice();
 	let options = eframe::NativeOptions {
 		viewport: {
 			let builder = egui::ViewportBuilder::default()
@@ -575,14 +575,14 @@ fn main() -> eframe::Result {
 				)
 				.with_min_inner_size(app_settings::MIN_WINDOW_SIZE.map(|size| size as f32))
 				.with_active(!start_minimized)
-				.with_app_id("cz.viceverse.serein");
+				.with_app_id("cz.viceverse.aethon");
 			#[cfg(any(target_os = "windows", target_os = "linux"))]
 			let builder = builder
 				.with_icon(eframe::icon_data::from_png_bytes(icon).expect("bundled app icon"));
 			if cfg!(target_os = "macos") {
 				// Discord-style inline title bar: traffic lights sit over the app's own strip.
 				// eframe swaps in the egui logo when no icon is set; an empty icon keeps the
-				// bundle's Serein.icns in the Dock and app switcher.
+				// bundle's Aethon.icns in the Dock and app switcher.
 				builder
 					.with_icon(egui::IconData::default())
 					.with_title_shown(false)
@@ -644,7 +644,7 @@ fn main() -> eframe::Result {
 		..Default::default()
 	};
 	let result = eframe::run_native(
-		"Serein",
+		"Aethon",
 		options,
 		Box::new(move |cc| {
 			let mut desktop =
@@ -671,7 +671,7 @@ fn main() -> eframe::Result {
 	// Quitting mid-share drops media workers that are still closing their encoders, and
 	// NVIDIA's exit handlers crash or deadlock if the process exits during that teardown.
 	if !discord_voice::wait_for_media_threads(std::time::Duration::from_secs(5)) {
-		eprintln!("Screen or camera capture was still closing when Serein exited.");
+		eprintln!("Screen or camera capture was still closing when Aethon exited.");
 	}
 	result
 }
@@ -901,7 +901,7 @@ impl FrameMetrics {
 	fn new(sample: Option<(Duration, Duration)>) -> Self {
 		Self {
 			enabled: sample.is_some()
-				|| std::env::var_os("SEREIN_FRAME_DIAGNOSTICS").is_some_and(|v| v == "1"),
+				|| std::env::var_os("AETHON_FRAME_DIAGNOSTICS").is_some_and(|v| v == "1"),
 			started: None,
 			sample: sample.map(|(warmup, duration)| FrameSample {
 				ready: std::time::Instant::now() + warmup,
@@ -931,7 +931,7 @@ impl FrameMetrics {
 		}
 		let started = *sample.started.get_or_insert_with(|| {
 			Self::sample_record(serde_json::json!({
-				"serein_frame_sample": "start",
+				"aethon_frame_sample": "start",
 				"viewport_size": viewport_size,
 				"pixels_per_point": pixels_per_point,
 			}));
@@ -943,7 +943,7 @@ impl FrameMetrics {
 		}
 		sample.complete = true;
 		Self::sample_record(serde_json::json!({
-			"serein_frame_sample": "complete",
+			"aethon_frame_sample": "complete",
 			"elapsed_ms": elapsed.as_millis(),
 			"callbacks": self.frames,
 			"without_input": self.inputless,
@@ -1004,7 +1004,7 @@ impl Drop for FrameMetrics {
 			let _ = writeln!(
 				std::io::stderr(),
 				// Preserve the legacy diagnostic label; elapsed callback time is wall time.
-				"[Serein frames] callbacks={} without_input={} cpu_us_buckets(1000,2000,4000,8000,16000,32000,64000,above)={:?} reflows(total,consecutive)={:?}",
+				"[Aethon frames] callbacks={} without_input={} cpu_us_buckets(1000,2000,4000,8000,16000,32000,64000,above)={:?} reflows(total,consecutive)={:?}",
 				self.frames,
 				self.inputless,
 				self.buckets,
@@ -2006,7 +2006,7 @@ impl Desktop {
 		messaging.build = ui::design::Build {
 			channel: if cfg!(debug_assertions) {
 				ui::design::Channel::Dev
-			} else if option_env!("SEREIN_CHANNEL") == Some("nightly") {
+			} else if option_env!("AETHON_CHANNEL") == Some("nightly") {
 				ui::design::Channel::Nightly
 			} else {
 				ui::design::Channel::Stable
@@ -2658,7 +2658,7 @@ impl Desktop {
 	fn diagnostics_report(&self, ctx: &egui::Context) -> String {
 		use std::fmt::Write;
 		let mut report = String::with_capacity(24 * 1024);
-		report.push_str("# Serein diagnostics\n\n");
+		report.push_str("# Aethon diagnostics\n\n");
 		report.push_str(&self.messaging.diagnostic_info(ctx));
 		report.push('\n');
 		let log_file = diagnostics::path()
@@ -2706,7 +2706,7 @@ impl Desktop {
 			let wake = ctx.clone();
 			self.runtime.spawn(async move {
 				let destination =
-					platform::save::text_destination(parent, "serein-diagnostics.txt").await;
+					platform::save::text_destination(parent, "aethon-diagnostics.txt").await;
 				let outcome = match destination {
 					Some(path) => {
 						let written = path.clone();
@@ -3063,14 +3063,12 @@ impl Desktop {
 					None
 				}
 				Command::Website => {
-					ctx.open_url(egui::OpenUrl::new_tab(
-						"https://github.com/ViceVerse-cz/Serein",
-					));
+					ctx.open_url(egui::OpenUrl::new_tab("https://github.com/sudodc2/Serein"));
 					None
 				}
 				Command::ReportIssue => {
 					ctx.open_url(egui::OpenUrl::new_tab(
-						"https://github.com/ViceVerse-cz/Serein/issues/new/choose",
+						"https://github.com/sudodc2/Serein/issues/new/choose",
 					));
 					None
 				}
@@ -3080,7 +3078,7 @@ impl Desktop {
 			}
 		}
 	}
-	/// Whether closing may keep Serein running without a window. macOS apps stay in the Dock
+	/// Whether closing may keep Aethon running without a window. macOS apps stay in the Dock
 	/// until quit, and the Dock icon reopens the window.
 	fn background_available(&self) -> bool {
 		cfg!(target_os = "macos") || self.tray_available()
@@ -4350,6 +4348,11 @@ impl Desktop {
 					request,
 					result: Err(Failure::Protocol),
 				},
+				// Offline breach indexes report nothing; settle any pending lookup.
+				Command::BreachCheck { user, .. } => Event::BreachReports {
+					user,
+					results: Vec::new(),
+				},
 				Command::StreamPreview {
 					guild,
 					channel,
@@ -4737,14 +4740,14 @@ impl Desktop {
 						if self.messaging.custom_font.busy && self.font_picker.is_none() {
 							self.messaging.custom_font.busy = false;
 							self.messaging.custom_font.status =
-								"Local storage worker stopped. Restart Serein to save fonts.";
+								"Local storage worker stopped. Restart Aethon to save fonts.";
 						}
 						if self.messaging.channel_preferences_reload
 							|| self.messaging.channel_preferences_load_pending
 						{
 							self.messaging.channel_preferences_reload = false;
 							self.messaging.channel_preferences_load_pending = false;
-							self.messaging.channel_preferences_status = "Local storage worker stopped; restart Serein to restore channel preferences.";
+							self.messaging.channel_preferences_status = "Local storage worker stopped; restart Aethon to restore channel preferences.";
 						}
 						presence_cache_stopped = self.presence_load_pending;
 						break;
@@ -5087,7 +5090,7 @@ impl Desktop {
 					if result.is_err() {
 						self.messaging.toasts.push(
 							ui::design::Level::Error,
-							"Could not delete the plaintext saved logins in Serein's data folder",
+							"Could not delete the plaintext saved logins in Aethon's data folder",
 						);
 					} else if !enabled {
 						self.credential_status = "Plaintext saved logins deleted";
@@ -5100,7 +5103,7 @@ impl Desktop {
 						// Nothing could have been saved without a credential store.
 						Err(platform::CredentialError::NoStore) => "",
 						Err(_) => {
-							"Could not remove the Serein saved login in your OS credential manager"
+							"Could not remove the Aethon saved login in your OS credential manager"
 						}
 					};
 				}
@@ -5408,15 +5411,15 @@ impl Desktop {
 				&[("reason", failure.label().into())],
 			);
 			for (setting, scope) in [
-				("SEREIN_MEMBER_DIAGNOSTICS", "members"),
-				("SEREIN_GATEWAY_DIAGNOSTICS", "gateway"),
+				("AETHON_MEMBER_DIAGNOSTICS", "members"),
+				("AETHON_GATEWAY_DIAGNOSTICS", "gateway"),
 			] {
 				if std::env::var_os(setting).as_deref() == Some(std::ffi::OsStr::new("1")) {
 					use std::io::Write;
 					// One extra fixed-label terminal line per enabled scope; closed stderr is OK.
 					let _ = writeln!(
 						std::io::stderr(),
-						"[Serein {scope}] Session stopped: {}",
+						"[Aethon {scope}] Session stopped: {}",
 						failure.label()
 					);
 				}
@@ -5526,7 +5529,7 @@ impl Desktop {
 		let radius = round_corners::RADIUS * self.window.scale_factor() as f32;
 		ctx.layer_painter(egui::LayerId::new(
 			egui::Order::Debug,
-			egui::Id::unique("serein-round-corners"),
+			egui::Id::unique("aethon-round-corners"),
 		))
 		.add(round_corners::Mask::callback(
 			ctx.viewport_rect(),
@@ -6340,7 +6343,7 @@ impl eframe::App for Desktop {
 						ui.painter().rect_filled(rect, 8, p.accent);
 						ui::icons::paint(
 							ui.painter(),
-							ui::icons::Icon::Serein,
+							ui::icons::Icon::Aethon,
 							rect.shrink(7.0),
 							p.accent_text,
 						);

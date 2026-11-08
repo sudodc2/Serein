@@ -187,7 +187,7 @@ impl MessagingUi {
 		design::notice(ui, design::Level::Info, "setup-window-restart");
 	}
 
-	/// How Serein sits on the desktop: launch at login, its title bar and the tray.
+	/// How Aethon sits on the desktop: launch at login, its title bar and the tray.
 	fn setup_desktop(&mut self, ui: &mut egui::Ui) {
 		design::card(ui, |ui| self.startup_switches(ui));
 		ui.add_space(8.0);

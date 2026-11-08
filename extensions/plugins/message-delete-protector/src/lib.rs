@@ -1,4 +1,4 @@
-use serein_extension_sdk::{Invocation, Output};
+use aethon_extension_sdk::{Invocation, Output};
 
 // The host retains bounded session memory; this plugin receives no message bodies.
 fn activate(input: Invocation) -> Output {
@@ -8,4 +8,4 @@ fn activate(input: Invocation) -> Output {
 	}
 }
 
-serein_extension_sdk::export!(activate);
+aethon_extension_sdk::export!(activate);

@@ -3,14 +3,14 @@
 The published plugins, built against the one [SDK](../sdk) that
 the [authoring guide](../../examples/extensions/README.md) documents. Any language
 producing compatible WebAssembly can use this ABI; Rust authors can call
-`serein_extension_sdk::export!(handler)`.
+`aethon_extension_sdk::export!(handler)`.
 
 Build and package from `extensions/`, the workspace root (Python 3 is used only by the author):
 
 ```powershell
 rustup target add wasm32-unknown-unknown
 cargo build --locked --release --target wasm32-unknown-unknown
-python pack.py plugins/message-delete-protector/manifest.json target/wasm32-unknown-unknown/release/message_delete_protector.wasm plugins/packages/message-delete-protector.serein-extension
+python pack.py plugins/message-delete-protector/manifest.json target/wasm32-unknown-unknown/release/message_delete_protector.wasm plugins/packages/message-delete-protector.aethon-extension
 ```
 
 A rebuilt module is not a release by itself: committed packages are the reviewed bytes
@@ -30,7 +30,7 @@ Sticker Images plugin is retired. Native eligibility uses the account's Nitro
 entitlement. Unavailable native selections enter the composer as named artwork
 links; explicit Send uses Markdown with text, or attachments for artwork alone.
 Declarative themes are under `../themes/`.
-The author packages compiled bytes; Serein never runs a repository's build scripts.
+The author packages compiled bytes; Aethon never runs a repository's build scripts.
 
 ## ABI and limits
 
@@ -46,7 +46,7 @@ All versions and updates require explicit user consent.
 ## Custom Rich Presence (preview)
 
 See [Custom RPC](custom-rpc/README.md) for setup and builds. Requires the preview
-rich-presence SDK from Serein PR #465. Install through the shared catalog or import
+rich-presence SDK from Aethon PR #465. Install through the shared catalog or import
 the package locally. Older clients without this capability cannot install it.
 
 ## API Proxy (preview)

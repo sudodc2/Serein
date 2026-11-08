@@ -15,10 +15,10 @@ class RepositoryInputs(unittest.TestCase):
     def test_downloads_require_complete_matching_checksums(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
-            package = root / "serein.deb"
+            package = root / "aethon.deb"
             package.write_bytes(b"synthetic package")
             manifest = root / "SHA256SUMS.txt"
-            entry = hashlib.sha256(package.read_bytes()).hexdigest() + "  ./serein.deb\n"
+            entry = hashlib.sha256(package.read_bytes()).hexdigest() + "  ./aethon.deb\n"
             manifest.write_text(entry + "0" * 64 + "  ./macOS.zip\n")
             verify(root)
             package.write_bytes(b"corrupted")
@@ -41,9 +41,9 @@ class RepositoryInputs(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "unsafe"):
                 verify(root)
             package.unlink()
-            flatpak_pkg = root / "serein.flatpak"
+            flatpak_pkg = root / "aethon.flatpak"
             flatpak_pkg.write_bytes(b"synthetic flatpak")
-            flatpak_entry = hashlib.sha256(flatpak_pkg.read_bytes()).hexdigest() + "  ./serein.flatpak\n"
+            flatpak_entry = hashlib.sha256(flatpak_pkg.read_bytes()).hexdigest() + "  ./aethon.flatpak\n"
             manifest.write_text(flatpak_entry)
             verify(root)
 
@@ -51,11 +51,11 @@ class RepositoryInputs(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
             names = [
-                "serein-v1.0.0-Linux-ubuntu-26.04-serein_1.0.0_arm64.deb",
-                "serein-v1.0.0-Linux-ubuntu-26.04-serein_1.0.0_amd64.deb",
-                "serein-v1.0.0-Linux-ubuntu-24.04-serein_1.0.0_arm64.deb",
-                "serein-v1.0.0-Linux-fedora-44-serein-1.0.0.x86_64.rpm",
-                "serein-v1.0.0-Linux-x86_64.flatpak",
+                "aethon-v1.0.0-Linux-ubuntu-26.04-aethon_1.0.0_arm64.deb",
+                "aethon-v1.0.0-Linux-ubuntu-26.04-aethon_1.0.0_amd64.deb",
+                "aethon-v1.0.0-Linux-ubuntu-24.04-aethon_1.0.0_arm64.deb",
+                "aethon-v1.0.0-Linux-fedora-44-aethon-1.0.0.x86_64.rpm",
+                "aethon-v1.0.0-Linux-x86_64.flatpak",
                 "SHA256SUMS.txt",
             ]
             for name in names:
@@ -70,7 +70,7 @@ class RepositoryInputs(unittest.TestCase):
 
     def test_rejects_unsafe_paths_keys_and_urls(self):
         good = dict(distribution="ubuntu-26.04", architecture="amd64",
-                    key="A" * 40, base_url="https://packages.example.org/serein")
+                    key="A" * 40, base_url="https://packages.example.org/aethon")
         validate(argparse.Namespace(**good))
         for field, value in [("distribution", "../escape"), ("architecture", "/amd64"),
                              ("key", "ABC123"), ("key", "A" * 40 + "\n"),
@@ -98,7 +98,7 @@ class RepositoryInputs(unittest.TestCase):
             index_file = dest / "index.html"
             self.assertTrue(index_file.is_file())
             content = index_file.read_text()
-            self.assertIn("Serein Linux Repositories", content)
+            self.assertIn("Aethon Linux Repositories", content)
             self.assertIn("setup.sh", content)
 
 

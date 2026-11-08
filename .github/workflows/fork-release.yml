@@ -14,10 +14,10 @@ permissions:
 
 env:
   RELEASE_CHANNEL: nightly
-  SEREIN_SKIP_CASK: '1'
+  AETHON_SKIP_CASK: '1'
 
 concurrency:
-  group: serein-fork-release
+  group: aethon-fork-release
   cancel-in-progress: false
 
 jobs:
@@ -89,7 +89,7 @@ jobs:
         run: |
           cargo xtask package
           mkdir release-assets
-          echo "ASSET=serein-$TAG-$RUNNER_OS-$RUNNER_ARCH" >> "$GITHUB_ENV"
+          echo "ASSET=aethon-$TAG-$RUNNER_OS-$RUNNER_ARCH" >> "$GITHUB_ENV"
       - name: Archive Windows package
         shell: pwsh
         run: |
@@ -129,7 +129,7 @@ jobs:
           path: .
       - uses: actions/download-artifact@v8.0.1
         with:
-          pattern: serein-*
+          pattern: aethon-*
           path: release-assets
           merge-multiple: true
       - name: Checksums

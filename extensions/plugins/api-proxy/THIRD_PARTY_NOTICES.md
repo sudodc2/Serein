@@ -1,7 +1,7 @@
 # API Proxy third-party notices
 
 Dependency versions match plugins/Cargo.lock; includes build dependencies.
-SDK source: Serein commit 910ae8994747e7dbae433cce9011ac04eefdd635 (MIT OR Apache-2.0).
+SDK source: Aethon commit 910ae8994747e7dbae433cce9011ac04eefdd635 (MIT OR Apache-2.0).
 Plugin and SDK licenses are in the repository root.
 
 
